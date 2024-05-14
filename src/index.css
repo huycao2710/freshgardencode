@@ -16,3 +16,7 @@ h1 {
   margin-left: 10px;
   margin-top: 40px;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
