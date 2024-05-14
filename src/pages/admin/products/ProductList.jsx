@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Divider, Typography } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
@@ -58,7 +59,7 @@ const rows = [
     createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
-export default function ProductList() {
+export default function OrderList() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -105,11 +106,30 @@ export default function ProductList() {
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
+                                                <React.Fragment key={column.id}>
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && typeof value === 'number'
+                                                            ? column.format(value)
+                                                            : value}
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        <Stack spacing={2} direction="row">
+                                                            <Edit
+                                                                style={{
+                                                                    fontSize: "20px",
+                                                                    color: "blue",
+                                                                    cursor: "pointer"
+                                                                }}
+                                                            />
+                                                            <Delete
+                                                                style={{
+                                                                    fontSize: "20px",
+                                                                    color: "darkred",
+                                                                    cursor: "pointer"
+                                                                }} />
+                                                        </Stack>
+                                                    </TableCell>
+                                                </React.Fragment>
                                             );
                                         })}
                                     </TableRow>
