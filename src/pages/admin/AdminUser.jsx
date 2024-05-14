@@ -5,7 +5,7 @@ import Navbar from '../../components/admin/Navbar'
 import UserList from './users/UserList'
 
 
-export default function AdminUser() {
+const AdminUser = () => {
     return (
         <>
             <div className="bgColor">
@@ -21,3 +21,4 @@ export default function AdminUser() {
         </>
     )
 }
+export default AdminUser

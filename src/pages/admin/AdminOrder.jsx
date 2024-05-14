@@ -6,7 +6,7 @@ import Navbar from '../../components/admin/Navbar';
 import OrderList from './orders/OrderList';
 
 
-export default function AdminOrder() {
+const AdminOrder = () => {
     return (
         <>
             <div className="bgColor">
@@ -22,3 +22,5 @@ export default function AdminOrder() {
         </>
     )
 }
+
+export default AdminOrder

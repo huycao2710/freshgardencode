@@ -1,11 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Routes, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { routes } from './routes';
 
 function App() {
   return (
     <div>
-      <Router>
+      <BrowserRouter>
         <Routes>
           {routes.map((route) => {
             const Page = route.page;
@@ -17,7 +17,7 @@ function App() {
             );
           })}
         </Routes>
-      </Router>
+      </BrowserRouter>
     </div>
   )
 }

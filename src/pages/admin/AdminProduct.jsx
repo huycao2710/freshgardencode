@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import Navbar from '../../components/admin/Navbar';
 import ProductList from './products/ProductList';
 
-export default function AdminProduct() {
+const AdminProduct = () => {
     return (
         <>
             <div className="bgColor">
@@ -21,3 +21,5 @@ export default function AdminProduct() {
         </>
     )
 }
+
+export default AdminProduct

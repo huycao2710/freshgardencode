@@ -10,7 +10,7 @@ import CountUp from 'react-countup';
 import MyCalendar from '../../components/MyCalender';
 
 
-export default function AdminHome() {
+const AdminHome = () => {
     return (
         <>
             <div className="bgColor">
@@ -102,3 +102,5 @@ export default function AdminHome() {
         </>
     )
 }
+
+export default AdminHome
