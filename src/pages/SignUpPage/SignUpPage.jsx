@@ -19,12 +19,12 @@ const SignUpPage = () => {
       </div>
       <div className="flex items-center justify-center flex-1 bg-gray-200 text-black">
         <div className="max-w-md w-full space-y-6">
-          <h2 className="text-3xl font-extrabold text-gray-900">Sign Up</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900">Đăng ký</h2>
           <form className="mt-8 space-y-6" action="#" method="POST">
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email" className="sr-only">
-                  Email address
+                  Email
                 </label>
                 <input
                   id="email"
@@ -32,13 +32,13 @@ const SignUpPage = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
+                  placeholder="Email"
                 />
               </div>
               <div>
                 <label htmlFor="password" className="sr-only">
-                  Password
+                  Mật khẩu
                 </label>
                 <input
                   id="password"
@@ -46,8 +46,64 @@ const SignUpPage = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
                   placeholder="Password"
+                />
+              </div>
+              <div>
+                <label htmlFor="name" className="sr-only">
+                  Tên
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
+                  placeholder="Họ tên"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="sr-only">
+                  Số điện thoại
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
+                  placeholder="Số điện thoại"
+                />
+              </div>
+              <div>
+                <label htmlFor="address" className="sr-only">
+                  Địa chỉ
+                </label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  autoComplete="address"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
+                  placeholder="Địa chỉ"
+                />
+              </div>
+              <div>
+                <label htmlFor="city" className="sr-only">
+                  Thành phố
+                </label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  autoComplete="city"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-5"
+                  placeholder="Thành phố"
                 />
               </div>
             </div>
@@ -56,17 +112,17 @@ const SignUpPage = () => {
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-logo-green hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Sign Up
+                Đăng ký
               </button>
             </div>
             <div className="text-center">
               <p className="text-sm">
-                Already have an account?{" "}
+                Bạn đã có sẵn tài khoản?{" "}
                 <a
                   href="#"
                   className="font-medium text-logo-green hover:text-lime-500"
                 >
-                  Sign in
+                  Đăng nhập
                 </a>
               </p>
             </div>
