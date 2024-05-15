@@ -3,7 +3,6 @@ import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
@@ -164,7 +163,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}>
+            <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#4B494E", color: "#B9D431" }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -176,14 +175,14 @@ export default function Navbar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                        FreshGarden Admin
-                    </Typography>
+                    <img
+                        src="/assets/images/Header/logo.jpg"
+                        alt="FreshGarden Admin"
+                        style={{
+                            display: { xs: 'none', sm: 'block' },
+                            maxWidth: '100%',
+                        }}
+                    />
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />

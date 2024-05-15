@@ -80,4 +80,5 @@ export const routes = [
         path: '/admin/orders',
         page: AdminOrder,
     },
+
 ]
