@@ -1,0 +1,22 @@
+export const MainProductData = [
+    {
+        image:"/assets/images/SP/CheeseCracker.jpg",
+        path:""
+    },
+    {
+        image:"/assets/images/SP/ChocolateFruit.jpg",
+        path:""
+    },
+    {
+        image:"/assets/images/SP/ForeverLove.jpg",
+        path:""
+    },
+    {
+        image:"/assets/images/SP/MousseHawaii.jpg",
+        path:""
+    },
+    {
+        image:"/assets/images/SP/SodaCracker.jpg",
+        path:""
+    },
+]

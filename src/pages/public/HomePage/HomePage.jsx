@@ -12,7 +12,7 @@ const HomePage = () => {
       <div id="homeslider" className="h-screen">
         <MainCarousel/>
       </div>
-      <section className="home-featured-product">
+      <section className="home-featured-product py-12" style={{backgroundImage:'url(/assets/images/Header/nenHeader.jpg)'}}>
         <MainProduct/>
       </section>
     </div>

@@ -9,6 +9,9 @@ module.exports = {
         'logo-green': '#B9D431',
         'banner-black': '#4B494E',
       },
+      fontFamily: {
+        'playfairDisplay': ['Playfair Display',],
+      }
     },
   },
   plugins: [],
