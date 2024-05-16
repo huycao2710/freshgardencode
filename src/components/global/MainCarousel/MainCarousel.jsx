@@ -1,51 +1,38 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { MainCarouselData } from "./MainCarouselData";
-import { Carousel } from "antd";
-
-const items = MainCarouselData.map((item) => (
-  <img
-    className="cursor-pointer -z-10"
-    role="presentation"
-    src={item.image}
-    alt=""
-  />
-));
-
-const contentStyle = {
-  margin: 0,
-  height: "160px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
+import { Autoplay,  } from "swiper/modules";
 
 const MainCarousel = () => {
   return (
     <>
-      <div style={{ width: "100%", margin: "0 auto" }}>
-        <Carousel dotPosition="right" autoplay>
+        <Swiper
+          className="w-full h-full"
+          direction={"vertical"}
+          loop={true}
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+        >
           {MainCarouselData.map((item, index) => (
-            <div key={index}>
-              <div
-                style={{
-                  height: "820px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#364d79",
-                }}
-              >
-                <img
-                  src={item.image}
-                  alt={`Slide ${index + 1}`}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-            </div>
+            <SwiperSlide
+              key={index}
+              className="flex justify-center items-center bg-white"
+            >
+              <img
+                src={item.image}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
           ))}
-        </Carousel>
-      </div>
+        </Swiper>
+     
     </>
   );
 };
