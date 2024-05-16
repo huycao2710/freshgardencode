@@ -82,8 +82,14 @@ const AdminHome = () => {
                         <Box height={20} />
                         <Grid container spacing={2}>
                             <Grid item xs={8}>
-                                <Card sx={{ height: 60 + "vh" }}>
-                                    <CardContent>
+                                <Card
+                                    className="flex items-center justify-center"
+                                    sx={{
+                                        height: "60vh",
+                                        display: "flex",
+                                    }}
+                                >
+                                    <CardContent sx={{ height: "100%" }}>
                                         <PieChart />
                                     </CardContent>
                                 </Card>
