@@ -19,16 +19,17 @@ const contentStyle = {
   textAlign: "center",
   background: "#364d79",
 };
+
 const MainCarousel = () => {
   return (
     <>
       <div style={{ width: "100%", margin: "0 auto" }}>
-        <Carousel arrows dotPosition="left" infinite={false} autoplay>
+        <Carousel dotPosition="right" autoplay>
           {MainCarouselData.map((item, index) => (
             <div key={index}>
               <div
                 style={{
-                  height: "500px",
+                  height: "820px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
