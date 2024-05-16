@@ -4,16 +4,19 @@ import { MainProductData } from "./MainProductData";
 
 const MainProduct = () => {
     const items = MainProductData.map((item)=>(
-        <img
-        className="cursor-pointer flex justify-center items-center"
+        <div key={item.id} className="flex justify-center items-center">
+      <img
+        className="cursor-pointer"
         role="presentation"
-        src ={item.image}
+        src={item.image}
         alt=""
-        />
+      />
+    </div>
     ));
   return (
     <>
-      <div className="mb-7">
+    <div className="flex flex-col justify-center items-center">
+    <div className="mb-7">
         <div className="icon flex justify-center items-center">
           <img src="/assets/images/SP/IconSP.jpg" alt="" />
         </div>
@@ -29,6 +32,8 @@ const MainProduct = () => {
             items={items}
         />
       </div>
+    </div>
+      
     </>
   );
 };
