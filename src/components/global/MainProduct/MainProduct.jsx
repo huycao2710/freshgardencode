@@ -18,7 +18,7 @@ const MainProduct = () => {
   };
 
 
-const slidePrev = () => {
+  const slidePrev = () => {
     if (activeIndex > 0) {
       carouselRef.current.slidePrev();
       setActiveIndex(activeIndex - 1);
@@ -31,7 +31,7 @@ const slidePrev = () => {
       setActiveIndex(activeIndex + 1);
     }
   };
-  
+
   console.log("Current active index:", activeIndex);
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
   const items = MainProductData.map((item) => (
@@ -56,6 +56,7 @@ const slidePrev = () => {
             Cập nhật về những sản phẩm nổi bật nhất từ Fresh Garden
           </div>
         </div>
+        {/* thay icon trái là <LeftCircleOutlined /> và bên phải <RightCircleOutlined /> trong antd cả chỉnh 2 nút này giãn ra ngoài vì nó đang bị dính vô ảnh sản phẩm*/}
         <div className="container relative py-5">
           <AliceCarousel
             className="w-full h-full"
