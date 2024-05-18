@@ -5,8 +5,9 @@ import MainProduct from "../../../components/global/MainProduct/MainProduct";
 import Product from "../../../components/global/MainProduct/Product";
 import About from "../../../components/global/MainProduct/About";
 import About2 from "../../../components/global/MainProduct/About2";
-import { Article } from "@mui/icons-material";
 import Service from "../../../components/global/MainProduct/Service";
+import Articles from "../../../components/global/MainProduct/Articles";
+import ClientReview from "../../../components/global/MainProduct/ClientReview";
 
 const HomePage = () => {
   return (
@@ -18,12 +19,8 @@ const HomePage = () => {
       <About />
       <About2 />
       <Service />
-      <section>
-        <div>client</div>
-      </section>
-      <section>
-        <div>brand</div>
-      </section>
+      <Articles/>
+      <ClientReview />
     </div>
   );
 };
