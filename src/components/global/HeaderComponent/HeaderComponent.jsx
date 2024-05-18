@@ -48,7 +48,7 @@ const HeaderComponent = () => {
     };
 
     return (
-        <>
+        <div>
             <div
                 className="container-fluid justify-center items-center"
                 style={{ height: "50px", maxHeight: "80vh" }}
@@ -84,7 +84,7 @@ const HeaderComponent = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

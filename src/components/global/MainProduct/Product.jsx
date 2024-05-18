@@ -4,73 +4,31 @@ import { MainProductData } from "./MainProductData";
 import { Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { LocalGroceryStore } from "@mui/icons-material";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 const Product = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const carouselRef = useRef(null);
-  
-    const responsive = {
-      0: { items: 2 },
-      720: { items: 3 },
-      1024: { items: 4 },
-    };
-  
-    const getItemsInView = () => {
-      if (window.innerWidth >= 1024) {
-        return 4;
-      } else if (window.innerWidth >= 720) {
-        return 3;
-      } else {
-        return 2;
-      }
-    };
-    const handleSlideChanged = (event) => {
-      setActiveIndex(event.item);
-    };
-  
-    const slidePrev = () => {
-      if (activeIndex > 0) {
-        carouselRef.current.slidePrev();
-        setActiveIndex(activeIndex - 1);
-      }
-    };
-  
-    const slideNext = () => {
-      const itemsInView = getItemsInView();
-      if (activeIndex < MainProductData.length - itemsInView) {
-        carouselRef.current.slideNext();
-        setActiveIndex(activeIndex + 1);
-      }
-    };
-    const items = MainProductData.map((item) => (
-        <div
-          key={item.id}
-          className="flex flex-col justify-center items-center py-5 cursor-pointer group"
-        >
-          <img
-            className="object-cover"
-            role="presentation"
-            src={item.image}
-            alt=""
-          />
-          <span className="text-black text-center mt-2">{item.name}</span>
-          <span className="text-logo-green font-sans text-center mt-2">
-            {item.price}
-          </span>
-          <div className="absolute inset-0 flex justify-center items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button variant="contained" className="w-12 h-12 bg-black">
-              <LocalGroceryStore  className="text-white" />
-            </button>
-            <button variant="contained" className="w-12 h-12 bg-black">
-              <RemoveRedEyeIcon  className="text-white" />
-            </button>
-          </div>
-        </div>
-      ));
+  const bestsellingProducts = MainProductData.filter(
+    (product) => product.path === "1"
+  );
+  const newProducts = MainProductData.filter((product) => product.path === "2");
+  const saleProducts = MainProductData.filter(
+    (product) => product.path === "3"
+  );
+  const [products, setProducts] = useState(bestsellingProducts);
+  const handleButtonClick = (path) => {
+    if (path === "1") {
+      setProducts(bestsellingProducts);
+    } else if (path === "2") {
+      setProducts(newProducts);
+    } else if (path === "3") {
+      setProducts(saleProducts);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center">
-         <div className="mb-7">
+    <section className="-home-tab-product py-12">
+      <div className="flex flex-col justify-center items-center">
+        <div className="mb-7">
           <div className="icon flex justify-center items-center">
             <img src="/assets/images/SP/IconSP.jpg" alt="" />
           </div>
@@ -82,42 +40,54 @@ const Product = () => {
           </div>
         </div>
         <div>
-            <Button>Ban chay</Button>
-            <Button>Moi</Button>
-            <Button>Khuyen mai</Button>
+          <Button onClick={() => handleButtonClick("1")}>Bán chạy</Button>
+          <Button onClick={() => handleButtonClick("2")}>Mới</Button>
+          <Button onClick={() => handleButtonClick("3")}>Khuyến mãi</Button>
         </div>
-        <div className="container relative py-5 px-10">
-          <AliceCarousel
-            className="w-full h-full"
-            items={items}
-            responsive={responsive}
-            disableDotsControls
-            disableButtonsControls
-            onSlideChanged={handleSlideChanged}
-            activeIndex={activeIndex}
-            ref={carouselRef}
-          />
-          {/* {
-            <Button
-              className="z-50 text-white bg-banner-black absolute top-1/2 left-2 transform -translate-y-1/2 cursor-pointer flex justify-center items-center"
-              shape="circle"
-              icon={<LeftOutlined />}
-              size="large"
-              onClick={slidePrev}
-            ></Button>
-          }
-          {
-            <Button
-              className="z-50 text-white bg-banner-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
-              shape="circle"
-              icon={<RightOutlined />}
-              size="large"
-              onClick={slideNext}
-            ></Button>
-          } */}
+        <div className="container mx-auto py-5 px-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {MainProductData.map((item) => (
+              <div
+                key={item.id}
+                className="relative flex flex-col justify-center items-center py-10 cursor-pointer group bg-white"
+              >
+                <div className="picture">
+                  <img
+                    className="object-cover w-full h-48 rounded-t-lg"
+                    role="presentation"
+                    src={item.image}
+                    alt=""
+                  />
+                </div>
+                <div className="detail">
+                  <span className="text-black text-center mt-2">
+                    {item.name}
+                  </span>
+                  <div className="text-logo-green font-sans text-center mt-2">
+                    {item.price}
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex justify-center items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button
+                    variant="contained"
+                    className="w-12 h-12 bg-black flex justify-center items-center"
+                  >
+                    <LocalGroceryStore className="text-white" />
+                  </button>
+                  <button
+                    variant="contained"
+                    className="w-12 h-12 bg-black flex justify-center items-center"
+                  >
+                    <RemoveRedEyeIcon className="text-white" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-    </div>
-  )
-}
+      </div>
+    </section>
+  );
+};
 
-export default Product
+export default Product;
