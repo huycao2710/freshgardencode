@@ -71,7 +71,7 @@ const MainProduct = () => {
     </div>
   ));
   return (
-    <>
+    <section className="home-featured-product py-12" style={{backgroundImage:'url(/assets/images/Header/nenHeader.jpg)'}}>
       <div className="flex flex-col justify-center items-center">
         <div className="mb-7">
           <div className="icon flex justify-center items-center">
@@ -115,8 +115,9 @@ const MainProduct = () => {
             ></Button>
           }
         </div>
-      </div>
-    </>
+      </div>  
+    </section>
+      
   );
 };
 

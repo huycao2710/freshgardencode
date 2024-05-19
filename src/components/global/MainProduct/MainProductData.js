@@ -3,48 +3,48 @@ export const MainProductData = [
         image:"/assets/images/SPNB/CheeseCracker.jpg",
         name:"CheeseCracker1",
         price:"x00.000",
-        path:""
+        path:"1"
     },
     {
         image:"/assets/images/SPNB/ChocolateLove.jpg",
         name:"ChocolateLove1",
         price:"x00.000",
-        path:""
+        path:"1"
     },
     {
         image:"/assets/images/SPNB/PinkLady.jpg",
         name:"PinkLady1",
         price:"x00.000",
-        path:""
+        path:"2"
     },
     {
         image:"/assets/images/SPNB/SodaCracker.jpg",
         name:"SodaCracker1",
         price:"x00.000",
-        path:""
+        path:"2"
     },
     {
         image:"/assets/images/SPNB/CheeseCracker.jpg",
         name:"CheeseCracker2",
         price:"x00.000",
-        path:""
+        path:"3"
     },
     {
         image:"/assets/images/SPNB/ChocolateLove.jpg",
         name:"ChocolateLove2",
         price:"x00.000",
-        path:""
+        path:"3"
     },
     {
         image:"/assets/images/SPNB/PinkLady.jpg",
         name:"PinkLady2",
         price:"x00.000",
-        path:""
+        path:"1"
     },
     {
         image:"/assets/images/SPNB/SodaCracker.jpg",
         name:"SodaCracker2",
         price:"x00.000",
-        path:""
+        path:"1"
     },
 ]

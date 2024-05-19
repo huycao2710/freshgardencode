@@ -8,7 +8,7 @@ import { Autoplay,  } from "swiper/modules";
 
 const MainCarousel = () => {
   return (
-    <>
+    <div id="homeslider" className="h-screen max-h-41r">
         <Swiper
           className="w-full h-full"
           direction={"vertical"}
@@ -33,7 +33,7 @@ const MainCarousel = () => {
           ))}
         </Swiper>
      
-    </>
+    </div>
   );
 };
 

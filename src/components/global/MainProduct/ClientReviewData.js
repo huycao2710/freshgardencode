@@ -1,0 +1,22 @@
+export const ClientReviewData = [
+    {
+        image:"/assets/images/KH/KH1.jpg",
+        title:"title1",
+        desc:"111111111111111111111111111111111111111111111111111111111111111111122222222222222222"
+    },
+    {
+        image:"/assets/images/KH/KH2.jpg",
+        title:"title3",
+        desc:"1111111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+        image:"/assets/images/KH/KH3.jpg",
+        title:"title3",
+        desc:"1111111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+        image:"/assets/images/KH/KH4.jpg",
+        title:"title4",
+        desc:"1111111111111111111111111111111111111111111111111111111111111111111"
+    },
+]
