@@ -62,10 +62,10 @@ const MainProduct = () => {
       </span>
       <div className="absolute inset-0 flex justify-center items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <button variant="contained" className="w-12 h-12 bg-black">
-          <LocalGroceryStore  className="text-white" />
+          <LocalGroceryStore className="text-white" />
         </button>
         <button variant="contained" className="w-12 h-12 bg-black">
-          <RemoveRedEyeIcon  className="text-white" />
+          <RemoveRedEyeIcon className="text-white" />
         </button>
       </div>
     </div>

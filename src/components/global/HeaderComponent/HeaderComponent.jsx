@@ -47,6 +47,16 @@ const HeaderComponent = () => {
         marginLeft: "0px",
     };
 
+    const [openSidebar, setOpenSidebar] = useState(false);
+
+    const handleOpenSidebar = () => {
+        setOpenSidebar(true);
+    };
+
+    const handleCloseSidebar = () => {
+        setOpenSidebar(false);
+    };
+
     return (
         <>
             <div
@@ -72,15 +82,16 @@ const HeaderComponent = () => {
                     </div>
 
                     <div className="text-white flex justify-content-end ml-auto">
-                        <a className="cursor-pointer px-5">
+                        <span className="cursor-pointer px-5">
                             <Search fontSize="medium" />
-                        </a>
+                        </span>
                         <span className="cursor-pointer px-5">
                             <LocalGroceryStore fontSize="medium" />
                         </span>
-                        <span onClick="" className="cursor-pointer px-5">
+                        <span onClick={handleOpenSidebar} className="cursor-pointer px-5">
                             <Menu fontSize="medium" />
                         </span>
+                        <SidebarComponent open={openSidebar} onClose={handleCloseSidebar} />
                     </div>
                 </div>
             </div>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import backgroundImage from './KH3.jpg';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/state/auth/Action'
 
 const SignInPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const containerStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -13,13 +14,22 @@ const SignInPage = () => {
     minHeight: '100vh',
   };
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const dispatch = useDispatch();
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    e.preventDefault()
+
+    const data = new FormData(e.currentTarget);
+
+    const userData = {
+      fullName: data.get("fullName"),
+      email: data.get("email"),
+      password: data.get("password")
+    }
+
+    dispatch(login(userData))
+    console.log("userData", userData)
   };
 
   return (
@@ -33,31 +43,35 @@ const SignInPage = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <label htmlFor="email" className="text-sm text-grey-900">Email*</label>
                 <input
+                  required
                   id="email"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  autoComplete="email"
                   placeholder="mail@loopple.com"
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500"
                 />
                 <label htmlFor="password" className="text-sm text-grey-900">Mật khẩu*</label>
                 <input
+                  required
                   id="password"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  autoComplete="password"
                   placeholder="Nhập mật khẩu"
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500"
                 />
                 <button type="submit" className="w-full px-6 py-3 bg-logo-green text-white font-bold rounded-lg hover:bg-red-700 focus:outline-none focus:ring focus:ring-indigo-200">
                   Đăng Nhập
                 </button>
-                <p className="text-sm text-grey-900 text-center">Bạn chưa có tài khoản? <a href="javascript:void(0)" className="font-bold text-grey-700">Tạo tài khoản mới</a></p>
               </form>
+              <p className="text-sm text-grey-900 text-center">Bạn chưa có tài khoản? <Link to="/sign-up" className="font-bold text-grey-700 hover:text-[#B9D431]">Tạo tài khoản mới</Link></p>
             </div>
-            <p className="text-lg text-slate-500 py-1 font-semibold text-center mt-5">
-              Fresh Garden
-            </p>
+            <div className="text-center mt-5">
+              <Link to="/" className="text-lg font-semibold text-slate-500 hover:text-[#B9D431]">
+                Fresh Garden
+              </Link>
+            </div>
           </div>
         </div>
       </div>
