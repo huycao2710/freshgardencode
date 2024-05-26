@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainCarousel from "../../../components/global/MainCarousel/MainCarousel";
 import MainProduct from "../../../components/global/MainProduct/MainProduct";
 import Product from "../../../components/global/MainProduct/Product";
@@ -9,7 +9,6 @@ import Articles from "../../../components/global/MainProduct/Articles";
 import ClientReview from "../../../components/global/MainProduct/ClientReview";
 
 const HomePage = () => {
-
   return (
     <div>
       <MainCarousel />

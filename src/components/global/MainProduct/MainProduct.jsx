@@ -43,8 +43,6 @@ const MainProduct = () => {
       setActiveIndex(activeIndex + 1);
     }
   };
-
-  console.log("Current active index:", activeIndex);
   const items = MainProductData.map((item) => (
     <div
       key={item.id}
