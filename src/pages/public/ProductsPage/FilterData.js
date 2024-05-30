@@ -1,10 +1,10 @@
 export const filters = [
   {
-    id: "size",
-    name: "Size",
+    id: "category",
+    name: "Loại bánh",
     options: [
-      { value: "size 6 - 16cm", label: "Size 6" },
-      { value: "size 8 - 21cm", label: "Size 8" },
+      { value: "bánh ngọt", label: "bánh ngọt" },
+      { value: "bánh mì", label: "bánh mì" },
     ],
   },
 ];

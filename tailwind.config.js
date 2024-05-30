@@ -15,7 +15,7 @@ module.exports = {
         'montserrat': ['Montserrat',],
       },
       spacing: {
-        '41r': '41rem',
+        '55r': '55rem',
       }
     },
   },

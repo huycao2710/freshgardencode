@@ -15,7 +15,7 @@ import { api } from '../../../config/apiConfig';
 export const getCategories = () => async (dispatch) => {
     dispatch({ type: GET_CATEGORIES_REQUEST });
     try {
-        const { data } = await api.get('/api/categories/findAllLevel3');
+        const { data } = await api.get('/api/categories/findAllLevel1');
         dispatch({
             type: GET_CATEGORIES_SUCCESS,
             payload: data,

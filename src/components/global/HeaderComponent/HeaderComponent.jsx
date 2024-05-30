@@ -63,19 +63,19 @@ const HeaderComponent = () => {
                 className="container-fluid justify-center items-center"
                 style={{ height: "50px", maxHeight: "80vh" }}
             >
-                <div className="bg-fixed justify-content-between" style={HeaderBackGround}>
+                <div className="bg-fixed justify-content-end" style={HeaderBackGround}>
                     <div className="mr-10" style={LogoHeader}></div>
                     <div style={NhuongQuyenLogo}></div>
-                    <div className="text-white text-sm ml-20 flex items-center space-x-6">
-                        <div className="flex items-center space-x-2">
+                    <div className="text-white text-sm ml-72 flex items-center space-x-12">
+                        <div className="flex items-center space-x-5">
                             <PhoneInTalk fontSize="14px" />
                             <a className="cursor-pointer">024 3856 3856</a>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-5">
                             <MailOutline fontSize="14px" />
                             <a className="cursor-pointer">cskh@freshgarden.vn</a>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-5">
                             <LocationOn fontSize="14px" />
                             <a className="cursor-pointer">46 An Dương, Hà Nội</a>
                         </div>
