@@ -11,6 +11,7 @@ import {
     Search,
 } from "@mui/icons-material";
 import SidebarComponent from "../Sidebar/SidebarComponent";
+import { useNavigate } from "react-router-dom";
 
 const HeaderComponent = () => {
     const HeaderBackGround = {
@@ -45,6 +46,7 @@ const HeaderComponent = () => {
         width: "230px",
         height: "40px",
         marginLeft: "0px",
+        cursor: "pointer",
     };
 
     const [openSidebar, setOpenSidebar] = useState(false);
@@ -57,6 +59,12 @@ const HeaderComponent = () => {
         setOpenSidebar(false);
     };
 
+    const navigate = useNavigate();
+
+    const handleNavigateNhuongQuyen = () => {
+        navigate('/nhuongquyen');
+    };
+
     return (
         <div>
             <div
@@ -65,7 +73,7 @@ const HeaderComponent = () => {
             >
                 <div className="bg-fixed justify-content-end" style={HeaderBackGround}>
                     <div className="mr-10" style={LogoHeader}></div>
-                    <div style={NhuongQuyenLogo}></div>
+                    <div style={NhuongQuyenLogo} onClick={handleNavigateNhuongQuyen}></div>
                     <div className="text-white text-sm ml-72 flex items-center space-x-12">
                         <div className="flex items-center space-x-5">
                             <PhoneInTalk fontSize="14px" />
