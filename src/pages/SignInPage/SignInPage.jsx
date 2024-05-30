@@ -2,10 +2,9 @@ import React from 'react';
 import backgroundImage from './KH3.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/state/auth/Action'
 
 const SignInPage = () => {
-  
+
   const containerStyle = {
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',
@@ -18,19 +17,7 @@ const SignInPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
 
-    const data = new FormData(e.currentTarget);
-
-    const userData = {
-      fullName: data.get("fullName"),
-      email: data.get("email"),
-      password: data.get("password")
-    }
-
-    dispatch(login(userData))
-    console.log("userData", userData)
-    navigate("/")
   };
 
   return (

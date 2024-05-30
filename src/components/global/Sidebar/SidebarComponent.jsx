@@ -37,7 +37,7 @@ const SidebarComponent = ({ open, onClose }) => {
                                     </Link>
                                     <Link
                                         to="/sign-in"
-                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/sign-in' ? 'bg-[#B9D431] text-white' : 'text-black hover:text-[#B9D431]'}`}
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/sign-in' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
                                         onClick={(e) => {
                                             onClose();
                                             e.stopPropagation();
@@ -47,7 +47,7 @@ const SidebarComponent = ({ open, onClose }) => {
                                     </Link>
                                     <Link
                                         to="/sign-up"
-                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/sign-up' ? 'bg-[#B9D431] text-white' : 'text-black hover:text-[#B9D431]'}`}
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/sign-up' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
                                         onClick={(e) => {
                                             onClose();
                                             e.stopPropagation();
@@ -57,7 +57,7 @@ const SidebarComponent = ({ open, onClose }) => {
                                     </Link>
                                     <Link
                                         to="/product"
-                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/product' ? 'bg-[#B9D431] text-white' : 'text-black hover:text-[#B9D431]'}`}
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/product' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
                                         onClick={(e) => {
                                             onClose();
                                             e.stopPropagation();
@@ -66,8 +66,18 @@ const SidebarComponent = ({ open, onClose }) => {
                                         Sản phẩm
                                     </Link>
                                     <Link
+                                        to="/map"
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/map' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
+                                        onClick={(e) => {
+                                            onClose();
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        Danh sách cửa hàng
+                                    </Link>
+                                    <Link
                                         to="/contact"
-                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/contact' ? 'bg-[#B9D431] text-white' : 'text-black hover:text-[#B9D431]'}`}
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/contact' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
                                         onClick={(e) => {
                                             onClose();
                                             e.stopPropagation();

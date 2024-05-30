@@ -1,41 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import 'react-alice-carousel/lib/alice-carousel.css';
 import img1 from "../SignUpPage/Banner/Banner1.jpg";
 import img2 from "../SignUpPage/Banner/Banner2.jpg";
 import img3 from "../SignUpPage/Banner/Banner3.jpg";
 import Carousel from "./Carousel";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser, register } from '../../redux/state/auth/Action'
+import { useDispatch } from "react-redux";
 
 const SignUpPage = () => {
   const slides = [img1, img2, img3];
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector(store => store)
 
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getUser(jwt))
-    }
-  }, [jwt, auth.jwt, dispatch])
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
-
-    const userData = {
-      fullName: data.get("fullName"),
-      email: data.get("email"),
-      password: data.get("password")
-    }
-
-    await dispatch(register(userData));
-
-    console.log('userData', userData);
-    navigate('/sign-in');
   }
 
   return (
