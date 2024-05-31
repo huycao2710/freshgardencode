@@ -36,6 +36,7 @@ const HeaderComponent = () => {
         height: "42px",
         paddingTop: "4px",
         paddingBottom: "4px",
+        cursor: "pointer",
     };
 
     const NhuongQuyenLogo = {
@@ -65,6 +66,11 @@ const HeaderComponent = () => {
         navigate('/nhuongquyen');
     };
 
+    const handleNavigateHomePage = () => {
+        navigate('/');
+    };
+
+
     return (
         <div>
             <div
@@ -72,7 +78,7 @@ const HeaderComponent = () => {
                 style={{ height: "50px", maxHeight: "80vh" }}
             >
                 <div className="bg-fixed justify-content-end" style={HeaderBackGround}>
-                    <div className="mr-10" style={LogoHeader}></div>
+                    <div className="mr-10" style={LogoHeader} onClick={handleNavigateHomePage}></div>
                     <div style={NhuongQuyenLogo} onClick={handleNavigateNhuongQuyen}></div>
                     <div className="text-white text-sm ml-72 flex items-center space-x-12">
                         <div className="flex items-center space-x-5">

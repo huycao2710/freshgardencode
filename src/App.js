@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as UserAllService from './services/UserAllService';
-import { updateUser } from './redux/slides/userAllSlide';
+import { resetUser, updateUser } from './redux/slides/userAllSlide';
 import { isJsonString } from './util';
 import { routes } from './routes';
 import Loading from './components/global/LoadingComponent/LoadingComponent';
@@ -18,35 +18,44 @@ const fadeTransition = {
 
 const App = () => {
   const dispatch = useDispatch();
-  const [isPending, setIsPending] = useState(false);
   const user = useSelector((state) => state.user);
-  const location = useLocation();
+  const [isPending, setIsPending] = useState(false)
 
   useEffect(() => {
-    setIsPending(true);
-    const { storageData, decoded } = handleDecoded();
-    if (decoded?.id) {
-      handleGetDetailsUser(decoded?.id, storageData);
-    }
-    setIsPending(false);
+    const initialize = async () => {
+      setIsPending(true)
+      const { storageData, decoded } = handleDecoded();
+      if (decoded?.id) {
+        await handleGetDetailsUser(decoded?.id, storageData);
+      }
+    };
+    setIsPending(false)
+    initialize();
   }, []);
 
   const handleDecoded = () => {
-    let storageData = localStorage.getItem('access_token');
-    let decoded = {};
-    if (storageData && isJsonString(storageData)) {
-      storageData = JSON.parse(storageData);
-      decoded = jwtDecode(storageData);
+    let storageData = user?.access_token || localStorage.getItem('access_token')
+    let decoded = {}
+    if (storageData && isJsonString(storageData) && !user?.access_token) {
+      storageData = JSON.parse(storageData)
+      decoded = jwtDecode(storageData)
     }
-    return { decoded, storageData };
-  };
+    return { decoded, storageData }
+  }
 
   UserAllService.axiosJWT.interceptors.request.use(async (config) => {
     const currentTime = new Date();
     const { decoded } = handleDecoded();
+    let storageRefreshToken = localStorage.getItem('refresh_token')
+    const refreshToken = JSON.parse(storageRefreshToken)
+    const decodedRefreshToken = jwtDecode(refreshToken)
     if (decoded?.exp < currentTime.getTime() / 1000) {
-      const data = await UserAllService.refreshToken();
-      config.headers['token'] = `Bearer ${data?.access_token}`;
+      if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+        const data = await UserAllService.refreshToken(refreshToken)
+        config.headers['token'] = `Bearer ${data?.access_token}`
+      } else {
+        dispatch(resetUser())
+      }
     }
     return config;
   }, (err) => {
@@ -54,22 +63,28 @@ const App = () => {
   });
 
   const handleGetDetailsUser = async (id, token) => {
-    let storageRefreshToken = localStorage.getItem('refresh_token');
-    const refreshToken = JSON.parse(storageRefreshToken);
-    const res = await UserAllService.getDetailsInfoUser(id, token);
-    dispatch(updateUser({ ...res?.data, access_token: token, refreshToken: refreshToken }));
+    try {
+      let storageRefreshToken = localStorage.getItem('refresh_token')
+      const refreshToken = JSON.parse(storageRefreshToken)
+      const res = await UserAllService.getDetailsInfoUser(id, token);
+      console.log('User details response:', res);
+      dispatch(updateUser({ ...res?.data, access_token: token, refreshToken: refreshToken }));
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
   };
 
   return (
     <div>
-      <Loading isPending={isPending}>
-        <AnimatePresence mode="wait">
-          <Routes key={location.pathname} location={location}>
-            {routes.map((route) => {
-              const Page = route.page;
-              const Layout = route.isShowHeader ? DefaultComponent : Fragment;
+      <AnimatePresence mode="wait">
+        <Routes >
+          {routes.map((route) => {
+            const Page = route.page;
+            const ischeckAuth = !route.isPrivate || user.isAdmin;
+            const Layout = route.isShowHeader ? DefaultComponent : Fragment;
 
-              return (
+            return (
+              ischeckAuth && (
                 <Route
                   key={route.path}
                   path={route.path}
@@ -87,11 +102,11 @@ const App = () => {
                     </motion.div>
                   }
                 />
-              );
-            })}
-          </Routes>
-        </AnimatePresence>
-      </Loading>
+              )
+            );
+          })}
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 };
