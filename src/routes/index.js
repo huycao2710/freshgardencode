@@ -8,7 +8,7 @@ import DetailsOrderPage from "../pages/public/DetailsOrderPage/DetailsOrderPage"
 import HomePage from "../pages/public/HomePage/HomePage";
 import MapPage from "../pages/public/MapPage/MapPage";
 import MyOrderPage from "../pages/public/MyOrderPage/MyOrderPage";
-import NhuongQuyenPage from "../pages/public/NhuongQuyenPage/NhuongQuyenPage";
+import FranchisePage from "../pages/public/FranchisePage/FranchisePage";
 import OrderPage from "../pages/public/OrderPage/OrderPage";
 import OrderSuccess from "../pages/public/OrderSuccess/OrderSuccess";
 import PaymentPage from "../pages/public/PaymentPage/PaymentPage";
@@ -85,7 +85,7 @@ export const routes = [
     },
     {
         path: '/nhuongquyen',
-        page: NhuongQuyenPage,
+        page: FranchisePage,
         isShowHeader: false
     },
     {
