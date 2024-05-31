@@ -10,6 +10,7 @@ import ClientReview from "../../../components/global/MainProduct/ClientReview";
 
 const HomePage = () => {
   return (
+    <>
     <div>
       <MainCarousel />
       <MainProduct />
@@ -20,6 +21,11 @@ const HomePage = () => {
       <Articles />
       <ClientReview />
     </div>
+    <footer>
+
+    </footer>
+    </>
+    
   );
 };
 
