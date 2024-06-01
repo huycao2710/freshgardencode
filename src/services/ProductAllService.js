@@ -1,12 +1,13 @@
 import axios from "axios"
-import { axiosJWT } from "./UserService"
+import { axiosJWT } from "./UserAllService"
+
 export const getAllProduct = async (search, limit) => {
     let res = {}
-    if (search?.length > 0) {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?filter=name&filter=${search}&limit=${limit}`)
-    } else {
-        res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?limit=${limit}`)
-    }
+    // if (search?.length > 0) {
+    //     res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?filter=name&filter=${search}&limit=${limit}`)
+    // } else {
+    res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?limit=${limit}`)
+    // }
     return res.data
 }
 
@@ -64,3 +65,8 @@ export const getProductsByCategory = async (categoryName) => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-products-by-category/${categoryName}`);
     return res.data;
 };
+
+export const getFeaturedProducts = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-featured-products`)
+    return res.data
+}

@@ -12,21 +12,18 @@ import Footer from "../../../components/global/FooterComponent/Footer";
 const HomePage = () => {
   return (
     <>
-    <div>
-      <MainCarousel />
-      <MainProduct />
-      <Product />
-      <About />
-      <About2 />
-      <Service />
-      <Articles />
-      <ClientReview />
-    </div>
-    <footer>
-      <Footer/>
-    </footer>
+      <div>
+        <MainCarousel />
+        <MainProduct />
+        <Product />
+        <About />
+        <About2 />
+        <Service />
+        <Articles />
+        <ClientReview />
+      </div>
     </>
-    
+
   );
 };
 

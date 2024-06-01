@@ -69,7 +69,7 @@ export const routes = [
         isShowHeader: false
     },
     {
-        path: '/product-details/:id',
+        path: '/product-details',
         page: ProductDetailPage,
         isShowHeader: true
     },
@@ -91,22 +91,26 @@ export const routes = [
     {
         path: '/admin',
         page: AdminHome,
-        isShowHeader: false
+        isShowHeader: false,
+        isPrivate: true
     },
     {
         path: '/admin/users',
         page: AdminUser,
-        isShowHeader: false
+        isShowHeader: false,
+        isPrivate: true
     },
     {
         path: '/admin/products',
         page: AdminProduct,
-        isShowHeader: false
+        isShowHeader: false,
+        isPrivate: true
     },
     {
         path: '/admin/orders',
         page: AdminOrder,
-        isShowHeader: false
+        isShowHeader: false,
+        isPrivate: true
     },
 
 ]

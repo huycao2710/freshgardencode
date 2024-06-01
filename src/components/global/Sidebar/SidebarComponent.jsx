@@ -54,7 +54,6 @@ const SidebarComponent = ({ open, onClose }) => {
         onClose();
     };
 
-
     return (
         <AnimatePresence>
             {open && (

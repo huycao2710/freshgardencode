@@ -12,6 +12,8 @@ import {
 } from "@mui/icons-material";
 import SidebarComponent from "../Sidebar/SidebarComponent";
 import { useNavigate } from "react-router-dom";
+import { Badge } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
     const HeaderBackGround = {
@@ -70,6 +72,7 @@ const HeaderComponent = () => {
         navigate('/');
     };
 
+    const order = useSelector((state) => state.order)
 
     return (
         <div>
@@ -96,13 +99,16 @@ const HeaderComponent = () => {
                     </div>
 
                     <div className="text-white flex justify-content-end ml-auto">
-                        <span className="cursor-pointer px-5">
+                        <span className="cursor-pointer mx-5">
                             <Search fontSize="medium" />
                         </span>
-                        <span className="cursor-pointer px-5">
-                            <LocalGroceryStore fontSize="medium" />
+                        <span className="cursor-pointer mx-5">
+                            <Badge badgeContent={5} color="success">
+                                {/* badgeContent={order?.orderItems?.length} */}
+                                <LocalGroceryStore fontSize="medium" />
+                            </Badge>
                         </span>
-                        <span onClick={handleOpenSidebar} className="cursor-pointer px-5">
+                        <span onClick={handleOpenSidebar} className="cursor-pointer mx-5">
                             <Menu fontSize="medium" />
                         </span>
                         <SidebarComponent open={openSidebar} onClose={handleCloseSidebar} />
