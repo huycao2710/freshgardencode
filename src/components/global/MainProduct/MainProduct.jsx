@@ -17,16 +17,6 @@ const MainProduct = () => {
     1024: { items: 4 },
   };
 
-  const getItemsInView = () => {
-    if (window.innerWidth >= 1024) {
-      return 4;
-    } else if (window.innerWidth >= 720) {
-      return 3;
-    } else {
-      return 2;
-    }
-  };
-
   const handleSlideChanged = (event) => {
     setActiveIndex(event.item);
   };
