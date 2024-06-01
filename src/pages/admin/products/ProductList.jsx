@@ -1,140 +1,674 @@
-import { Delete, Edit, Queue } from '@mui/icons-material'
-import React, { useState } from 'react'
-import AddProduct from './AddProduct';
-import EditProduct from './EditProduct';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Button, Form, Select, Space } from "antd";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useMutationHooks } from "../../../hooks/useMutationHook";
+import { useQuery } from "@tanstack/react-query";
+import { DeleteOutlined, EditOutlined, SearchOutlined } from "@mui/icons-material";
+import InputComponent from "../../../components/admin/InputComponent/InputComponent";
+import { getBase64, renderOptions } from "../../../util";
+import { WrapperHeader, WrapperUploadFile } from "./style";
+import TableComponent from "../../../components/admin/TableComponent/TableComponent";
+import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
+import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
+import DrawerComponent from "../../../components/admin/DrawerComponent/DrawerComponent";
+import * as ProductAllService from "../../../services/ProductAllService";
+import * as message from "../../../components/global/MessageComponent/Message";
+import { PlusOutlined } from "@ant-design/icons";
+
 
 const ProductList = () => {
-    const [open, setOpen] = useState(false);
-    const [openAddProductDialog, setOpenAddProductDialog] = useState(false);
-    const [openEditProductDialog, setOpenEditProductDialog] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [rowSelected, setRowSelected] = useState('')
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+    const [isPendingUpdate, setIsPendingUpdate] = useState(false)
+    const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
+    const user = useSelector((state) => state?.user)
+    const searchInput = useRef(null);
+    const inittial = () => ({
+        nameProduct: '',
+        price: '',
+        description: '',
+        rating: '',
+        imageProduct: '',
+        categoryName: '',
+        countInStock: '',
+        newCategory: '',
+        discount: '',
+    })
+    const [stateProduct, setStateProduct] = useState(inittial())
+    const [stateProductDetails, setStateProductDetails] = useState(inittial())
 
-    const handleOpenAddProductClick = () => {
-        setOpenAddProductDialog(true);
-    };
+    const [form] = Form.useForm();
 
-    const handleCloseAddProductDialog = () => {
-        setOpenAddProductDialog(false);
-    };
+    const mutation = useMutationHooks(
+        (data) => {
+            const { nameProduct,
+                price,
+                description,
+                rating,
+                imageProduct,
+                categoryName,
+                countInStock, discount } = data
+            const res = ProductAllService.createNewProduct({
+                nameProduct,
+                price,
+                description,
+                rating,
+                imageProduct,
+                categoryName,
+                countInStock,
+                discount
+            })
+            return res
+        }
+    )
+    const mutationUpdate = useMutationHooks(
+        (data) => {
+            const { id,
+                token,
+                ...rests } = data
+            const res = ProductAllService.updateInfoProduct(
+                id,
+                token,
+                { ...rests })
+            return res
+        },
+    )
 
-    const handleOpenEditProductClick = () => {
-        setOpenEditProductDialog(true);
-    };
+    const mutationDeleted = useMutationHooks(
+        (data) => {
+            const { id,
+                token,
+            } = data
+            const res = ProductAllService.deleteInfoProduct(
+                id,
+                token)
+            return res
+        },
+    )
 
-    const handleCloseEditProductDialog = () => {
-        setOpenEditProductDialog(false);
-    };
+    const mutationDeletedMany = useMutationHooks(
+        (data) => {
+            const { token, ...ids
+            } = data
+            const res = ProductAllService.deleteManyProduct(
+                ids,
+                token)
+            return res
+        },
+    )
 
-    const handleDeleteClick = () => {
-        setOpen(true);
-    };
+    const getAllProducts = async () => {
+        const res = await ProductAllService.getAllProduct()
+        return res
+    }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-    return (
-        <div className="flex flex-col items-center w-full">
-            <h1 className="text-xl font-semibold mb-4">Quản lý sản phẩm</h1>
-            <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 w-full">
-                <div className="flex justify-end px-6 py-4">
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded flex items-center" onClick={handleOpenAddProductClick}>
-                        <Queue style={{ marginRight: 8 }} />
-                        Thêm sản phẩm
-                    </button>
-                </div>
-                <div className="w-full overflow-x-auto">
-                    <table className="border-collapse bg-white text-left text-sm text-gray-500 w-full">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Name</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">State</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Role</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Team</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                            <tr class="hover:bg-gray-50">
-                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                                    <div class="relative h-10 w-10">
-                                        <img
-                                            class="h-full w-full rounded-full object-cover object-center"
-                                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                        />
-                                        <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                                    </div>
-                                    <div class="text-sm">
-                                        <div class="font-medium text-gray-700">Steven Jobs</div>
-                                        <div class="text-gray-400">jobs@sailboatui.com</div>
-                                    </div>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <span
-                                        class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
-                                    >
-                                        <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                                        Active
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">Product Designer</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-                                        >
-                                            Design
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
-                                        >
-                                            Product
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600"
-                                        >
-                                            Develop
-                                        </span>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-end gap-4">
-                                        <button onClick={handleDeleteClick}>
-                                            <Delete style={{ fontSize: 20 }} />
-                                        </button>
-                                        <button onClick={handleOpenEditProductClick}>
-                                            <Edit style={{ fontSize: 20 }} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    const fetchGetDetailsProduct = async (rowSelected) => {
+        const res = await ProductAllService.getDetailsInfoProduct(rowSelected)
+        if (res?.data) {
+            setStateProductDetails({
+                nameProduct: res?.data?.nameProduct,
+                price: res?.data?.price,
+                description: res?.data?.description,
+                rating: res?.data?.rating,
+                imageProduct: res?.data?.imageProduct,
+                categoryName: res?.data?.categoryName,
+                countInStock: res?.data?.countInStock,
+                discount: res?.data?.discount
+            })
+        }
+        setIsPendingUpdate(false)
+    }
+
+    useEffect(() => {
+        if (!isModalOpen) {
+            form.setFieldsValue(stateProductDetails)
+        } else {
+            form.setFieldsValue(inittial())
+        }
+    }, [form, stateProductDetails, isModalOpen])
+
+    useEffect(() => {
+        if (rowSelected && isOpenDrawer) {
+            setIsPendingUpdate(true)
+            fetchGetDetailsProduct(rowSelected)
+        }
+    }, [rowSelected, isOpenDrawer])
+
+    const handleDetailsProduct = () => {
+        setIsOpenDrawer(true)
+    }
+
+    const handleDelteManyProducts = (ids) => {
+        mutationDeletedMany.mutate({ ids: ids, token: user?.access_token }, {
+            onSettled: () => {
+                queryProduct.refetch()
+            }
+        })
+    }
+
+    const fetchAllCategoryProduct = async () => {
+        const res = await ProductAllService.getAllCategory()
+        return res
+    }
+
+    const { data, isPending, isSuccess, isError } = mutation
+    const { data: dataUpdated, isPending: isPendingUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
+    const { data: dataDeleted, isPending: isPendingDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
+    const { data: dataDeletedMany, isPending: isPendingDeletedMany, isSuccess: isSuccessDelectedMany, isError: isErrorDeletedMany } = mutationDeletedMany
+
+
+    const queryProduct = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
+    const categoryProduct = useQuery({ queryKey: ['category-product'], queryFn: fetchAllCategoryProduct })
+    const { isPending: isPendingProducts, data: products } = queryProduct
+    const renderAction = () => {
+        return (
+            <div>
+                <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={() => setIsModalOpenDelete(true)} />
+                <EditOutlined style={{ color: 'orange', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsProduct} />
             </div>
-            <AddProduct open={openAddProductDialog} onClose={handleCloseAddProductDialog} />
-            <EditProduct open={openEditProductDialog} onClose={handleCloseEditProductDialog} />
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+        )
+    }
+
+
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        // setSearchText(selectedKeys[0]);
+        // setSearchedColumn(dataIndex);
+    };
+    const handleReset = (clearFilters) => {
+        clearFilters();
+        // setSearchText('');
+    };
+
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
             >
-                <DialogTitle id="alert-dialog-title">Xác nhận xóa</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Bạn có chắc chắn muốn xóa sản phẩm này không?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary" sx={{ fontWeight: '600' }}>
-                        Hủy
+                <InputComponent
+                    ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
                     </Button>
-                    <Button onClick={handleClose} sx={{ color: 'red', fontWeight: '600' }} autoFocus>
-                        Xóa
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
                     </Button>
-                </DialogActions>
-            </Dialog>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        // render: (text) =>
+        //   searchedColumn === dataIndex ? (
+        //     // <Highlighter
+        //     //   highlightStyle={{
+        //     //     backgroundColor: '#ffc069',
+        //     //     padding: 0,
+        //     //   }}
+        //     //   searchWords={[searchText]}
+        //     //   autoEscape
+        //     //   textToHighlight={text ? text.toString() : ''}
+        //     // />
+        //   ) : (
+        //     text
+        //   ),
+    });
+
+
+    const columns = [
+        {
+            title: 'Tên sản phẩm',
+            dataIndex: 'nameProduct',
+            sorter: (a, b) => a.nameProduct.length - b.nameProduct.length,
+            ...getColumnSearchProps('nameProduct')
+        },
+        {
+            title: 'Loại sản phẩm',
+            dataIndex: 'categoryName',
+        },
+        {
+            title: 'Mô tả',
+            dataIndex: 'description',
+        },
+        {
+            title: 'Giá tiền',
+            dataIndex: 'price',
+        },
+        {
+            title: 'Đánh giá',
+            dataIndex: 'rating',
+            sorter: (a, b) => a.rating - b.rating,
+            filters: [
+                {
+                    text: '>= 3',
+                    value: '>=',
+                },
+                {
+                    text: '<= 3',
+                    value: '<=',
+                }
+            ],
+            onFilter: (value, record) => {
+                if (value === '>=') {
+                    return Number(record.rating) >= 3
+                }
+                return Number(record.rating) <= 3
+            },
+        },
+        {
+            title: 'Số lượng',
+            dataIndex: 'countInStock',
+        },
+        {
+            title: 'Action',
+            dataIndex: 'action',
+            render: renderAction
+        },
+    ];
+    const dataTable = products?.data?.length && products?.data?.map((product) => {
+        return { ...product, key: product._id }
+    })
+
+    useEffect(() => {
+        if (isSuccess && data?.status === 'OK') {
+            message.success()
+            handleCancel()
+        } else if (isError) {
+            message.error()
+        }
+    }, [isSuccess])
+
+    useEffect(() => {
+        if (isSuccessDelectedMany && dataDeletedMany?.status === 'OK') {
+            message.success()
+        } else if (isErrorDeletedMany) {
+            message.error()
+        }
+    }, [isSuccessDelectedMany])
+
+    useEffect(() => {
+        if (isSuccessDelected && dataDeleted?.status === 'OK') {
+            message.success()
+            handleCancelDelete()
+        } else if (isErrorDeleted) {
+            message.error()
+        }
+    }, [isSuccessDelected])
+
+    const handleCloseDrawer = () => {
+        setIsOpenDrawer(false);
+        setStateProductDetails({
+            nameProduct: '',
+            price: '',
+            description: '',
+            rating: '',
+            imageProduct: '',
+            categoryName: '',
+            countInStock: ''
+        })
+        form.resetFields()
+    };
+
+    useEffect(() => {
+        if (isSuccessUpdated && dataUpdated?.status === 'OK') {
+            message.success()
+            handleCloseDrawer()
+        } else if (isErrorUpdated) {
+            message.error()
+        }
+    }, [isSuccessUpdated])
+
+    const handleCancelDelete = () => {
+        setIsModalOpenDelete(false)
+    }
+
+
+    const handleDeleteProduct = () => {
+        mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
+            onSettled: () => {
+                queryProduct.refetch()
+            }
+        })
+    }
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        setStateProduct({
+            nameProduct: '',
+            price: '',
+            description: '',
+            rating: '',
+            imageProduct: '',
+            categoryName: '',
+            countInStock: '',
+            discount: '',
+        })
+        form.resetFields()
+    };
+
+    const onFinish = () => {
+        const params = {
+            nameProduct: stateProduct.nameProduct,
+            price: stateProduct.price,
+            description: stateProduct.description,
+            rating: stateProduct.rating,
+            imageProduct: stateProduct.imageProduct,
+            categoryName: stateProduct.categoryName === 'add_category' ? stateProduct.newCategory : stateProduct.categoryName,
+            countInStock: stateProduct.countInStock,
+            discount: stateProduct.discount
+        }
+        mutation.mutate(params, {
+            onSettled: () => {
+                queryProduct.refetch()
+            }
+        })
+    }
+
+    const handleOnchange = (e) => {
+        setStateProduct({
+            ...stateProduct,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleOnchangeDetails = (e) => {
+        setStateProductDetails({
+            ...stateProductDetails,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleOnchangeAvatar = async ({ fileList }) => {
+        const file = fileList[0]
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        setStateProduct({
+            ...stateProduct,
+            imageProduct: file.preview
+        })
+    }
+
+    const handleOnchangeAvatarDetails = async ({ fileList }) => {
+        const file = fileList[0]
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        setStateProductDetails({
+            ...stateProductDetails,
+            imageProduct: file.preview
+        })
+    }
+    const onUpdateProduct = () => {
+        mutationUpdate.mutate({ id: rowSelected, token: user?.access_token, ...stateProductDetails }, {
+            onSettled: () => {
+                queryProduct.refetch()
+            }
+        })
+    }
+
+    const handleChangeSelect = (value) => {
+        setStateProduct({
+            ...stateProduct,
+            categoryName: value
+        })
+    }
+
+    return (
+        <div>
+            <WrapperHeader>Quản lý sản phẩm</WrapperHeader>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+                <Button
+                    style={{ height: '40px', borderRadius: '6px', borderStyle: 'dashed', marginRight: '10px' }}
+                    onClick={() => setIsModalOpen(true)}
+                >
+                    <PlusOutlined style={{ fontSize: '20px' }} /> Thêm sản phẩm mới
+                </Button>
+            </div>
+            <div style={{ marginTop: '20px' }}>
+                <TableComponent handleDelteMany={handleDelteManyProducts} columns={columns} isPending={isPendingProducts} data={dataTable} onRow={(record, rowIndex) => {
+                    return {
+                        onClick: event => {
+                            setRowSelected(record._id)
+                        }
+                    };
+                }} />
+            </div>
+            <ModalComponent forceRender title="Tạo sản phẩm" open={isModalOpen} onCancel={handleCancel} footer={null}>
+                <Loading isPending={isPending}>
+
+                    <Form
+                        name="basic"
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 18 }}
+                        onFinish={onFinish}
+                        autoComplete="on"
+                        form={form}
+                    >
+                        <Form.Item
+                            label="Tên sản phẩm"
+                            name="nameProduct"
+                            rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]}
+                        >
+                            <InputComponent value={stateProduct['nameProduct']} onChange={handleOnchange} name="nameProduct" />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Loại sản phẩm"
+                            name="categoryName"
+                            rules={[{ required: true, message: 'Vui lòng nhập loại sản phẩm!' }]}
+                        >
+                            <Select
+                                name="categoryName"
+                                // defaultValue="lucy"
+                                // style={{ width: 120 }}
+                                value={stateProduct.categoryName}
+                                onChange={handleChangeSelect}
+                                options={renderOptions(categoryProduct?.data?.data)}
+                            />
+                        </Form.Item>
+                        {stateProduct.categoryName === 'add_category' && (
+                            <Form.Item
+                                label='Loại mới'
+                                name="newCategory"
+                                rules={[{ required: true, message: 'Vui lòng nhập loại sản phẩm mới!' }]}
+                            >
+                                <InputComponent value={stateProduct.newCategory} onChange={handleOnchange} name="newCategory" />
+                            </Form.Item>
+                        )}
+                        <Form.Item
+                            label="Số lượng"
+                            name="countInStock"
+                            rules={[{ required: true, message: 'Vui lòng nhập số lượng!' }]}
+                        >
+                            <InputComponent value={stateProduct.countInStock} onChange={handleOnchange} name="countInStock" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá tiền"
+                            name="price"
+                            rules={[{ required: true, message: 'Vui lòng nhập giá tiền!' }]}
+                        >
+                            <InputComponent value={stateProduct.price} onChange={handleOnchange} name="price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Mô tả"
+                            name="description"
+                            rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
+                        >
+                            <InputComponent value={stateProduct.description} onChange={handleOnchange} name="description" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Đánh giá"
+                            name="rating"
+                            rules={[{ required: true, message: 'Vui lòng nhập đánh giá!' }]}
+                        >
+                            <InputComponent value={stateProduct.rating} onChange={handleOnchange} name="rating" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Giảm giá"
+                            name="discount"
+                            rules={[{ required: true, message: 'Vui lòng nhập giá giảm!' }]}
+                        >
+                            <InputComponent value={stateProduct.discount} onChange={handleOnchange} name="discount" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Ảnh sản phẩm"
+                            name="imageProduct"
+                            rules={[{ required: false, message: 'Vui lòng nhập ảnh sản phẩm!' }]}
+                        >
+                            <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                                <Button >Select File</Button>
+                                {stateProduct?.imageProduct && (
+                                    <img src={stateProduct?.imageProduct} style={{
+                                        height: '60px',
+                                        width: '60px',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover',
+                                        marginLeft: '10px'
+                                    }} alt="avatar" />
+                                )}
+                            </WrapperUploadFile>
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ offset: 18, span: 14 }}>
+                            <Button type="primary" htmlType="submit">
+                                Thêm sản phẩm
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Loading>
+            </ModalComponent>
+            <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="65%">
+                <Loading isPending={isPendingUpdate || isPendingUpdated}>
+
+                    <Form
+                        name="basic"
+                        labelCol={{ span: 8 }}
+                        wrapperCol={{ span: 16 }}
+                        onFinish={onUpdateProduct}
+                        autoComplete="on"
+                        form={form}
+                    >
+                        <Form.Item
+                            label="Tên sản phẩm"
+                            name="nameProduct"
+                            rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]}
+                        >
+                            <InputComponent value={stateProductDetails['nameProduct']} onChange={handleOnchangeDetails} name="nameProduct" />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Loại sản phẩm"
+                            name="categoryName"
+                            rules={[{ required: true, message: 'Vui lòng nhập loại sản phẩm!' }]}
+                        >
+                            <InputComponent value={stateProductDetails['categoryName']} onChange={handleOnchangeDetails} name="categoryName" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Số lượng "
+                            name="countInStock"
+                            rules={[{ required: true, message: 'Vui lòng nhập số lượng!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.countInStock} onChange={handleOnchangeDetails} name="countInStock" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá tiền"
+                            name="price"
+                            rules={[{ required: true, message: 'Vui lòng nhập giá sản phẩm!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.price} onChange={handleOnchangeDetails} name="price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Mô tả"
+                            name="description"
+                            rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.description} onChange={handleOnchangeDetails} name="description" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Đánh giá"
+                            name="rating"
+                            rules={[{ required: true, message: 'Vui lòng nhập đánh giá!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.rating} onChange={handleOnchangeDetails} name="rating" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Giảm giá"
+                            name="discount"
+                            rules={[{ required: true, message: 'Vui lòng nhập giá giảm!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.discount} onChange={handleOnchangeDetails} name="discount" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Ảnh sản phẩm"
+                            name="imageProduct"
+                            rules={[{ required: false, message: 'Vui lòng nhập ảnh sản phẩm!' }]}
+                        >
+                            <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                                <Button >Select File</Button>
+                                {stateProductDetails?.imageProduct && (
+                                    <img src={stateProductDetails?.imageProduct} style={{
+                                        height: '60px',
+                                        width: '60px',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover',
+                                        marginLeft: '10px'
+                                    }} alt="avatar" />
+                                )}
+                            </WrapperUploadFile>
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+                            <Button type="primary" htmlType="submit">
+                                Cập nhật
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Loading>
+            </DrawerComponent>
+            <ModalComponent title="Xóa sản phẩm" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteProduct}>
+                <Loading isPending={isPendingDeleted}>
+                    <div>Bạn có chắc xóa sản phẩm này không?</div>
+                </Loading>
+            </ModalComponent>
         </div>
     )
 }

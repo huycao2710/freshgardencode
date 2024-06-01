@@ -102,9 +102,8 @@ const HeaderComponent = () => {
                         <span className="cursor-pointer mx-5">
                             <Search fontSize="medium" />
                         </span>
-                        <span className="cursor-pointer mx-5">
-                            <Badge badgeContent={5} color="success">
-                                {/* badgeContent={order?.orderItems?.length} */}
+                        <span className="cursor-pointer mx-5" onClick={() => navigate('/order')} >
+                            <Badge badgeContent={order?.orderItems?.length} color="success">
                                 <LocalGroceryStore fontSize="medium" />
                             </Badge>
                         </span>

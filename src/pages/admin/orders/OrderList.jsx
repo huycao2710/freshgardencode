@@ -2,123 +2,160 @@ import { Delete, Edit } from '@mui/icons-material';
 import React, { useState } from 'react';
 import EditOrder from './EditOrder';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-
+import { WrapperHeader } from './style';
+import TableComponent from '../../../components/admin/TableComponent/TableComponent';
+import { useSelector } from 'react-redux';
+import * as OrderAllService from "../../../services/OrderAllService";
+import { useQuery } from '@tanstack/react-query';
+import InputComponent from '../../../components/admin/InputComponent/InputComponent';
+import { Space } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { convertPrice } from '../../../util'
+import { orderContant } from '../../../contant'
+import PieChartComponent from '../../../charts/PieChartComp';
 
 const OrderList = () => {
-    const [open, setOpen] = useState(false);
-    const [openEditOrderDialog, setOpenEditOrderDialog] = useState(false);
+    const user = useSelector((state) => state?.user)
 
-    const handleOpenEditOrderClick = () => {
-        setOpenEditOrderDialog(true);
-    };
 
-    const handleCloseEditOrderDialog = () => {
-        setOpenEditOrderDialog(false);
-    };
+    const getAllOrder = async () => {
+        const res = await OrderAllService.getAllInfoOrder(user?.access_token)
+        return res
+    }
 
-    const handleDeleteClick = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-    return (
-        <div className="flex flex-col items-center w-full">
-            <h1 className="text-xl font-semibold mb-4">Quản lý đơn hàng</h1>
-            <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 w-full">
-                <div className="w-full overflow-x-auto">
-                    <table className="border-collapse bg-white text-left text-sm text-gray-500 w-full">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Name</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">State</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Role</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Team</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                            <tr class="hover:bg-gray-50">
-                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                                    <div class="relative h-10 w-10">
-                                        <img
-                                            class="h-full w-full rounded-full object-cover object-center"
-                                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                        />
-                                        <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                                    </div>
-                                    <div class="text-sm">
-                                        <div class="font-medium text-gray-700">Steven Jobs</div>
-                                        <div class="text-gray-400">jobs@sailboatui.com</div>
-                                    </div>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <span
-                                        class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
-                                    >
-                                        <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                                        Active
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">Order Designer</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-                                        >
-                                            Design
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
-                                        >
-                                            Order
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600"
-                                        >
-                                            Develop
-                                        </span>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-end gap-4">
-                                        <button onClick={handleDeleteClick}>
-                                            <Delete style={{ fontSize: 20 }} />
-                                        </button>
-                                        <button onClick={handleOpenEditOrderClick}>
-                                            <Edit style={{ fontSize: 20 }} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <EditOrder open={openEditOrderDialog} onClose={handleCloseEditOrderDialog} />
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+    const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
+    const { isLoading: isLoadingOrders, data: orders } = queryOrder
+
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
             >
-                <DialogTitle id="alert-dialog-title">Xác nhận xóa</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Bạn có chắc chắn muốn xóa đơn hàng này không?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary" sx={{ fontWeight: '600' }}>
-                        Hủy
+                <InputComponent
+                    // ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    // onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        // onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
                     </Button>
-                    <Button onClick={handleClose} sx={{ color: 'red', fontWeight: '600' }} autoFocus>
-                        Xóa
+                    <Button
+                        // onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
                     </Button>
-                </DialogActions>
-            </Dialog>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                // setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        // render: (text) =>
+        //   searchedColumn === dataIndex ? (
+        //     // <Highlighter
+        //     //   highlightStyle={{
+        //     //     backgroundColor: '#ffc069',
+        //     //     padding: 0,
+        //     //   }}
+        //     //   searchWords={[searchText]}
+        //     //   autoEscape
+        //     //   textToHighlight={text ? text.toString() : ''}
+        //     // />
+        //   ) : (
+        //     text
+        //   ),
+    });
+
+    const columns = [
+        {
+            title: 'Họ tên',
+            dataIndex: 'fullName',
+            sorter: (a, b) => a.fullName.length - b.fullName.length,
+            ...getColumnSearchProps('fullName')
+        },
+        {
+            title: 'Số điện thoại',
+            dataIndex: 'phone',
+            sorter: (a, b) => a.phone.length - b.phone.length,
+            ...getColumnSearchProps('phone')
+        },
+        {
+            title: 'Địa chỉ',
+            dataIndex: 'address',
+            sorter: (a, b) => a.address.length - b.address.length,
+            ...getColumnSearchProps('address')
+        },
+        {
+            title: 'Đã trả tiền',
+            dataIndex: 'isPaid',
+            sorter: (a, b) => a.isPaid.length - b.isPaid.length,
+            ...getColumnSearchProps('isPaid')
+        },
+        {
+            title: 'Chuyển phát',
+            dataIndex: 'isDelivered',
+            sorter: (a, b) => a.isDelivered.length - b.isDelivered.length,
+            ...getColumnSearchProps('isDelivered')
+        },
+        {
+            title: 'Phương thức thanh toán',
+            dataIndex: 'paymentMethod',
+            sorter: (a, b) => a.paymentMethod.length - b.paymentMethod.length,
+            ...getColumnSearchProps('paymentMethod')
+        },
+        {
+            title: 'Tổng số tiền',
+            dataIndex: 'totalPrice',
+            sorter: (a, b) => a.totalPrice.length - b.totalPrice.length,
+            ...getColumnSearchProps('totalPrice')
+        },
+    ];
+
+    const dataTable = orders?.data?.length && orders?.data?.map((order) => {
+        console.log('user', order)
+        return { ...order, key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod], isPaid: order?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán', isDelivered: order?.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng', totalPrice: convertPrice(order?.totalPrice) }
+    })
+
+    return (
+        <div>
+            <WrapperHeader>Quản lý đơn hàng</WrapperHeader>
+            <div style={{ marginTop: '20px' }}>
+                <TableComponent columns={columns} isLoading={isLoadingOrders} data={dataTable} />
+            </div>
         </div>
     )
 }

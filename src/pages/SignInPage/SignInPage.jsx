@@ -38,6 +38,7 @@ const SignInPage = () => {
         navigate(location?.state)
       } else {
         navigate('/')
+        window.location.reload();
       }
       localStorage.setItem('access_token', JSON.stringify(data?.access_token));
       localStorage.setItem(

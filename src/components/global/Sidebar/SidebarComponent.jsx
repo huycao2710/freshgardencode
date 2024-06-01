@@ -146,6 +146,16 @@ const SidebarComponent = ({ open, onClose }) => {
                                         Sản phẩm
                                     </Link>
                                     <Link
+                                        to="/tintuc"
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/tintuc' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
+                                        onClick={(e) => {
+                                            onClose();
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        Tin tức
+                                    </Link>
+                                    <Link
                                         to="/map"
                                         className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/map' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
                                         onClick={(e) => {

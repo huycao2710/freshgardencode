@@ -39,8 +39,8 @@ export const renderOptions = (arr) => {
         })
     }
     results.push({
-        label: 'Thêm type',
-        value: 'add_type'
+        label: 'Thêm loại bánh mới',
+        value: 'add_category'
     })
     return results
 }

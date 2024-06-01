@@ -16,6 +16,14 @@ import ProductDetailPage from "../pages/public/ProductDetailPage/ProductDetailPa
 import ProductsPage from "../pages/public/ProductsPage/ProductsPage";
 import Profile from "../pages/public/Profile/Profile";
 import TypeProductPage from "../pages/public/TypeProductPage/TypeProductPage";
+import NotFoundPage from "../pages/public/NotFoundPage/NotFoundPage";
+import NewsPage from "../pages/public/NewsPage/NewsPage";
+import News1 from "../pages/public/NewsPage/News1";
+import News2 from "../pages/public/NewsPage/News2";
+import News3 from "../pages/public/NewsPage/News3";
+import News4 from "../pages/public/NewsPage/News4";
+import News5 from "../pages/public/NewsPage/News5";
+import News6 from "../pages/public/NewsPage/News6";
 
 export const routes = [
     {
@@ -69,7 +77,13 @@ export const routes = [
         isShowHeader: false
     },
     {
+        path: '/notfoundpage',
+        page: NotFoundPage,
+        isShowHeader: true
+    },
+    {
         path: '/product-details',
+        // path: '/product-details/:id',
         page: ProductDetailPage,
         isShowHeader: true
     },
@@ -111,6 +125,41 @@ export const routes = [
         page: AdminOrder,
         isShowHeader: false,
         isPrivate: true
+    },
+    {
+        path: '/tintuc',
+        page: NewsPage,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc1',
+        page: News1,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc2',
+        page: News2,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc3',
+        page: News3,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc4',
+        page: News4,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc5',
+        page: News5,
+        isShowHeader: true
+    },
+    {
+        path: '/tintuc/tintuc6',
+        page: News6,
+        isShowHeader: true
     },
 
 ]

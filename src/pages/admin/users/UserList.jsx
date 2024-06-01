@@ -1,140 +1,555 @@
-import { Delete, Edit, PersonAdd } from '@mui/icons-material'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
-import React, { useState } from 'react'
-import AddUser from './AddUser';
-import EditUser from './EditUser';
+import { Button, Form, Space, Radio } from "antd";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useMutationHooks } from "../../../hooks/useMutationHook";
+import { useQuery } from "@tanstack/react-query";
+import { DeleteOutlined, EditOutlined, SearchOutlined } from "@mui/icons-material";
+import InputComponent from "../../../components/admin/InputComponent/InputComponent";
+import { getBase64 } from "../../../util";
+import { WrapperHeader, WrapperUploadFile } from "./style";
+import TableComponent from "../../../components/admin/TableComponent/TableComponent";
+import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
+import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
+import DrawerComponent from "../../../components/admin/DrawerComponent/DrawerComponent";
+import * as UserAllService from "../../../services/UserAllService";
+import * as message from "../../../components/global/MessageComponent/Message";
+import { PlusOutlined } from "@ant-design/icons";
 
 const UserList = () => {
-    const [open, setOpen] = useState(false);
-    const [openAddUserDialog, setOpenAddUserDialog] = useState(false);
-    const [openEditUserDialog, setOpenEditUserDialog] = useState(false);
+    const [rowSelected, setRowSelected] = useState("");
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+    const [isPendingUpdate, setIsPendingUpdate] = useState(false);
+    const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
+    const searchInput = useRef(null);
+    const user = useSelector((state) => state?.user);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleOpenAddUserClick = () => {
-        setOpenAddUserDialog(true);
+    const [stateUserDetails, setStateUserDetails] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        password: '',
+        isAdmin: false,
+        avatar: '',
+        address: '',
+        city: '',
+    });
+
+    const [form] = Form.useForm();
+
+    const mutationUpdate = useMutationHooks(
+        (data) => {
+            const { id, token, ...rests } = data;
+            const res = UserAllService.updateInfoUser(id, { ...rests }, token);
+            return res;
+        },
+    );
+
+    const mutationDeleted = useMutationHooks(
+        (data) => {
+            const { id, token } = data;
+            const res = UserAllService.deleteInfoUser(id, token);
+            return res;
+        },
+    );
+
+    const mutationDeletedMany = useMutationHooks(
+        (data) => {
+            const { token, ...ids } = data;
+            const res = UserAllService.deleteManyUser(ids, token);
+            return res;
+        },
+    );
+
+    const handleDeleteManyUsers = (ids) => {
+        mutationDeletedMany.mutate({ ids: ids, token: user?.access_token }, {
+            onSettled: () => {
+                queryUser.refetch();
+            }
+        });
     };
 
-    const handleCloseAddUserDialog = () => {
-        setOpenAddUserDialog(false);
+    const getAllUsers = async () => {
+        const res = await UserAllService.getAllInfoUser(user?.access_token);
+        return res;
     };
 
-    const handleOpenEditUserClick = () => {
-        setOpenEditUserDialog(true);
+    const fetchGetDetailsUser = async (rowSelected) => {
+        const res = await UserAllService.getDetailsInfoUser(rowSelected);
+        if (res?.data) {
+            setStateUserDetails({
+                fullName: res?.data?.fullName,
+                email: res?.data?.email,
+                password: res?.data?.password,
+                phone: res?.data?.phone,
+                isAdmin: res?.data?.isAdmin,
+                address: res?.data?.address,
+                avatar: res.data?.avatar,
+                city: res?.data?.city,
+            });
+        }
+        setIsPendingUpdate(false);
     };
 
-    const handleCloseEditUserDialog = () => {
-        setOpenEditUserDialog(false);
+    useEffect(() => {
+        form.setFieldsValue(stateUserDetails);
+    }, [form, stateUserDetails]);
+
+    useEffect(() => {
+        if (rowSelected && isOpenDrawer) {
+            setIsPendingUpdate(true);
+            fetchGetDetailsUser(rowSelected);
+        }
+    }, [rowSelected, isOpenDrawer]);
+
+    const handleDetailsUser = () => {
+        setIsOpenDrawer(true);
     };
 
-    const handleDeleteClick = () => {
-        setOpen(true);
-    };
+    const { data: dataUpdated, isPending: isPendingUpdated, isError: isErrorUpdated, isSuccess: isSuccessUpdated } = mutationUpdate;
+    const { data: dataDeleted, isPending: isPendingDeleted, isSuccess: isSuccessDeleted, isError: isErrorDeleted } = mutationDeleted;
+    const { data: dataDeletedMany, isPending: isPendingDeletedMany, isSuccess: isSuccessDeletedMany, isError: isErrorDeletedMany } = mutationDeletedMany;
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-    return (
-        <div className="flex flex-col items-center w-full">
-            <h1 className="text-xl font-semibold mb-4">Quản lý người dùng</h1>
-            <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 w-full">
-                <div className="flex justify-end px-6 py-4">
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded flex items-center" onClick={handleOpenAddUserClick}>
-                        <PersonAdd style={{ marginRight: 8 }} />
-                        Thêm người dùng
-                    </button>
-                </div>
-                <div className="w-full overflow-x-auto">
-                    <table className="border-collapse bg-white text-left text-sm text-gray-500 w-full">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Tên</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Trạng thái</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900">Phân Quyền</th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
-                                <th scope="col" className="px-6 py-4 font-medium text-gray-900"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                            <tr class="hover:bg-gray-50">
-                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                                    <div class="relative h-10 w-10">
-                                        <img
-                                            class="h-full w-full rounded-full object-cover object-center"
-                                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                        />
-                                        <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                                    </div>
-                                    <div class="text-sm">
-                                        <div class="font-medium text-gray-700">Steven Jobs</div>
-                                        <div class="text-gray-400">jobs@sailboatui.com</div>
-                                    </div>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <span
-                                        class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
-                                    >
-                                        <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                                        Active
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">Product Designer</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex gap-2">
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-                                        >
-                                            Design
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
-                                        >
-                                            Product
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600"
-                                        >
-                                            Develop
-                                        </span>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-end gap-4">
-                                        <button onClick={handleDeleteClick}>
-                                            <Delete style={{ fontSize: 20 }} />
-                                        </button>
-                                        <button onClick={handleOpenEditUserClick}>
-                                            <Edit style={{ fontSize: 20 }} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    const queryUser = useQuery({
+        queryKey: ["users"],
+        queryFn: getAllUsers,
+    });
+    const { isPending: isPendingUsers, data: users } = queryUser;
+
+    const renderAction = () => {
+        return (
+            <div>
+                <DeleteOutlined
+                    style={{ color: "red", fontSize: "30px", cursor: "pointer" }}
+                    onClick={() => setIsModalOpenDelete(true)}
+                />
+                <EditOutlined
+                    style={{ color: "orange", fontSize: "30px", cursor: "pointer" }}
+                    onClick={handleDetailsUser}
+                />
             </div>
-            <AddUser open={openAddUserDialog} onClose={handleCloseAddUserDialog} />
-            <EditUser open={openEditUserDialog} onClose={handleCloseEditUserDialog} />
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+        );
+    };
+
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+    };
+
+    const handleReset = (clearFilters) => {
+        clearFilters();
+    };
+
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
             >
-                <DialogTitle id="alert-dialog-title">Xác nhận xóa</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Bạn có chắc chắn muốn xóa người dùng này không?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary" sx={{ fontWeight: '600' }}>
-                        Hủy
+                <InputComponent
+                    ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
                     </Button>
-                    <Button onClick={handleClose} sx={{ color: 'red', fontWeight: '600' }} autoFocus>
-                        Xóa
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
                     </Button>
-                </DialogActions>
-            </Dialog>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            close();
+                        }}
+                    >
+                        close
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1677ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+    });
+
+    const columns = [
+        {
+            title: "Họ tên",
+            dataIndex: "fullName",
+            render: (text) => <a>{text}</a>,
+            sorter: (a, b) => a.fullName.length - b.fullName.length,
+            ...getColumnSearchProps('fullName')
+        },
+        {
+            title: "Email",
+            dataIndex: "email",
+            render: (text) => <a>{text}</a>,
+            sorter: (a, b) => a.email.length - b.email.length,
+            ...getColumnSearchProps('email')
+        },
+        {
+            title: "Password",
+            dataIndex: "password",
+        },
+        {
+            title: "Số điện thoại",
+            dataIndex: "phone",
+            sorter: (a, b) => a.phone - b.phone,
+            ...getColumnSearchProps('phone')
+        },
+        {
+            title: "Địa chỉ",
+            dataIndex: "address",
+            render: (text) => <a>{text}</a>,
+            sorter: (a, b) => a.address.length - b.address.length,
+            ...getColumnSearchProps('address')
+        },
+        {
+            title: "Thành phố",
+            dataIndex: "city",
+            render: (text) => <a>{text}</a>,
+            sorter: (a, b) => a.city.length - b.city.length,
+            ...getColumnSearchProps('city')
+        },
+        {
+            title: "Admin",
+            dataIndex: "isAdmin",
+            filters: [
+                {
+                    text: 'Admin',
+                    value: 'true',
+                },
+                {
+                    text: 'Khách hàng',
+                    value: 'false',
+                },
+            ],
+        },
+        {
+            title: "Action",
+            dataIndex: "action",
+            render: renderAction,
+        },
+    ];
+
+    const dataTable =
+        users?.data?.length > 0 &&
+        users?.data?.map((user) => {
+            return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Admin' : 'Khách hàng' };
+        });
+
+    useEffect(() => {
+        if (isSuccessUpdated && dataUpdated?.status === "OK") {
+            message.success('Cập nhật thành công thông tin!');
+            handleCloseDrawer();
+        } else if (isErrorUpdated) {
+            message.error('Đã gặp lỗi trong quá trình cập nhật');
+        }
+    }, [isSuccessUpdated]);
+
+    useEffect(() => {
+        if (isSuccessDeleted && dataDeleted?.status === 'OK') {
+            message.success('Xoá thành công người dùng!')
+            handleCancelDelete()
+        } else if (isErrorDeleted) {
+            message.error('Gặp lỗi khi xoá người dùng!')
+        }
+    }, [isSuccessDeleted])
+
+    useEffect(() => {
+        if (isSuccessDeletedMany && dataDeletedMany?.status === 'OK') {
+            message.success()
+        } else if (isErrorDeletedMany) {
+            message.error()
+        }
+    }, [isSuccessDeletedMany])
+
+    const handleCancelDelete = () => {
+        setIsModalOpenDelete(false);
+    }
+    const handleDeleteUser = () => {
+        mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
+            onSettled: () => {
+                queryUser.refetch()
+            }
+        })
+    }
+    const handleCloseDrawer = () => {
+        setIsOpenDrawer(false);
+        setStateUserDetails({
+            name: "",
+            email: "",
+            phone: "",
+            isAdmin: false,
+        });
+        form.resetFields();
+    };
+
+    const handleOnchangeDetails = (e) => {
+        setStateUserDetails({
+            ...stateUserDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleOnChangeAvatarDetails = async ({ fileList }) => {
+        const file = fileList[0];
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        setStateUserDetails({
+            ...stateUserDetails,
+            avatar: file.preview,
+        });
+    };
+
+    const onUpdateUser = () => {
+        mutationUpdate.mutate({ id: rowSelected, token: user?.access_token, ...stateUserDetails }, {
+            onSettled: () => {
+                queryUser.refetch()
+            }
+        })
+    }
+
+    const handleChangeAdminStatus = (e) => {
+        setStateUserDetails({
+            ...stateUserDetails,
+            isAdmin: e.target.value,
+        });
+    };
+
+    return (
+        <div>
+            <WrapperHeader>
+                Quản lý người dùng
+            </WrapperHeader>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+                <Button
+                    style={{ height: '40px', borderRadius: '6px', borderStyle: 'dashed', marginRight: '10px' }}
+                    onClick={() => setIsModalOpen(true)}
+                >
+                    <PlusOutlined style={{ fontSize: '20px' }} /> Thêm người dùng mới
+                </Button>
+            </div>
+            <div style={{ marginTop: "20px" }}>
+                <TableComponent
+                    handleDeleteMany={handleDeleteManyUsers}
+                    columns={columns}
+                    isPending={isPendingUsers}
+                    data={dataTable}
+                    onRow={(record, rowIndex) => {
+                        return {
+                            onClick: (event) => {
+                                setRowSelected(record._id);
+                            },
+                        };
+                    }}
+                />
+            </div>
+
+            <DrawerComponent
+                title="Chi tiết người dùng"
+                isOpen={isOpenDrawer}
+                onClose={() => setIsOpenDrawer(false)}
+                width="50%"
+            >
+                <Loading isPending={isPendingUpdate || isPendingUpdated}>
+                    <Form
+                        name="basic"
+                        labelCol={{
+                            span: 8,
+                        }}
+                        wrapperCol={{
+                            span: 16,
+                        }}
+                        onFinish={onUpdateUser}
+                        autoComplete="on"
+                        form={form}
+                    >
+                        <Form.Item
+                            label="Họ tên"
+                            name="fullName"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập họ tên!",
+                                },
+                            ]}
+                        >
+                            <InputComponent
+                                value={stateUserDetails['fullName']}
+                                onChange={handleOnchangeDetails}
+                                name="fullName"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập email!",
+                                },
+                            ]}
+                        >
+                            <InputComponent
+                                value={stateUserDetails['email']}
+                                onChange={handleOnchangeDetails}
+                                name="email"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Số điện thoại"
+                            name="phone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập số điện thoại!",
+                                },
+                            ]}
+                        >
+                            <InputComponent
+                                value={stateUserDetails.phone}
+                                onChange={handleOnchangeDetails}
+                                name="phone"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập địa chỉ!",
+                                },
+                            ]}
+                        >
+                            <InputComponent
+                                value={stateUserDetails.address}
+                                onChange={handleOnchangeDetails}
+                                name="address"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Thành phố"
+                            name="city"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập thành phố!",
+                                },
+                            ]}
+                        >
+                            <InputComponent
+                                value={stateUserDetails.address}
+                                onChange={handleOnchangeDetails}
+                                name="city"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Ảnh đại diện"
+                            name="avatar"
+                            rules={[
+                                {
+                                    message: "Vui lòng nhập hình đại diện!",
+                                },
+                            ]}
+                        >
+                            <WrapperUploadFile
+                                onChange={handleOnChangeAvatarDetails}
+                                maxCount={1}
+                            >
+                                <Button>Select File</Button>
+                                {stateUserDetails?.avatar && (
+                                    <img
+                                        src={stateUserDetails?.avatar}
+                                        style={{
+                                            height: "60px",
+                                            width: "60px",
+                                            borderRadius: "50%",
+                                            objectFit: "cover",
+                                            marginLeft: "10px",
+                                        }}
+                                        alt="avatar"
+                                    />
+                                )}
+                            </WrapperUploadFile>
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Quyền"
+                            name="isAdmin"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn quyền!",
+                                },
+                            ]}
+                        >
+                            <Radio.Group onChange={handleChangeAdminStatus} value={stateUserDetails.isAdmin}>
+                                <Radio value={true}>Admin</Radio>
+                                <Radio value={false}>Khách hàng</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{
+                                offset: 20,
+                                span: 16,
+                            }}
+                        >
+                            <Button type="primary" htmlType="submit">
+                                Cập nhật thông tin
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Loading>
+            </DrawerComponent>
+            <ModalComponent title="Xóa người dùng" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteUser}>
+                <Loading isPending={isPendingDeleted}>
+                    <div>Bạn có chắc muốn xoá tài khoản này không</div>
+                </Loading>
+            </ModalComponent>
         </div>
     )
 }

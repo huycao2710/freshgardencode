@@ -7,7 +7,6 @@ import About2 from "../../../components/global/MainProduct/About2";
 import Service from "../../../components/global/MainProduct/Service";
 import Articles from "../../../components/global/MainProduct/Articles";
 import ClientReview from "../../../components/global/MainProduct/ClientReview";
-import Footer from "../../../components/global/FooterComponent/Footer";
 
 const HomePage = () => {
   return (

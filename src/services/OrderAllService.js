@@ -1,4 +1,4 @@
-import { axiosJWT } from "./UserService"
+import { axiosJWT } from "./UserAllService"
 
 export const createNewOrder = async (data, access_token) => {
     const res = await axiosJWT.post(`${process.env.REACT_APP_API_URL}/order/create-neworder/${data.user}`, data, {

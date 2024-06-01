@@ -52,10 +52,12 @@ const stores = [
     },
     {
         id: 7,
-        name: "CH Hanoi Adelaide School",
+        name: "CH 140 Lê Trọng Tấn",
         address:
-            "Lô C35-NT3, C29-TH, C26-THCS, Khu C, Khu đô thị mới Lê Trọng Tấn – Geleximco, Dương Nội, Hà Đông, Hà Nội",
-        phone: "(024) 3856 3856 - số máy lẻ 329",
+            "Số 140 Lê Trọng Tấn, Thanh Xuân, Hà Nội",
+        phone: "(024) 3856 3856 - số máy lẻ: 347",
+        mapSrc:
+            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.9092892784524!2d105.82732407599792!3d20.996272988892045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac6297b9d051%3A0xae5e699c9393a0aa!2zMTQwIFAuIEzDqiBUcuG7jW5nIFThuqVuLCBLaMawxqFuZyBNYWksIFRoYW5oIFh1w6JuLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1717261652539!5m2!1svi!2s",
     },
     {
         id: 8,

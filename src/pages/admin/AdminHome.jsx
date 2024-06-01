@@ -5,11 +5,31 @@ import Navbar from "../../components/admin/Navbar";
 import "../../../src/Dashboard.css";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { CreditCard, ShoppingBag } from "@mui/icons-material";
-import PieChart from "../../charts/PieChart";
 import CountUp from "react-countup";
 import MyCalendar from "../../components/MyCalender";
+import PieChartComponent from "../../charts/PieChartComp";
+import { useQuery } from "@tanstack/react-query";
+import * as OrderAllService from "../../services/OrderAllService";
+import { useSelector } from "react-redux";
+import { convertPrice } from '../../util'
+import { orderContant } from '../../contant'
 
 const AdminHome = () => {
+
+  const user = useSelector((state) => state?.user)
+
+  const getAllOrder = async () => {
+    const res = await OrderAllService.getAllInfoOrder(user?.access_token)
+    return res
+  }
+
+  const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
+  const { isLoading: isLoadingOrders, data: orders } = queryOrder
+
+  const deliveredOrders = orders?.data?.filter(order => order?.isDelivered)?.length || 0;
+
+  const pendingOrders = orders?.data?.filter(order => !order?.isDelivered)?.length || 0;
+
   return (
     <>
       <div className="bgColor">
@@ -19,37 +39,11 @@ const AdminHome = () => {
           <SideNav />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={8}> 
+              <Grid item xs={8}>
                 <Stack spacing={2} direction="row">
                   <Card
                     sx={{ minWidth: 49.25 + "%", height: 150 }}
                     className="gradient"
-                  >
-                    <CardContent>
-                      <div className="iconStyle">
-                        <CreditCard />
-                      </div>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        sx={{ color: "#ffffff" }}
-                      >
-                        $<CountUp delay={0.4} end={500} duration={0.6} />
-                      </Typography>
-                      <Typography
-                        gutterBottom
-                        variant="body2"
-                        component="div"
-                        sx={{ color: "#ccd1d1" }}
-                      >
-                        Total Earning
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                  <Card
-                    sx={{ minWidth: 49.25 + "%", height: 150 }}
-                    className="gradientlight"
                   >
                     <CardContent>
                       <div className="iconStyle">
@@ -61,7 +55,7 @@ const AdminHome = () => {
                         component="div"
                         sx={{ color: "#ffffff" }}
                       >
-                        $<CountUp delay={0.4} end={900} duration={0.6} />
+                        <CountUp delay={0.4} end={pendingOrders} duration={0.6} />
                       </Typography>
                       <Typography
                         gutterBottom
@@ -69,7 +63,33 @@ const AdminHome = () => {
                         component="div"
                         sx={{ color: "#ccd1d1" }}
                       >
-                        Total Orders
+                        Tổng đơn hàng chưa được giao
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  <Card
+                    sx={{ minWidth: 49.25 + "%", height: 150 }}
+                    className="gradientlight"
+                  >
+                    <CardContent>
+                      <div className="iconStyle">
+                        <CreditCard />
+                      </div>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        sx={{ color: "#ffffff" }}
+                      >
+                        <CountUp delay={0.4} end={deliveredOrders} duration={0.6} />
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="div"
+                        sx={{ color: "#ccd1d1" }}
+                      >
+                        Tổng đơn hàng đã được giao
                       </Typography>
                     </CardContent>
                   </Card>
@@ -118,8 +138,8 @@ const AdminHome = () => {
                     display: "flex",
                   }}
                 >
-                  <CardContent sx={{height:"100%"}}>
-                    <PieChart />
+                  <CardContent sx={{ height: "100%" }}>
+                    <PieChartComponent data={orders?.data} />
                   </CardContent>
                 </Card>
               </Grid>

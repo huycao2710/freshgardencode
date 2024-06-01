@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import { ArticlesData } from "./ArticalesData";
+import { useNavigate } from "react-router-dom";
+
 const Articles = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
+  const navigate = useNavigate();
 
   const responsive = {
     0: { items: 1 },
@@ -15,15 +18,24 @@ const Articles = () => {
     setActiveIndex(event.item);
   };
 
+  const handleItemClick = (link) => {
+    navigate(link);
+    window.scrollTo(0, 0); // Cuộn trang lên đầu khi người dùng click
+  };
+
   const items = ArticlesData.map((item) => (
-    <div className="articles-wrap w-auto h-auto border border-black mx-3">
+    <div
+      className="articles-wrap w-auto h-auto border border-black mx-3"
+      key={item.name}
+      onClick={() => handleItemClick(item.link)}
+    >
       <div className="articles-image cursor-pointer">
         <img className="object-cover" src={item.image} alt="" />
       </div>
 
       <div className="articles-content py-8 px-4">
         <h3 className="title mb-4">
-          <a href="">{item.title}</a>
+          <a>{item.title}</a>
         </h3>
         <div className="desc mb-16">
           <p>{item.desc}</p>
@@ -31,6 +43,7 @@ const Articles = () => {
       </div>
     </div>
   ));
+
   return (
     <section>
       <div className="section-heading text-center mb-10">
@@ -40,27 +53,26 @@ const Articles = () => {
           </div>
           <span>Tin tức</span>
           <div className="desc text-base text-gray-500 mt-4">
-            Nơi Fresh Garden cập nhật thông tin mới nhất vê sản phẩm, cửa hàng
+            Nơi Fresh Garden cập nhật thông tin mới nhất về sản phẩm, cửa hàng
             và ưu đãi
           </div>
         </h2>
       </div>
       <div className="flex flex-col justify-center items-center">
-      <div className="container relative py-5 px-10 select-none" >
-        <AliceCarousel
-          className="w-full h-full"
-          items={items}
-          responsive={responsive}
-          disableDotsControls
-          disableButtonsControls
-          mouseTracking
-          onSlideChanged={handleSlideChanged}
-          activeIndex={activeIndex}
-          ref={carouselRef}
-        />
+        <div className="container relative py-5 px-10 select-none">
+          <AliceCarousel
+            className="w-full h-full"
+            items={items}
+            responsive={responsive}
+            disableDotsControls
+            disableButtonsControls
+            mouseTracking
+            onSlideChanged={handleSlideChanged}
+            activeIndex={activeIndex}
+            ref={carouselRef}
+          />
+        </div>
       </div>
-      </div>
-      
     </section>
   );
 };
