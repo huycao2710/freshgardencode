@@ -6,7 +6,7 @@ const ProductCard = ({ product }) => {
   return (
     <>
     <div className="relative w-auto transition-all cursor-pointer group">
-      <div className=" flex justify-center items-center border h-80">
+      <div className=" flex justify-center items-center h-80">
         <img
           className="h-full w-full object-cover object-center transition-transform duration-300"
           src={product.imageProduct}
