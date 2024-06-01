@@ -24,7 +24,7 @@ export const createNewProduct = async (data) => {
 }
 
 export const getDetailsInfoProduct = async (id) => {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-detailproduct/${id}`)
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-detailproduct/665a8925db95dcec31080637`)
     return res.data
 }
 
