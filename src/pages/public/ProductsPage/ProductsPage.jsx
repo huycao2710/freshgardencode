@@ -5,11 +5,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Pagination from "@mui/material/Pagination";
 import { useQuery } from "@tanstack/react-query";
 import * as ProductAllService from "../../../services/ProductAllService";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryText, setCategoryText] = useState("Tất cả sản phẩm");
   const [products, setProducts] = useState(null);
+  const navigate = useNavigate()
 
   const fetchProducts = async () => {
     if (selectedCategory) {
@@ -58,6 +60,8 @@ export default function ProductPage() {
     }
     setProducts({ data: sortedProducts });
   };
+
+  
 
   return (
     <div className="bg-white font-playfairDisplay">
@@ -110,7 +114,18 @@ export default function ProductPage() {
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                       {productsData?.data?.map((product) => (
-                        <ProductCard key={product._id} product={product} />
+                        <ProductCard
+                          key={product._id}
+                          countInStock={product.countInStock}
+                          description={product.description}
+                          imageProduct={product.imageProduct}
+                          nameProduct={product.nameProduct}
+                          price={product.price}
+                          rating={product.rating}
+                          type={product.type}
+                          selled={product.selled}
+                          discount={product.discount}
+                          id={product._id} />
                       ))}
                     </div>
                   )}

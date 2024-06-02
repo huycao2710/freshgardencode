@@ -8,27 +8,10 @@ import { CreditCard, ShoppingBag } from "@mui/icons-material";
 import CountUp from "react-countup";
 import MyCalendar from "../../components/MyCalender";
 import PieChartComponent from "../../charts/PieChartComp";
-import { useQuery } from "@tanstack/react-query";
-import * as OrderAllService from "../../services/OrderAllService";
-import { useSelector } from "react-redux";
-import { convertPrice } from '../../util'
-import { orderContant } from '../../contant'
 
 const AdminHome = () => {
 
-  const user = useSelector((state) => state?.user)
 
-  const getAllOrder = async () => {
-    const res = await OrderAllService.getAllInfoOrder(user?.access_token)
-    return res
-  }
-
-  const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
-  const { isLoading: isLoadingOrders, data: orders } = queryOrder
-
-  const deliveredOrders = orders?.data?.filter(order => order?.isDelivered)?.length || 0;
-
-  const pendingOrders = orders?.data?.filter(order => !order?.isDelivered)?.length || 0;
 
   return (
     <>
@@ -55,7 +38,7 @@ const AdminHome = () => {
                         component="div"
                         sx={{ color: "#ffffff" }}
                       >
-                        <CountUp delay={0.4} end={pendingOrders} duration={0.6} />
+                        <CountUp delay={0.4} end={1000} duration={0.6} />
                       </Typography>
                       <Typography
                         gutterBottom
@@ -81,7 +64,7 @@ const AdminHome = () => {
                         component="div"
                         sx={{ color: "#ffffff" }}
                       >
-                        <CountUp delay={0.4} end={deliveredOrders} duration={0.6} />
+                        <CountUp delay={0.4} end={1000} duration={0.6} />
                       </Typography>
                       <Typography
                         gutterBottom
@@ -139,7 +122,7 @@ const AdminHome = () => {
                   }}
                 >
                   <CardContent sx={{ height: "100%" }}>
-                    <PieChartComponent data={orders?.data} />
+
                   </CardContent>
                 </Card>
               </Grid>

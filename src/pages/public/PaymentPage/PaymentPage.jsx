@@ -33,7 +33,7 @@ const PaymentPage = () => {
   const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false);
   const [sdkReady, setSdkReady] = useState(false);
   const [stateUserDetails, setStateUserDetails] = useState({
-    name: "",
+    fullName: "",
     phone: "",
     address: "",
     city: ""
@@ -51,7 +51,7 @@ const PaymentPage = () => {
     if (isOpenModalUpdateInfo) {
       setStateUserDetails({
         city: user?.city,
-        name: user?.name,
+        name: user?.fullName,
         address: user?.address,
         phone: user?.phone
       })
@@ -96,12 +96,12 @@ const PaymentPage = () => {
 
 
   const handleAddOrder = () => {
-    if (user?.access_token && order?.orderItemsSelected && user?.name && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
+    if (user?.access_token && order?.orderItemsSelected && user?.fullName && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
       // eslint-disable-next-line no-unused-expressions
       mutationAddOrder.mutate(
         {
           token: user?.access_token, orderItems: order?.orderItemsSelected,
-          fullName: user?.name, address: user?.address, phone: user?.phone, city: user?.city,
+          fullName: user?.fullName, address: user?.address, phone: user?.phone, city: user?.city,
           paymentMethod: payment, itemsPrice: priceMemo, shippingPrice: deliveryPriceMemo,
           totalPrice: totalPriceMemo, user: user?.id, email: user?.email
         }
