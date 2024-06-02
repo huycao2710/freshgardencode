@@ -11,7 +11,6 @@ export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryText, setCategoryText] = useState("Tất cả sản phẩm");
   const [products, setProducts] = useState(null);
-  const navigate = useNavigate()
 
   const fetchProducts = async () => {
     if (selectedCategory) {
@@ -60,8 +59,6 @@ export default function ProductPage() {
     }
     setProducts({ data: sortedProducts });
   };
-
-  
 
   return (
     <div className="bg-white font-playfairDisplay">

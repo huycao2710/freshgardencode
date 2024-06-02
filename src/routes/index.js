@@ -12,7 +12,7 @@ import FranchisePage from "../pages/public/FranchisePage/FranchisePage";
 import OrderPage from "../pages/public/OrderPage/OrderPage";
 import OrderSuccess from "../pages/public/OrderSuccess/OrderSuccess";
 import PaymentPage from "../pages/public/PaymentPage/PaymentPage";
-import ProductDetailPage from "../pages/public/ProductDetailPage/ProductDetailPage";
+import ProductDetail from "../pages/public/ProductDetailPage/ProductDetail";
 import ProductsPage from "../pages/public/ProductsPage/ProductsPage";
 import Profile from "../pages/public/Profile/Profile";
 import TypeProductPage from "../pages/public/TypeProductPage/TypeProductPage";
@@ -84,7 +84,8 @@ export const routes = [
     {
         // path: '/product-details',
         path: '/product-details/:id',
-        page: ProductDetailPage,
+        //page: ProductDetailPage,
+        page: ProductDetail,
         isShowHeader: true
     },
     {

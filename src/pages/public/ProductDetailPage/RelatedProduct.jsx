@@ -1,24 +1,49 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { LocalGroceryStore } from "@mui/icons-material";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { convertPrice } from '../../../util'
 
-const ProductDetailsCard = ({ product }) => {
+const RelatedProductCard = ({ product }) => {
+  const { id,countInStock, description, imageProduct, nameProduct, price, rating, type, selled, discount } = product;
+  const navigate = useNavigate();
+
+  const handleDetailsProduct = () => {
+    navigate(`/product-details/${id}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <> {/* Tăng khoảng cách giữa các sản phẩm */}
-      <div className="cursor-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[15rem]"> {/* Tăng kích thước của thẻ RelatedProduct */}
-        <div className="h-[15rem] w-[15rem]"> {/* Kích thước ảnh lớn hơn */}
-          <img
-            className="object-cover object-top w-full h-full"
-            src={product.imageProduct}
-            alt=""
-          />
-        </div>
+    <>
+    <div className="relative w-auto transition-all cursor-pointer group" >
+      <div className=" flex justify-center items-center h-80">
+        <img
+          className="h-full w-full object-cover object-center transition-transform duration-300"
+          src={imageProduct}
+          alt={nameProduct}
+        />
+      </div>
 
-        <div className="p-4">
-          <h3 className="text-lg font-medium text-gray-900">{product.nameProduct}</h3>
-          <p className="mt-2 text-sm text-gray-500">{product.price}</p>
+      <div className="absolute inset-0 flex justify-center items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <button className="w-12 h-12 bg-black flex justify-center items-center rounded-full">
+          <LocalGroceryStore className="text-white" />
+        </button>
+        <button className="w-12 h-12 bg-black flex justify-center items-center rounded-full">
+          <RemoveRedEyeIcon className="text-white" />
+        </button>
+      </div>
+
+      <div className="pt-3 px-5 textPart bg-white-p-3 font-sans">
+        <div>
+          <p className="">{nameProduct}</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <p className="font-semibold text-2xl text-logo-green">{convertPrice(price)}</p>
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 };
 
-export default ProductDetailsCard;
+export default RelatedProductCard;
