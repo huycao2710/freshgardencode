@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';  // Adjusted import to not use named import
 import { AnimatePresence, motion } from 'framer-motion';
 import * as UserAllService from './services/UserAllService';
 import { resetUser, updateUser } from './redux/slides/userAllSlide';
@@ -40,7 +40,12 @@ const App = () => {
       if (isJsonString(storageData) && !user?.access_token) {
         storageData = JSON.parse(storageData);
       }
-      decoded = jwtDecode(storageData);
+      try {
+        decoded = jwtDecode(storageData);
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        handleLogout();  // Logout if the token is invalid
+      }
     }
     return { decoded, storageData };
   };
@@ -49,16 +54,26 @@ const App = () => {
     const currentTime = new Date();
     const { decoded } = handleDecoded();
     let storageRefreshToken = localStorage.getItem('refresh_token');
-    const refreshToken = JSON.parse(storageRefreshToken);
-    const decodedRefreshToken = jwtDecode(refreshToken);
-    if (decoded?.exp < currentTime.getTime() / 1000) {
-      if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
-        const data = await UserAllService.refreshToken(refreshToken);
-        config.headers['token'] = `Bearer ${data?.access_token}`;
-        localStorage.setItem('access_token', JSON.stringify(data?.access_token));
-        dispatch(updateUser({ ...user, access_token: data?.access_token }));
-      } else {
-        handleLogout();
+    let refreshToken = null;
+
+    if (storageRefreshToken) {
+      try {
+        refreshToken = JSON.parse(storageRefreshToken);
+        const decodedRefreshToken = jwtDecode(refreshToken);
+
+        if (decoded?.exp < currentTime.getTime() / 1000) {
+          if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+            const data = await UserAllService.refreshToken(refreshToken);
+            config.headers['Authorization'] = `Bearer ${data?.access_token}`;
+            localStorage.setItem('access_token', JSON.stringify(data?.access_token));
+            dispatch(updateUser({ ...user, access_token: data?.access_token }));
+          } else {
+            handleLogout();
+          }
+        }
+      } catch (error) {
+        console.error('Error processing refresh token:', error);
+        handleLogout();  // Logout if refresh token is invalid
       }
     }
     return config;
@@ -69,7 +84,7 @@ const App = () => {
   const handleGetDetailsUser = async (id, token) => {
     try {
       let storageRefreshToken = localStorage.getItem('refresh_token');
-      const refreshToken = JSON.parse(storageRefreshToken);
+      const refreshToken = storageRefreshToken ? JSON.parse(storageRefreshToken) : null;
       const res = await UserAllService.getDetailsInfoUser(id, token);
       console.log('User details response:', res);
       dispatch(updateUser({ ...res?.data, access_token: token, refreshToken: refreshToken }));
