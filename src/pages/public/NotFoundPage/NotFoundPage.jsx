@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const NotFoundPage = () => {
+  const navigate = useNavigate()
   return (
     <div className="bg-gray-100 h-screen flex justify-center items-center">
       <div className="text-center">

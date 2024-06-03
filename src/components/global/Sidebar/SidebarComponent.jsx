@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as UserAllService from '../../../services/UserAllService';
 import { resetUser } from '../../../redux/slides/userAllSlide';
 import Loading from '../LoadingComponent/LoadingComponent';
+import { persistor } from '../../../redux/store';
+
 
 const SidebarComponent = ({ open, onClose }) => {
     const location = useLocation();
@@ -16,9 +18,16 @@ const SidebarComponent = ({ open, onClose }) => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
     const clickLogOut = async () => {
-        await UserAllService.logoutUser();
-        dispatch(resetUser());
-        onClose();
+        try {
+            await UserAllService.logoutUser();
+            localStorage.clear();
+            sessionStorage.clear();
+            dispatch(resetUser());
+            persistor.purge();
+            onClose();
+        } catch (error) {
+            console.error('Failed to log out:', error);
+        }
     };
 
     useEffect(() => {

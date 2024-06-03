@@ -33,49 +33,16 @@ const ProductDetailComponent = ({ idProduct }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+
   const onChange = (value) => {
     setNumProduct(Number(value));
   };
+
   const fetchGetDetailsProduct = async (context) => {
     const id = context?.queryKey && context?.queryKey[1];
     if (id) {
       const res = await ProductAllService.getDetailsInfoProduct(id);
       return res.data;
-    }
-  };
-
-  useEffect(() => {
-    const orderRedux = order?.orderItems?.find(
-      (item) => item.product === productDetails?._id
-    );
-    if (
-      orderRedux?.amount + numProduct <= orderRedux?.countInStock ||
-      (!orderRedux && productDetails?.countInStock > 0)
-    ) {
-      setErrorLimitOrder(false);
-    } else if (productDetails?.countInStock === 0) {
-      setErrorLimitOrder(true);
-    }
-  }, [numProduct]);
-
-  useEffect(() => {
-    if (order.isSuccessOrder) {
-      message.success("Sản phẩm đã thêm vào giỏ hàng");
-    }
-    return () => {
-      dispatch(resetOrder());
-    };
-  }, [order.isSuccessOrder]);
-
-  const handleChangeCount = (type, limited) => {
-    if (type === "increase") {
-      if (limited) {
-        setNumProduct(numProduct + 1);
-      }
-    } else {
-      if (limited) {
-        setNumProduct(numProduct - 1);
-      }
     }
   };
 
@@ -85,21 +52,47 @@ const ProductDetailComponent = ({ idProduct }) => {
     enabled: !!idProduct,
   });
 
+  useEffect(() => {
+    if (productDetails) {
+      const orderRedux = order?.orderItems?.find(
+        (item) => item.product === productDetails._id
+      );
+      if (
+        orderRedux?.amount + numProduct <= orderRedux?.countInStock ||
+        (!orderRedux && productDetails?.countInStock > 0)
+      ) {
+        setErrorLimitOrder(false);
+      } else if (productDetails?.countInStock === 0) {
+        setErrorLimitOrder(true);
+      }
+    }
+  }, [numProduct, productDetails, order]);
+
+  useEffect(() => {
+    if (order.isSuccessOrder) {
+      message.success("Sản phẩm đã thêm vào giỏ hàng");
+    }
+    return () => {
+      dispatch(resetOrder());
+    };
+  }, [order.isSuccessOrder, dispatch]);
+
+  const handleChangeCount = (type) => {
+    if (type === "increase") {
+      if (numProduct < productDetails?.countInStock) {
+        setNumProduct(numProduct + 1);
+      }
+    } else {
+      if (numProduct > 1) {
+        setNumProduct(numProduct - 1);
+      }
+    }
+  };
+
   const handleAddOrderProduct = () => {
     if (!user?.id) {
       navigate("/sign-in", { state: location?.pathname });
     } else {
-      // {
-      //     name: { type: String, required: true },
-      //     amount: { type: Number, required: true },
-      //     image: { type: String, required: true },
-      //     price: { type: Number, required: true },
-      //     product: {
-      //         type: mongoose.Schema.Types.ObjectId,
-      //         ref: 'Product',
-      //         required: true,
-      //     },
-      // },
       const orderRedux = order.orderItems?.find(
         (item) => item.product === productDetails?._id
       );
@@ -126,6 +119,10 @@ const ProductDetailComponent = ({ idProduct }) => {
     }
   };
 
+  if (!productDetails) {
+    return null; // Or some fallback UI
+  }
+
   return (
     <Loading isPending={isPending}>
       <div className="lg:px-20">
@@ -149,7 +146,11 @@ const ProductDetailComponent = ({ idProduct }) => {
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10">
             <div className="flex flex-col items-center">
               <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-              <Image src={productDetails?.imageProduct} alt="image product" preview={false} />
+                <Image
+                  src={productDetails?.imageProduct}
+                  alt="image product"
+                  preview={false}
+                />
               </div>
             </div>
             <div className="lg:col-span-1 maxt-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7x1 lg:px-8 lg:pb-24">
@@ -192,9 +193,8 @@ const ProductDetailComponent = ({ idProduct }) => {
                         background: "transparent",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        handleChangeCount("decrease", numProduct === 1)
-                      }
+                      onClick={() => handleChangeCount("decrease")}
+                      disabled={numProduct === 1}
                     >
                       <MinusOutlined
                         style={{ color: "#000", fontSize: "15px" }}
@@ -202,7 +202,6 @@ const ProductDetailComponent = ({ idProduct }) => {
                     </button>
                     <WrapperInputNumber
                       onChange={onChange}
-                      defaultValue={1}
                       value={numProduct}
                       size="small"
                       min={1}
@@ -214,12 +213,8 @@ const ProductDetailComponent = ({ idProduct }) => {
                         background: "transparent",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        handleChangeCount(
-                          "increase",
-                          numProduct === productDetails?.countInStock
-                        )
-                      }
+                      onClick={() => handleChangeCount("increase")}
+                      disabled={numProduct === productDetails?.countInStock}
                     >
                       <PlusOutlined
                         style={{ color: "#000", fontSize: "15px" }}

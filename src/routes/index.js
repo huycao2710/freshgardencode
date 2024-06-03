@@ -15,7 +15,6 @@ import PaymentPage from "../pages/public/PaymentPage/PaymentPage";
 import ProductDetail from "../pages/public/ProductDetailPage/ProductDetail";
 import ProductsPage from "../pages/public/ProductsPage/ProductsPage";
 import Profile from "../pages/public/Profile/Profile";
-import TypeProductPage from "../pages/public/TypeProductPage/TypeProductPage";
 import NotFoundPage from "../pages/public/NotFoundPage/NotFoundPage";
 import NewsPage from "../pages/public/NewsPage/NewsPage";
 import News1 from "../pages/public/NewsPage/News1";
@@ -62,11 +61,6 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/:type',
-        page: TypeProductPage,
-        isShowHeader: true
-    },
-    {
         path: '/sign-in',
         page: SignInPage,
         isShowHeader: false
@@ -77,14 +71,7 @@ export const routes = [
         isShowHeader: false
     },
     {
-        path: '/notfoundpage',
-        page: NotFoundPage,
-        isShowHeader: true
-    },
-    {
-        // path: '/product-details',
         path: '/product-details/:id',
-        //page: ProductDetailPage,
         page: ProductDetail,
         isShowHeader: true
     },
