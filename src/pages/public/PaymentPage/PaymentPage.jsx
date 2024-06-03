@@ -51,7 +51,7 @@ const PaymentPage = () => {
     if (isOpenModalUpdateInfo) {
       setStateUserDetails({
         city: user?.city,
-        name: user?.fullName,
+        fullName: user?.fullName,
         address: user?.address,
         phone: user?.phone
       })
@@ -162,7 +162,7 @@ const PaymentPage = () => {
 
   const handleCancelUpdate = () => {
     setStateUserDetails({
-      name: '',
+      fullName: '',
       email: '',
       phone: '',
       isAdmin: false,
@@ -180,11 +180,11 @@ const PaymentPage = () => {
   }
 
   const handleUpdateInfoUser = () => {
-    const { name, address, city, phone } = stateUserDetails
-    if (name && address && city && phone) {
+    const { fullName, address, city, phone } = stateUserDetails
+    if (fullName && address && city && phone) {
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({ name, address, city, phone }))
+          dispatch(updateUser({ fullName, address, city, phone }))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -203,7 +203,7 @@ const PaymentPage = () => {
       {
         token: user?.access_token,
         orderItems: order?.orderItemsSelected,
-        fullName: user?.name,
+        fullName: user?.fullName,
         address: user?.address,
         phone: user?.phone,
         city: user?.city,
@@ -399,7 +399,7 @@ const PaymentPage = () => {
             >
               <Form.Item
                 label="Họ tên"
-                name="name"
+                name="fullName"
                 rules={[
                   {
                     required: true,
@@ -408,9 +408,9 @@ const PaymentPage = () => {
                 ]}
               >
                 <InputComponent
-                  value={stateUserDetails["name"]}
+                  value={stateUserDetails["fullName"]}
                   onChange={handleOnchangeDetails}
-                  name="name"
+                  name="fullName"
                 />
               </Form.Item>
 

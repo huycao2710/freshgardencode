@@ -96,7 +96,7 @@ const Footer = () => {
         Copyright © 2024 Freshgarden.vn
       </div>
     </div>
-    
+
   );
 };
 

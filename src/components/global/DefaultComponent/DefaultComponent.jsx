@@ -6,7 +6,9 @@ const DefaultComponent = ({ children }) => {
     return (
         <div>
             <HeaderComponent />
-            {children}
+            <div style={{ marginBottom: '20px' }}>
+                {children}
+            </div>
             <Footer />
         </div>
     )
