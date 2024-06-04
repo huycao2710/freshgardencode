@@ -74,45 +74,57 @@ const HeaderComponent = () => {
 
     const order = useSelector((state) => state.order)
 
-    return (
-            <div
-                className="container-fluid justify-center items-center"
-                style={{ height: "50px", maxHeight: "80vh" }}
-            >
-                <div className="bg-fixed justify-content-end" style={HeaderBackGround}>
-                    <div className="mr-10" style={LogoHeader} onClick={handleNavigateHomePage}></div>
-                    <div style={NhuongQuyenLogo} onClick={handleNavigateNhuongQuyen}></div>
-                    <div className="text-white text-sm ml-72 flex items-center space-x-12">
-                        <div className="flex items-center space-x-5">
-                            <PhoneInTalk fontSize="14px" />
-                            <a className="cursor-pointer">024 3856 3856</a>
-                        </div>
-                        <div className="flex items-center space-x-5">
-                            <MailOutline fontSize="14px" />
-                            <a className="cursor-pointer">cskh@freshgarden.vn</a>
-                        </div>
-                        <div className="flex items-center space-x-5">
-                            <LocationOn fontSize="14px" />
-                            <a className="cursor-pointer">46 An Dương, Hà Nội</a>
-                        </div>
-                    </div>
+    const user = useSelector((state) => state.user)
 
-                    <div className="text-white flex justify-content-end ml-auto">
-                        <span className="cursor-pointer mx-5">
-                            <Search fontSize="medium" />
-                        </span>
-                        <span className="cursor-pointer mx-5" onClick={() => navigate('/order')} >
-                            <Badge badgeContent={order?.orderItems?.length} color="success">
-                                <LocalGroceryStore fontSize="medium" />
-                            </Badge>
-                        </span>
-                        <span onClick={handleOpenSidebar} className="cursor-pointer mx-5">
-                            <Menu fontSize="medium" />
-                        </span>
-                        <SidebarComponent open={openSidebar} onClose={handleCloseSidebar} />
+    const badgeCount = user?.access_token ? order?.orderItems?.length : 0;
+
+    const handleNavigateOrder = () => {
+        if (user?.access_token) {
+            navigate("/order");
+        } else {
+            navigate("/sign-in");
+        }
+    };
+
+    return (
+        <div
+            className="container-fluid justify-center items-center"
+            style={{ height: "50px", maxHeight: "80vh" }}
+        >
+            <div className="bg-fixed justify-content-end" style={HeaderBackGround}>
+                <div className="mr-10" style={LogoHeader} onClick={handleNavigateHomePage}></div>
+                <div style={NhuongQuyenLogo} onClick={handleNavigateNhuongQuyen}></div>
+                <div className="text-white text-sm ml-72 flex items-center space-x-12">
+                    <div className="flex items-center space-x-5">
+                        <PhoneInTalk fontSize="14px" />
+                        <a className="cursor-pointer">024 3856 3856</a>
+                    </div>
+                    <div className="flex items-center space-x-5">
+                        <MailOutline fontSize="14px" />
+                        <a className="cursor-pointer">cskh@freshgarden.vn</a>
+                    </div>
+                    <div className="flex items-center space-x-5">
+                        <LocationOn fontSize="14px" />
+                        <a className="cursor-pointer">46 An Dương, Hà Nội</a>
                     </div>
                 </div>
+
+                <div className="text-white flex justify-content-end ml-auto">
+                    <span className="cursor-pointer mx-5">
+                        <Search fontSize="medium" />
+                    </span>
+                    <span className="cursor-pointer mx-5" onClick={handleNavigateOrder} >
+                        <Badge badgeContent={badgeCount} color="success">
+                            <LocalGroceryStore fontSize="medium" />
+                        </Badge>
+                    </span>
+                    <span onClick={handleOpenSidebar} className="cursor-pointer mx-5">
+                        <Menu fontSize="medium" />
+                    </span>
+                    <SidebarComponent open={openSidebar} onClose={handleCloseSidebar} />
+                </div>
             </div>
+        </div>
 
     );
 };
