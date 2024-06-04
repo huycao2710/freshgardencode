@@ -5,6 +5,6 @@ export const orderPayment = {
   },
   payment: {
     later_money: 'Thanh toán tiền mặt khi nhận hàng',
-    paypal: 'Thanh toán online'
+    paypal: 'Thanh toán Paypal'
   }
 }

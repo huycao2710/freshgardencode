@@ -353,7 +353,7 @@ const PaymentPage = () => {
                           purchase_units: [
                             {
                               amount: {
-                                value: (totalPriceMemo / 24540).toFixed(2), // PayPal accepts amount in string format
+                                value: (totalPriceMemo / 24540).toFixed(2), 
                               },
                             },
                           ],
