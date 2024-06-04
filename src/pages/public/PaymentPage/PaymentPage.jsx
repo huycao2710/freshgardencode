@@ -353,7 +353,7 @@ const PaymentPage = () => {
                           purchase_units: [
                             {
                               amount: {
-                                value: (totalPriceMemo / 24540).toFixed(2), 
+                                value: (totalPriceMemo / 24540).toFixed(2),
                               },
                             },
                           ],
@@ -495,5 +495,3 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
-
-
