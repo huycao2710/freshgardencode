@@ -111,7 +111,7 @@ const SignInPage = () => {
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                 <ReCAPTCHA
-                  sitekey="6LeZrvApAAAAANF8P9tvV9h56knBg1EkImzeQyc3"
+                  sitekey="6Lc5r_ApAAAAAFkH71LiveGqFIPc98eLm_8rY6Oe"
                   onChange={handleRecaptchaChange}
                 />
               </Box>
