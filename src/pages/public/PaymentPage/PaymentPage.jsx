@@ -211,7 +211,7 @@ const PaymentPage = () => {
         shippingPrice: deliveryPriceMemo,
         totalPrice: totalPriceMemo,
         user: user?.id,
-        isPaid: true,
+        isPaid: false,
         paidAt: details.update_time,
         email: user?.email
       }
