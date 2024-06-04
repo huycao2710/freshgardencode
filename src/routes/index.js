@@ -9,7 +9,6 @@ import FranchisePage from "../pages/public/FranchisePage/FranchisePage";
 import HomePage from "../pages/public/HomePage/HomePage";
 import MapPage from "../pages/public/MapPage/MapPage";
 import MyOrderPage from "../pages/public/MyOrderPage/MyOrderPage";
-import FranchisePage from "../pages/public/FranchisePage/FranchisePage";
 import OrderPage from "../pages/public/OrderPage/OrderPage";
 import OrderSuccess from "../pages/public/OrderSuccess/OrderSuccess";
 import PaymentPage from "../pages/public/PaymentPage/PaymentPage";
@@ -90,10 +89,6 @@ export const routes = [
         path: '/nhuongquyen',
         page: FranchisePage,
         isShowHeader: false
-    },
-    {
-        path: '/nhuongquyen',
-        page: FranchisePage,
     },
     {
         path: '/admin',

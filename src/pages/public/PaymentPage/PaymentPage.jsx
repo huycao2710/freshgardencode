@@ -1,4 +1,4 @@
-     import { Form, Radio } from "antd";
+import { Form, Radio } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Label,
@@ -17,7 +17,7 @@ import * as message from "../../../components/global/MessageComponent/Message";
 import { updateUser } from "../../../redux/slides/userAllSlide";
 import { useNavigate } from "react-router-dom";
 import { removeAllOrderProduct } from "../../../redux/slides/orderAllSlide";
-import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import * as PaymentService from "../../../services/PaymentService";
 import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
 import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
@@ -344,16 +344,32 @@ const PaymentPage = () => {
                 </WrapperTotal>
               </div>
               {payment === 'paypal' && sdkReady ? (
-                <div style={{ width: '320px' }}>
-                  <PayPalButton
-                    amount={Math.round(totalPriceMemo / 24540)}
-                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                    onSuccess={onSuccessPaypal}
-                    onError={() => {
-                      alert("Thanh toán không thành công. Vui lòng thử lại sau!")
-                    }}
-                  />
-                </div>
+                <PayPalScriptProvider options={{ "client-id": "your-client-id" }}>
+                  <div style={{ width: '320px' }}>
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: (totalPriceMemo / 24540).toFixed(2), // PayPal accepts amount in string format
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                          onSuccessPaypal(details, data);
+                        });
+                      }}
+                      onError={(err) => {
+                        alert("Thanh toán không thành công. Vui lòng thử lại sau!");
+                      }}
+                    />
+                  </div>
+                </PayPalScriptProvider>
               ) : (
                 <ButtonComp
                   onClick={() => handleAddOrder()}
@@ -479,3 +495,5 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+
+
