@@ -147,7 +147,7 @@ const OrderList = () => {
 
     const dataTable = orders?.data?.length && orders?.data?.map((order) => {
         console.log('user', order)
-        return { ...order, key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod], isPaid: order?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán', isDelivered: order?.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng', totalPrice: convertPrice(order?.totalPrice) }
+        return { ...order, key: order._id, fullName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod], isPaid: order?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán', isDelivered: order?.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng', totalPrice: convertPrice(order?.totalPrice) }
     })
 
     return (

@@ -17,7 +17,7 @@ import * as message from "../../../components/global/MessageComponent/Message";
 import { updateUser } from "../../../redux/slides/userAllSlide";
 import { useNavigate } from "react-router-dom";
 import { removeAllOrderProduct } from "../../../redux/slides/orderAllSlide";
-import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 import * as PaymentService from "../../../services/PaymentService";
 import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
 import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
@@ -50,7 +50,7 @@ const PaymentPage = () => {
     if (isOpenModalUpdateInfo) {
       setStateUserDetails({
         city: user?.city,
-        name: user?.fullName,
+        fullName: user?.fullName,
         address: user?.address,
         phone: user?.phone
       })
@@ -161,7 +161,7 @@ const PaymentPage = () => {
 
   const handleCancelUpdate = () => {
     setStateUserDetails({
-      name: '',
+      fullName: '',
       email: '',
       phone: '',
       isAdmin: false,
@@ -179,11 +179,11 @@ const PaymentPage = () => {
   }
 
   const handleUpdateInfoUser = () => {
-    const { name, address, city, phone } = stateUserDetails
-    if (name && address && city && phone) {
+    const { fullName, address, city, phone } = stateUserDetails
+    if (fullName && address && city && phone) {
       mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
         onSuccess: () => {
-          dispatch(updateUser({ name, address, city, phone }))
+          dispatch(updateUser({ fullName, address, city, phone }))
           setIsOpenModalUpdateInfo(false)
         }
       })
@@ -202,7 +202,7 @@ const PaymentPage = () => {
       {
         token: user?.access_token,
         orderItems: order?.orderItemsSelected,
-        fullName: user?.name,
+        fullName: user?.fullName,
         address: user?.address,
         phone: user?.phone,
         city: user?.city,
@@ -345,7 +345,7 @@ const PaymentPage = () => {
               </div>
               {payment === 'paypal' && sdkReady ? (
                 <div style={{ width: '320px' }}>
-                  <PayPalButton
+                  <PayPalButtons
                     amount={Math.round(totalPriceMemo / 24540)}
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={onSuccessPaypal}
@@ -398,7 +398,7 @@ const PaymentPage = () => {
             >
               <Form.Item
                 label="Họ tên"
-                name="name"
+                name="fullName"
                 rules={[
                   {
                     required: true,
@@ -407,9 +407,9 @@ const PaymentPage = () => {
                 ]}
               >
                 <InputComponent
-                  value={stateUserDetails["name"]}
+                  value={stateUserDetails["fullName"]}
                   onChange={handleOnchangeDetails}
-                  name="name"
+                  name="fullName"
                 />
               </Form.Item>
 

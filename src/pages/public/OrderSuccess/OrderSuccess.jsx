@@ -43,7 +43,7 @@ const OrderSuccess = () => {
                             <WrapperItemOrderInfo>
                                 {state.orders?.map((order) => {
                                     return (
-                                        <WrapperItemOrder key={order?.name}>
+                                        <WrapperItemOrder key={order?.nameProduct}>
                                             <div
                                                 style={{
                                                     width: "390px",
@@ -53,7 +53,7 @@ const OrderSuccess = () => {
                                                 }}
                                             >
                                                 <img
-                                                    src={order?.image}
+                                                    src={order?.imageProduct}
                                                     style={{
                                                         width: "77px",
                                                         height: "79px",
@@ -68,7 +68,7 @@ const OrderSuccess = () => {
                                                         whiteSpace: "nowrap",
                                                     }}
                                                 >
-                                                    {order?.name}
+                                                    {order?.nameProduct}
                                                 </div>
                                             </div>
                                             <div

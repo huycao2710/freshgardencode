@@ -92,7 +92,7 @@ const DetailsOrderPage = () => {
                       whiteSpace: 'nowrap',
                       marginLeft: '10px',
                       height: '70px',
-                    }}>{order?.name}</div>
+                    }}>{order?.nameProduct}</div>
                   </WrapperNameProduct>
                   <WrapperItem>{convertPrice(order?.price)}</WrapperItem>
                   <WrapperItem>{order?.amount}</WrapperItem>
