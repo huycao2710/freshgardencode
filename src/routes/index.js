@@ -5,6 +5,7 @@ import AdminOrder from "../pages/admin/AdminOrder";
 import AdminProduct from "../pages/admin/AdminProduct";
 import AdminUser from "../pages/admin/AdminUser";
 import DetailsOrderPage from "../pages/public/DetailsOrderPage/DetailsOrderPage";
+import FranchisePage from "../pages/public/FranchisePage/FranchisePage";
 import HomePage from "../pages/public/HomePage/HomePage";
 import MapPage from "../pages/public/MapPage/MapPage";
 import MyOrderPage from "../pages/public/MyOrderPage/MyOrderPage";
@@ -89,6 +90,10 @@ export const routes = [
         path: '/nhuongquyen',
         page: FranchisePage,
         isShowHeader: false
+    },
+    {
+        path: '/nhuongquyen',
+        page: FranchisePage,
     },
     {
         path: '/admin',
