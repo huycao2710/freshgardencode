@@ -36,6 +36,7 @@ const SignInPage = () => {
       console.log('Login successful:', data);
       if (location?.state) {
         navigate(location?.state)
+        window.location.reload();
       } else {
         navigate('/')
         window.location.reload();

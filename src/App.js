@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { jwtDecode } from 'jwt-decode';  // Adjusted import to not use named import
+import { jwtDecode } from 'jwt-decode';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as UserAllService from './services/UserAllService';
 import { resetUser, updateUser } from './redux/slides/userAllSlide';
@@ -44,7 +44,7 @@ const App = () => {
         decoded = jwtDecode(storageData);
       } catch (error) {
         console.error('Error decoding token:', error);
-        handleLogout();  // Logout if the token is invalid
+        handleLogout();
       }
     }
     return { decoded, storageData };
@@ -73,7 +73,7 @@ const App = () => {
         }
       } catch (error) {
         console.error('Error processing refresh token:', error);
-        handleLogout();  // Logout if refresh token is invalid
+        handleLogout();
       }
     }
     return config;

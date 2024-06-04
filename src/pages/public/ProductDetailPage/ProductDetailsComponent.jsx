@@ -120,7 +120,7 @@ const ProductDetailComponent = ({ idProduct }) => {
   };
 
   if (!productDetails) {
-    return null; // Or some fallback UI
+    return null;
   }
 
   return (
