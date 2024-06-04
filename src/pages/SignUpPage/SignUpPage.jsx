@@ -129,7 +129,7 @@ const SignUpPage = () => {
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
             <ReCAPTCHA
-              sitekey="6LfGtewpAAAAABgM1A7E41JllsnYza_1dExCPagI"
+              sitekey="6LeZrvApAAAAANF8P9tvV9h56knBg1EkImzeQyc3"
               onChange={handleRecaptchaChange}
             />
           </Box>
