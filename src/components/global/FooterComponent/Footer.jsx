@@ -1,9 +1,9 @@
 import React from "react";
 import { LocationOn, PhoneInTalk } from "@mui/icons-material";
 import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
+
 const Footer = () => {
   return (
-
     <div
       className="font-montserrat"
       style={{ backgroundImage: 'url("assets/images/Header/nenHeader.jpg")' }}

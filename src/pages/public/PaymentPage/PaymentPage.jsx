@@ -1,4 +1,4 @@
-import { Form, Radio } from "antd";
+     import { Form, Radio } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Label,
@@ -23,7 +23,6 @@ import Loading from "../../../components/global/LoadingComponent/LoadingComponen
 import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
 import InputComponent from "../../../components/admin/InputComponent/InputComponent";
 import ButtonComp from "../../../components/global/ButtonComponent/ButtonComp";
-
 
 const PaymentPage = () => {
   const order = useSelector((state) => state.order);

@@ -4,7 +4,6 @@ import AliceCarousel from "react-alice-carousel";
 import ProductDetailsComponent from "./ProductDetailsComponent";
 import { useParams } from "react-router-dom";
 import * as ProductAllService from "../../../services/ProductAllService";
-import RelatedProduct from "./RelatedProduct";
 import ProductCard from "../ProductsPage/ProductCard";
 
 export default function ProductDetails() {

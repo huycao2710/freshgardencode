@@ -6,10 +6,7 @@ import {
   WrapperPriceProduct,
   WrapperPriceTextProduct,
   WrapperQuantityProduct,
-  WrapperStyleColImage,
-  WrapperStyleImageSmall,
   WrapperStyleNameProduct,
-  WrapperStyleTextSell,
 } from "./style";
 import { StarFilled, PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import * as ProductAllService from "../../../services/ProductAllService";
