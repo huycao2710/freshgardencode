@@ -14,8 +14,6 @@ const HomePage = () => {
       <div>
         <MainCarousel />
         <MainProduct />
-        <Product />
-        <About />
         <About2 />
         <Service />
         <Articles />
