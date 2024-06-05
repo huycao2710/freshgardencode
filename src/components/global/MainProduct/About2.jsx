@@ -7,13 +7,12 @@ const About2 = () => {
         <div className="section-heading text-center mb-10">
           <h2 className="section-title text-5xl font-playfairDisplay text-gray-500">
             <div className="icon mb-5 flex justify-center items-center">
-              <img src="/assets/images/Story/storyIcon.jpg" alt="icon" />
+              <img src="/assets/images/TTD/TTDIcon.jpg" alt="icon" />
             </div>
-            <span>Câu chuyện Fresh Garden</span>
+            <span>Thẻ tích điểm Fresh Garden</span>
           </h2>
           <div className="desc text-base text-gray-500 mt-4">
-            Fresh Garden là thương hiệu bánh Việt được xây dựng từ tình yêu qua
-            những thông điệp ngọt ngào trong mỗi chiếc bánh.
+            Thẻ khách hàng thân thiết giúp khách hàng sở hữu nhiều ưu đãi khi tích lũy đủ số điểm
           </div>
         </div>
 
@@ -31,12 +30,14 @@ const About2 = () => {
           <div className="col-span-1 lg:col-span-1 flex justify-center">
             <div className="home-about-content p-10 bg-about-content h-fit w-auto text-white">
               <h3 className="text-2xl font-bold mb-4 font-playfairDisplay">
-                Câu chuyện về chiếc bánh tươi
+                Khách hàng thân thiết
               </h3>
               <p className="px-4 py-6 mb-4 font-sans text-lg">
-                Hơn 12 năm không ngừng phát triển, Fresh Garden - "Bánh tươi mỗi
-                ngày" với sứ mệnh xuyên suốt mang đến khách hàng những sản phẩm
-                dinh dưỡng - an toàn - tự nhiên tốt cho sức khỏe người dùng.
+                Với mong muốn mang lại cho Quý khách hàng
+                những lợi ích tốt nhất và đáp lại tình cảm tốt đẹp
+                cùng đồng hành mà Quý khách đã dành cho Fresh Garden
+                trong suốt thời gian qua, hệ thống triển khai
+                chương trình tích lũy điểm khi mua hàng tại tất cả cửa hàng.
               </p>
               <a href="/pages/about-us" className="flex items-center text-2xl ">
                 Xem thêm{" "}
