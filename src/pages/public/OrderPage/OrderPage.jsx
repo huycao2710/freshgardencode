@@ -42,15 +42,16 @@ const OrderPage = () => {
     fullName: "",
     phone: "",
     address: "",
-    city: ""
+    city: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const onChange = (e) => {
     if (listChecked.includes(e.target.value)) {
       const newListChecked = listChecked.filter(
-        (item) => item !== e.target.value);
+        (item) => item !== e.target.value
+      );
       setListChecked(newListChecked);
     } else {
       setListChecked([...listChecked, e.target.value]);
@@ -58,40 +59,40 @@ const OrderPage = () => {
   };
 
   const handleChangeCount = (type, idProduct, limited) => {
-    if (type === 'increase') {
+    if (type === "increase") {
       if (!limited) {
-        dispatch(increaseAmount({ idProduct }))
+        dispatch(increaseAmount({ idProduct }));
       }
     } else {
       if (!limited) {
-        dispatch(decreaseAmount({ idProduct }))
+        dispatch(decreaseAmount({ idProduct }));
       }
     }
-  }
+  };
 
   const handleDeleteOrder = (idProduct) => {
-    dispatch(removeOrderProduct({ idProduct }))
-  }
+    dispatch(removeOrderProduct({ idProduct }));
+  };
 
   const handleOnchangeCheckAll = (e) => {
     if (e.target.checked) {
-      const newListChecked = []
+      const newListChecked = [];
       order?.orderItems?.forEach((item) => {
-        newListChecked.push(item?.product)
-      })
-      setListChecked(newListChecked)
+        newListChecked.push(item?.product);
+      });
+      setListChecked(newListChecked);
     } else {
-      setListChecked([])
+      setListChecked([]);
     }
-  }
+  };
 
   useEffect(() => {
-    dispatch(selectedOrder({ listChecked }))
-  }, [listChecked])
+    dispatch(selectedOrder({ listChecked }));
+  }, [listChecked]);
 
   useEffect(() => {
-    form.setFieldsValue(stateUserDetails)
-  }, [form, stateUserDetails])
+    form.setFieldsValue(stateUserDetails);
+  }, [form, stateUserDetails]);
 
   useEffect(() => {
     if (isOpenModalUpdateInfo) {
@@ -99,121 +100,125 @@ const OrderPage = () => {
         city: user?.city,
         fullName: user?.fullName,
         address: user?.address,
-        phone: user?.phone
-      })
+        phone: user?.phone,
+      });
     }
-  }, [isOpenModalUpdateInfo])
+  }, [isOpenModalUpdateInfo]);
 
   const handleChangeAddress = () => {
-    setIsOpenModalUpdateInfo(true)
-  }
+    setIsOpenModalUpdateInfo(true);
+  };
 
   const priceMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
-    }, 0)
-    return result
-  }, [order])
+      return total + cur.price * cur.amount;
+    }, 0);
+    return result;
+  }, [order]);
 
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount * cur.amount) / 100)
-    }, 0)
+      const totalDiscount = cur.discount ? cur.discount : 0;
+      return total + (priceMemo * (totalDiscount * cur.amount)) / 100;
+    }, 0);
     if (Number(result)) {
-      return result
+      return result;
     }
-    return 0
-  }, [order])
+    return 0;
+  }, [order]);
 
   const deliveryPriceMemo = useMemo(() => {
     if (priceMemo >= 20000 && priceMemo < 500000) {
-      return 30000
+      return 30000;
     } else if (priceMemo >= 500000) {
-      return 50000
+      return 50000;
     } else {
-      return 0
+      return 0;
     }
-  }, [priceMemo])
+  }, [priceMemo]);
 
   const totalPriceMemo = useMemo(() => {
-    return Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
-  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo])
+    return (
+      Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
+    );
+  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo]);
 
   const handleRemoveAllOrder = () => {
     if (listChecked?.length > 1) {
-      dispatch(removeAllOrderProduct({ listChecked }))
+      dispatch(removeAllOrderProduct({ listChecked }));
     }
-  }
+  };
 
   const handleAddCard = () => {
     if (!order?.orderItemsSelected?.length) {
-      message.error('Vui lòng chọn sản phẩm')
-    } else if (!user?.phone || !user?.address || !user?.fullName || !user?.city) {
-      setIsOpenModalUpdateInfo(true)
+      message.error("Vui lòng chọn sản phẩm");
+    } else if (
+      !user?.phone ||
+      !user?.address ||
+      !user?.fullName ||
+      !user?.city
+    ) {
+      setIsOpenModalUpdateInfo(true);
     } else {
-      navigate('/payment')
+      navigate("/payment");
     }
-  }
+  };
 
-  const mutationUpdate = useMutationHooks(
-    (data) => {
-      const { id,
-        token,
-        ...rests } = data
-      const res = UserAllService.updateInfoUser(
-        id,
-        { ...rests }, token)
-      return res
-    },
-  )
+  const mutationUpdate = useMutationHooks((data) => {
+    const { id, token, ...rests } = data;
+    const res = UserAllService.updateInfoUser(id, { ...rests }, token);
+    return res;
+  });
 
   const { isPending, data } = mutationUpdate;
 
   const handleCancelUpdate = () => {
     setStateUserDetails({
-      fullName: '',
-      email: '',
-      phone: '',
+      fullName: "",
+      email: "",
+      phone: "",
       isAdmin: false,
-    })
-    form.resetFields()
-    setIsOpenModalUpdateInfo(false)
-  }
+    });
+    form.resetFields();
+    setIsOpenModalUpdateInfo(false);
+  };
 
   const handleUpdateInfoUser = () => {
-    const { fullName, address, city, phone } = stateUserDetails
+    const { fullName, address, city, phone } = stateUserDetails;
     if (fullName && address && city && phone) {
-      mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
-        onSuccess: () => {
-          dispatch(updateUser({ fullName, address, city, phone }))
-          setIsOpenModalUpdateInfo(false)
+      mutationUpdate.mutate(
+        { id: user?.id, token: user?.access_token, ...stateUserDetails },
+        {
+          onSuccess: () => {
+            dispatch(updateUser({ fullName, address, city, phone }));
+            setIsOpenModalUpdateInfo(false);
+          },
         }
-      })
+      );
     }
-  }
+  };
 
   const handleOnchangeDetails = (e) => {
     setStateUserDetails({
       ...stateUserDetails,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const itemsDelivery = [
     {
-      title: '0 VND',
-      description: 'Dưới 20.000VNĐ',
+      title: "0 VND",
+      description: "Dưới 20.000VNĐ",
     },
     {
-      title: '30.000 VND',
-      description: 'Từ dưới 20.000VNĐ đến dưới 500.000VNĐ',
+      title: "30.000 VND",
+      description: "Từ dưới 20.000VNĐ đến dưới 500.000VNĐ",
     },
     {
-      title: '50.000 VND',
-      description: 'Trên 500.000VNĐ',
+      title: "50.000 VND",
+      description: "Trên 500.000VNĐ",
     },
-  ]
+  ];
 
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
@@ -222,7 +227,18 @@ const OrderPage = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <WrapperLeft>
             <WrapperStyleHeaderDelivery>
-              <StepComponent items={itemsDelivery} current={deliveryPriceMemo === 30000 ? 1 : deliveryPriceMemo === 50000 ? 2 : order.orderItemsSelected.length === 0 ? 0 : 0} />
+              <StepComponent
+                items={itemsDelivery}
+                current={
+                  deliveryPriceMemo === 30000
+                    ? 1
+                    : deliveryPriceMemo === 50000
+                    ? 2
+                    : order.orderItemsSelected.length === 0
+                    ? 0
+                    : 0
+                }
+              />
             </WrapperStyleHeaderDelivery>
             <WrapperStyleHeader>
               <span style={{ display: "inline-block", width: "390px" }}>
@@ -304,7 +320,10 @@ const OrderPage = () => {
                           {convertPrice(order?.price)}
                         </span>
                       </span>
-                      <WrapperCountOrder>
+
+                      {/* item count */}
+                      <div className="flex items-center justify-center gap-2">
+                      
                         <button
                           style={{
                             border: "none",
@@ -312,7 +331,11 @@ const OrderPage = () => {
                             cursor: "pointer",
                           }}
                           onClick={() =>
-                            handleChangeCount("decrease", order?.product, order?.amount === 1)
+                            handleChangeCount(
+                              "decrease",
+                              order?.product,
+                              order?.amount === 1
+                            )
                           }
                         >
                           <MinusOutlined
@@ -333,14 +356,21 @@ const OrderPage = () => {
                             cursor: "pointer",
                           }}
                           onClick={() =>
-                            handleChangeCount("increase", order?.product, order?.amount === order?.countInStock, order?.amount === 1)
+                            handleChangeCount(
+                              "increase",
+                              order?.product,
+                              order?.amount === order?.countInStock,
+                              order?.amount === 1
+                            )
                           }
                         >
                           <PlusOutlined
                             style={{ color: "#000", fontSize: "10px" }}
                           />
                         </button>
-                      </WrapperCountOrder>
+                      
+                      </div>
+                      
                       <span
                         style={{
                           color: "rgb(255, 66, 78)",
@@ -364,8 +394,17 @@ const OrderPage = () => {
             <div style={{ width: "100%" }}>
               <WrapperInfo>
                 <span>Địa chỉ giao hàng: </span>
-                <span style={{ fontWeight: 'bold' }}>{`${user?.address}, ${user?.city}`}</span>
-                <span onClick={handleChangeAddress} style={{ color: 'green', cursor: 'pointer' }}> Thay đổi</span>
+                <br />
+                <span
+                  style={{ fontWeight: "bold" }}
+                >{`${user?.address}, ${user?.city}`}</span>
+                <span
+                  onClick={handleChangeAddress}
+                  style={{ color: "green", cursor: "pointer" }}
+                >
+                  {" "}
+                  Thay đổi
+                </span>
               </WrapperInfo>
               <WrapperInfo>
                 <div
@@ -400,7 +439,9 @@ const OrderPage = () => {
                       fontSize: "14px",
                       fontWeight: "bold",
                     }}
-                  >{convertPrice(priceDiscountMemo)}</span>
+                  >
+                    {convertPrice(priceDiscountMemo)}
+                  </span>
                 </div>
                 <div
                   style={{
@@ -443,16 +484,15 @@ const OrderPage = () => {
               onClick={() => handleAddCard()}
               size={40}
               styleButton={{
-                background: "rgb(255, 57, 69)",
+                background: "#B9D431",
                 height: "48px",
-                width: "360px",
+                width: "100%",
                 border: "none",
                 borderRadius: "4px",
                 marginTop: "10px",
               }}
               textbutton={"Thanh toán"}
               styleTextButton={{
-                color: "#fff",
                 fontSize: "15px",
                 fontWeight: "700",
               }}
