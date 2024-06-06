@@ -16,14 +16,14 @@ const About = () => {
             những thông điệp ngọt ngào trong mỗi chiếc bánh.
           </div>
         </div>
-        
+
         <div className="flex flex-wrap -mx-4">
           <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
             <div className="home-about-content p-10 bg-about-content h-full text-white">
               <h3 className="text-2xl font-bold mb-4 font-playfairDisplay">
                 Câu chuyện về chiếc bánh tươi
               </h3>
-              <p className="px-4 py-6 mb-4 font-sans text-lg">
+              <p className="py-6 mb-4 font-sans text-lg">
                 Hơn 12 năm không ngừng phát triển, Fresh Garden - "Bánh tươi mỗi
                 ngày" với sứ mệnh xuyên suốt mang đến khách hàng những sản phẩm
                 dinh dưỡng - an toàn - tự nhiên tốt cho sức khỏe người dùng.

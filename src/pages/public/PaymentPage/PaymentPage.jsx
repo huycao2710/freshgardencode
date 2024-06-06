@@ -219,11 +219,18 @@ const PaymentPage = () => {
     )
   }
 
-  const zalopaybtn = async () => {
+  const btnzalopay = async () => {
     const session = await PaymentService.ZaloPayment(data);
     const url = session.data.order_url
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
     window.open(url, 'zalopay', windowFeatures)
+  }
+
+  const btnmomo = async () => {
+    const session = await PaymentService.MomoPayment(data);
+    const url = session.data.payUrl
+    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
+    window.open(url, 'momo', windowFeatures)
   }
 
   const addPaypalScript = async () => {
@@ -237,6 +244,8 @@ const PaymentPage = () => {
     }
     document.body.appendChild(script)
   }
+
+
 
   useEffect(() => {
     if (payment === 'paypal' && !window.paypal) {
@@ -269,6 +278,7 @@ const PaymentPage = () => {
                     <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
                     <Radio value="paypal"> Thanh toán tiền bằng Paypal</Radio>
                     <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
+                    <Radio value="momo"> Thanh toán tiền bằng Momo</Radio>
                   </WrapperRadio>
                 </div>
               </WrapperInfo>
@@ -375,7 +385,7 @@ const PaymentPage = () => {
               {
                 payment === 'zalopay' &&
                 <ButtonComp
-                  onClick={() => zalopaybtn()}
+                  onClick={() => btnzalopay()}
                   size={40}
                   styleButton={{
                     background: "rgb(255, 57, 69)",
@@ -385,6 +395,23 @@ const PaymentPage = () => {
                     borderRadius: '4px'
                   }}
                   textbutton={'zalopay'}
+                  styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
+                >
+                </ButtonComp>
+              }
+              {
+                payment === 'momo' &&
+                <ButtonComp
+                  onClick={() => btnmomo()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textbutton={'momo'}
                   styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
                 >
                 </ButtonComp>

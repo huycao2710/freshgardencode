@@ -32,7 +32,7 @@ const About2 = () => {
               <h3 className="text-2xl font-bold mb-4 font-playfairDisplay">
                 Khách hàng thân thiết
               </h3>
-              <p className="px-4 py-6 mb-4 font-sans text-lg">
+              <p className=" py-6 mb-4 font-sans text-lg">
                 Với mong muốn mang lại cho Quý khách hàng
                 những lợi ích tốt nhất và đáp lại tình cảm tốt đẹp
                 cùng đồng hành mà Quý khách đã dành cho Fresh Garden
