@@ -1,6 +1,12 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
+  const handleItemClick = () => {
+    navigate("/pages/about-us");
+    window.scrollTo(0, 0); // Cuộn trang lên đầu khi người dùng click
+  };
   return (
     <section className="home-about flex flex-col items-center py-10">
       <div className="container mx-auto px-4 h-full">
@@ -28,13 +34,16 @@ const About = () => {
                 ngày" với sứ mệnh xuyên suốt mang đến khách hàng những sản phẩm
                 dinh dưỡng - an toàn - tự nhiên tốt cho sức khỏe người dùng.
               </p>
-              <a
-                href="/pages/about-us"
-                className="flex items-center text-2xl "
+              <div
+                onClick={handleItemClick}
+                className="flex items-center text-2xl cursor-pointer"
               >
                 Xem thêm{" "}
-                <i className="fa fa-long-arrow-right ml-2" aria-hidden="true"></i>
-              </a>
+                <i
+                  className="fa fa-long-arrow-right ml-2"
+                  aria-hidden="true"
+                ></i>
+              </div>
             </div>
           </div>
           <div className="w-full lg:w-1/2 px-4 pr-36">
@@ -47,7 +56,6 @@ const About = () => {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
