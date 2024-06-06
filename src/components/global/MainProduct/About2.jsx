@@ -39,7 +39,7 @@ const About2 = () => {
                 trong suốt thời gian qua, hệ thống triển khai
                 chương trình tích lũy điểm khi mua hàng tại tất cả cửa hàng.
               </p>
-              <a href="/pages/about-us" className="flex items-center text-2xl ">
+              <a href="/pages/point" className="flex items-center text-2xl ">
                 Xem thêm{" "}
                 <i
                   className="fa fa-long-arrow-right ml-2"

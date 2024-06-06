@@ -28,29 +28,29 @@ const NewsPage = () => {
 
         },
         {
-            title: "Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden",
-            description: "27.10.2024",
+            title: "Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ",
+            description: "09.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg",
+                "https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg",
             link: "/tintuc/tintuc2"
         },
         {
-            title: "BST bánh kem chào mừng ngày Phụ nữ Việt Nam",
-            description: "12.10.2023",
+            title: "Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt",
+            description: "16.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg",
+                "https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg",
             link: "/tintuc/tintuc3"
         },
         {
-            title: "Bạn đã biết ý nghĩa của ngày Tết Trung thu?",
-            description: "22.09.2023",
+            title: "Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi",
+            description: "13.04.2023",
             image:
-                "https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg",
+                "https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg",
             link: "/tintuc/tintuc4"
         },
         {
-            title: "ĐÓN MÙA TRĂNG 2023 VỚI BST THU AN CỦA FRESH GARDEN",
-            description: "24.08.2023",
+            title: "Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường",
+            description: "15.09.2023",
             image:
                 "https://file.hstatic.net/200000411281/article/fresh_garden05010_38fef0f8ff9d4427a1485f6d1d47f323.jpg",
             link: "/tintuc/tintuc5"
@@ -113,13 +113,13 @@ const NewsPage = () => {
                                 >
                                     <Meta
                                         title="[BST QÙA TẾT 2024] Gieo xuân an nhiên cùng Fresh Garden"
-                                        description="Tết và giá trị truyền thống tốt đẹp của Tết luôn thường trực trong tâm thức người Việt. Tết là cành đào phai, câu đối đỏ bên hộp quà thấm đượm yêu thương."
+                                        description="Tết và giá trị truyền thống tốt đẹp của Tết luôn thường trực trong tâm thức người Việt. Tết là cành đào phai, câu đối đỏ bên hộp quà thấm đượm..."
                                     />
                                 </Card>
                             </Link>
                         </Col>
                         <Col span={12}>
-                            <Link to="/new/tin2">
+                            <Link to="/tintuc/tintuc2">
                                 <Card
                                     hoverable
                                     style={{
@@ -129,19 +129,19 @@ const NewsPage = () => {
                                     cover={
                                         <img
                                             alt="example"
-                                            src="https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg"
+                                            src="https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg"
                                         />
                                     }
                                 >
                                     <Meta
-                                        title="Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden"
-                                        description="Vẫn là bánh kem cốt chiffon bồng bềnh ngọt ngào nhưng được khoác lên diện mạo ma mị và huyền bí hơn, bạn đã sẵn sàng tận hưởng bữa tiệc Halloween ma quái cùng Fresh Garden?"
+                                        title="Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ"
+                                        description="Nhân dịp kỷ niệm sinh nhật năm thứ 12, thương hiệu bánh tươi mỗi ngày - Fresh Garden mang đến chương trình khuyến mại"
                                     />
                                 </Card>
                             </Link>
                         </Col>
                         <Col span={12}>
-                            <Link to="/new/tin3">
+                            <Link to="/tintuc/tintuc3">
                                 <Card
                                     hoverable
                                     style={{
@@ -150,19 +150,19 @@ const NewsPage = () => {
                                     cover={
                                         <img
                                             alt="example"
-                                            src="https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg"
+                                            src="https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg"
                                         />
                                     }
                                 >
                                     <Meta
-                                        title="BST bánh kem chào mừng ngày Phụ nữ Việt Nam"
-                                        description="Nếu một ngày bạn cảm thấy thật khó để nói ra lời yêu thương dành cho người phụ nữ bên cạnh, hãy để những đóa hoa trong khu vườn bánh kem ngọt ngào của Fresh Garden thay lời muốn nói."
+                                        title="Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt"
+                                        description="Năm 2023 được nhận định là một năm có nhiều sự thay đổi trong thị trường quà tết. "
                                     />
                                 </Card>
                             </Link>
                         </Col>
                         <Col span={12}>
-                            <Link to="/new/tin4">
+                            <Link to="/tintuc/tintuc4">
                                 <Card
                                     hoverable
                                     style={{
@@ -172,19 +172,19 @@ const NewsPage = () => {
                                     cover={
                                         <img
                                             alt="example"
-                                            src="https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg"
+                                            src="https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg"
                                         />
                                     }
                                 >
                                     <Meta
-                                        title="Bạn đã biết ý nghĩa của ngày Tết Trung thu?"
-                                        description="Tết Trung thu theo Âm lịch là ngày rằm tháng 8 hằng năm. Đây là ngày lễ được các em nhỏ vô cùng yêu thích và còn được biết đến với tên gọi khác là Tết trông trăng,"
+                                        title="Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi"
+                                        description="Fresh Garden là một trong những thương hiệu bánh ngon đã đốn tim hàng triệu thực khách. "
                                     />
                                 </Card>
                             </Link>
                         </Col>
                         <Col span={12}>
-                            <Link to="/new/tin5">
+                            <Link to="/tintuc/tintuc5">
                                 <Card
                                     hoverable
                                     style={{
@@ -199,13 +199,13 @@ const NewsPage = () => {
                                 >
                                     <Meta
                                         title="Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường của Fresh Garden được yêu thích mùa Trăng này"
-                                        description="Trung thu được coi là Tết thứ 2 của những người con đất Việt, là giây phút sum vầy với những trông đợi và yêu thương. Cái hồn cái cốt của mùa trăng tròn chính là những chiếc bánh trung thu dẻo thơm"
+                                        description="Trung thu được coi là Tết thứ 2 của những người con đất Việt, là giây phút sum vầy với những trông đợi..."
                                     />
                                 </Card>
                             </Link>
                         </Col>
                         <Col span={12}>
-                            <Link to="/new/tin6">
+                            <Link to="/tintuc/tintuc6">
                                 <Card
                                     hoverable
                                     style={{

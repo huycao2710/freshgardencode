@@ -28,29 +28,29 @@ const News3 = () => {
 
         },
         {
-            title: "Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden",
-            description: "27.10.2024",
+            title: "Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ",
+            description: "09.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg",
+                "https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg",
             link: "/tintuc/tintuc2"
         },
         {
-            title: "BST bánh kem chào mừng ngày Phụ nữ Việt Nam",
-            description: "12.10.2023",
+            title: "Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt",
+            description: "16.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg",
+                "https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg",
             link: "/tintuc/tintuc3"
         },
         {
-            title: "Bạn đã biết ý nghĩa của ngày Tết Trung thu?",
-            description: "22.09.2023",
+            title: "Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi",
+            description: "13.04.2023",
             image:
-                "https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg",
+                "https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg",
             link: "/tintuc/tintuc4"
         },
         {
-            title: "ĐÓN MÙA TRĂNG 2023 VỚI BST THU AN CỦA FRESH GARDEN",
-            description: "24.08.2023",
+            title: "Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường",
+            description: "15.09.2023",
             image:
                 "https://file.hstatic.net/200000411281/article/fresh_garden05010_38fef0f8ff9d4427a1485f6d1d47f323.jpg",
             link: "/tintuc/tintuc5"
@@ -116,71 +116,112 @@ const News3 = () => {
 
     return (
         <Row gutter={[16, 16]}>
-            <Col span={12} style={{ margin: "0 auto" }}>
+            <Col span={12} style={{ margin: "0 0 0 200px" }}>
                 <CardContainer>
                     <div>
                         <img
-                            src="https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316_1024x1024.jpg"
+                            src="https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36_1024x1024.jpg"
                             alt=""
                             style={{ width: "100%", height: "500px" }}
                         />
                         <h1 style={styles.h1}>
-                            BST bánh kem chào mừng ngày Phụ nữ Việt Nam
+                            Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt
                         </h1>
-                        <h3 style={styles.h3}>Người viết: THÂN HOÀI NGHIÊM lúc 12.10.2023 | Tin tức</h3>
-                        <p style={{ paddingTop: " 10px", lineHeight: "21px", fontSize: "14px", fontStyle: "italic" }}>
-                            Nếu một ngày bạn cảm thấy thật khó để nói ra lời yêu thương dành cho người phụ nữ bên cạnh, hãy để những đóa hoa trong khu vườn bánh kem ngọt ngào của Fresh Garden thay lời muốn nói.
+                        <h3 style={styles.h3}>Người viết: Online10 lúc 16.12.2022 | Tin tức</h3>
+                        <p style={{ paddingTop: " 10px", lineHeight: "21px", fontSize: "14px" }}>
+                            Năm 2023 được nhận định là một năm có nhiều sự thay đổi trong thị trường quà tết. Vị thế của thương hiệu Việt đáp ứng tiêu chí của người tiêu dùng về Dinh dưỡng - Chất lượng - An toàn ngày càng được nâng cao.
+                        </p>
+                        <h1 style={styles.h1}>Tổng quan thị trường quà tết 2023</h1>
+                        <p>
+                            2022 là một năm biến động dù tác động của đại dịch Covid-19 đã giảm bớt, song người tiêu dùng vẫn khá thắt chặt trong chi tiêu. Nhu cầu mua sắm của người dân giảm mạnh, tác động lớn đến sức mua của thị trường quà tết so với cùng kỳ năm trước.
                         </p>
                         <p style={styles.p}>
-                            Bạn biết không, ẩn sâu phía sau những tâm hồn đầy gai góc, những vất vả hi sinh, mỗi người phụ nữ xung quanh chúng ta đều là một bông hoa rực rỡ yêu kiều. Bộ sưu tập bánh kem Fresh Garden gửi tặng các nàng nhân dịp Phụ nữ Việt Nam mang vẻ đẹp từ những đóa hoa ngọt ngào hứa hẹn là món quà làm "siêu lòng" mọi cô gái.
+                            Nếu mọi năm người tiêu dùng có xu hướng lựa chọn quà tết theo sở thích và nhu cầu, thì năm nay yếu tố quyết định lại  tập trung ở giá thành. Theo Brands Việt Nam, mức độ ưu tiên của người tiêu dùng về hộp quà tết năm nay được xếp theo thứ tự sẽ là giá thành, giá trị sử dụng và mẫu mã, bao bì.
+                        </p>
+                        <p style={styles.p}>
+                            Trải qua sự thay đổi về thị trường và nhận thức, thay vì lựa chọn các sản phẩm quà tết nhập ngoại, giá trị cao như các năm, thì trong dịp tết 2023, người tiêu dùng lại ưa chuộng các sản phẩm bánh, hộp quà tết được sản xuất trong nước với mức giá tầm trung, bao bì sang trọng.
                         </p>
                         <h1 style={styles.h1}>Flower of love - Đóa hoa được chăm chút từ yêu thương</h1>
                         <img
-                            src="https://file.hstatic.net/200000411281/file/dsc02666_5f9c4ef01f7c494892926d64378a8553_grande.jpg"
+                            src="https://file.hstatic.net/200000411281/file/z3956563394889_e956526f36f44e7504ca37a01ed496f0_428caef311d84675a483d042d9a8a4a8_grande.jpg"
                             alt=""
                             style={{ display: "block", margin: "auto" }}
                         />
-                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Hình ảnh bánh kem Flower of love</p>
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Thị trường quà tết 2023 có nhiều biến động</p>
                         <p style={styles.p}>
-                            Một bông hoa đẹp là khi được quan tâm và chăm chút mỗi ngày, người phụ nữ bên cạnh chúng ta cũng vậy. Đôi khi vì vẻ ngoài gai góc, những cá tính mạnh mẽ và việc quá quen với hình ảnh người phụ nữ dịu dàng luôn ở bên cạnh mà chúng ta quên mất người phụ nữ ấy cũng cần được yêu thương, trân trọng.
+                            Sau hơn 2 năm trầm lắng do ảnh hưởng từ đại dịch, tết Quý Mão 2023 được kỳ vọng sẽ là một mùa tết vui tươi, lạc quan và tốt đẹp đối với cả doanh nghiệp và người tiêu dùng với sự chuyển mình mạnh mẽ trong kinh tế.
+                        </p>
+                        <h1 style={styles.h1}>Trước tiên là sự chuyển hướng của dòng sản phẩm quà tết thương hiệu Việt</h1>
+                        <p>
+                            Một trong những nguyên nhân khiến người tiêu dùng dần chuyển sang dùng các sản phẩm mang thương hiệu Việt đó là thời kỳ nở rộ của các sản phẩm gắn mác “hàng nhập khẩu chính hãng” từ những năm trước đây kéo theo hệ lụy hàng giả, hàng nhái tràn lan. Người tiêu dùng cũng dần e ngại trước các sản phẩm hàng ngoại.
                         </p>
                         <p style={styles.p}>
-                            Flower of love lấy ý tưởng từ những đóa hoa yêu thương với lớp cốt chiffon hoa quả khô hỗn hợp nhân kem tươi bắt lưỡi, nhẹ nhàng trang trí hoa kem tươi. Không cầu kỳ, chiếc bánh như một đóa hoa nở rộ dưới nắng thu dịu dàng giống như vẻ đẹp của người phụ nữ dù trong hoàn cảnh nào cũng hiền dịu, yêu thương.
+                            Trong hoàn cảnh đó, ý thức về sức khỏe và sự thay đổi về kinh tế tạo ra một xu thế thị trường hoàn toàn mới, ảnh hưởng trực tiếp đến hành vi mua sắm và xu hướng dòng quà tết Quý Mão 2023. Đó là những món quà tết thương hiệu Việt thiên hướng quan tâm đến sức khỏe, và “tiêu dùng xanh”.
                         </p>
-                        <h1 style={styles.h1}>Princess - Nàng công chúa của tôi</h1>
+                        <p style={styles.p}>
+                            Thấu hiểu nhu cầu này, Fresh Garden cung cấp các sản phẩm bánh, hộp quà tết chuẩn thương hiệu Việt. Hộp quà tết tại Fresh Garden đảm bảo các tiêu chí về dinh dưỡng, nguồn gốc và quy trình sản xuất khép kín, đạt chuẩn kiểm định an toàn vệ sinh thực phẩm.
+                        </p>
                         <img
-                            src="https://file.hstatic.net/200000411281/file/2010-02_12251190a7bb4957a19d91aedd3f5d7b_grande.jpg"
+                            src="https://file.hstatic.net/200000411281/file/z3956563401639_119849202fbaf26fcdd7d087bd83e74a_617e6306fbe140f5a6d9824603bd3ab0_grande.jpg"
                             alt=""
                             style={{ display: "block", margin: "auto" }}
                         />
-                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Hình ảnh bánh kem Princess</p>
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Người tiêu dùng đang có xu hướng lựa chọn các sản phẩm tốt cho sức khỏe</p>
                         <p style={styles.p}>
-                            Khi được chăm chút và yêu thương, người phụ nữ của chúng ta sẽ tỏa sáng như một nàng công chúa. Nàng công chúa ấy có lúc vui cười tinh nghịch, cũng có lúc lắng đọng suy tư. Nhưng dù thế nào, cô gái ấy vẫn thật sự xinh đẹp. Mỗi một bông hoa trên chiếc bánh Princess cốt chiffon vani như thể hiện một khía cạnh cảm xúc của người phụ nữ, nhưng bạn nhìn xem, chẳng phải chúng vẫn thật xinh đẹp hay sao.
+                            Nguyên liệu làm nên các loại bánh hoàn toàn là nguyên liệu sạch, nhập khẩu có đầy đủ nguồn gốc xuất xứ. Thành phần thiên nhiên được Fresh Garden sử dụng chủ yếu là các loại hạt óc chó, hạnh nhân, macca, hạt dẻ cười, dừa hoặc những nguyên liệu được nhập khẩu từ nước ngoài như nam việt quất khô, nho khô,...
                         </p>
-                        <h1 style={styles.h1}>Endless love - Tình yêu vĩnh cửu</h1>
+                        <p style={styles.p}>
+                            Bên cạnh đó, hộp quà tết thương hiệu Fresh Garden cũng đáp ứng được nhu cầu biếu tặng cho đối tác, người thân của bạn với chi phí phù hợp cho nhiều phân khúc sản phẩm. Mức giá hộp quà trung cao cấp chỉ từ 290.000 - 590.000 đồng với mỗi set quà tết.
+                        </p>
+                        <p style={styles.p}>
+                            Bao bì hộp quà được thiết kế độc quyền, bắt mắt, hiện đại, trọn vẹn không khí tết. Sự kết hợp màu sắc tạo nên nét hài hòa, thu hút nhưng cũng không kém phần lịch sự và sang trọng, gửi gắm theo đó là thông điệp về sức khỏe, bình an, niềm tin và hy vọng vào một năm đại phát, rực rỡ.
+                        </p>
+                        <p style={styles.p}>
+                            Đặc biệt các sản phẩm trong hộp quà tết của Fresh Garden có thể sử dụng được với trà để làm tăng hương vị khi thưởng thức. Các loại bánh quy hạt có lượng đường được điều chỉnh phù hợp dùng với cả người cao tuổi và trẻ em bởi sự đổi mới trong hương vị.
+                        </p>
+                        <h1 style={styles.h1}>Hộp quà tết Fresh Garden đảm bảo Dinh dưỡng – Chất lượng – An toàn</h1>
+                        <p>
+                            Nắm bắt được thị hiếu lựa chọn quà tết Quý Mão 2023, cùng với mong muốn mang đến người tiêu dùng Việt những sản phẩm cao cấp, tốt cho sức khỏe, thân thiện với môi trường và mức giá phải chăng, Fresh Garden cho ra mắt bộ quà tết cao cấp với các tiêu chí: Dinh dưỡng - Chất lượng - An toàn lên hàng đầu.
+                        </p>
+                        <p style={styles.p}>
+                            Bạn có thể tham khảo bộ quà tết “Lời ru mùa xuân” với sự kết hợp của 4 loại bánh từ hạnh nhân, hạt dẻ cười, macca và hạt óc chó. Màu đỏ cam sang trọng, kết hợp với màu xanh và nâu của hộp bánh trong set quà thể hiện sự lạc quan chào đón năm mới, khởi đầu mới nhiều may mắn.
+                        </p>
                         <img
-                            src="https://file.hstatic.net/200000411281/file/4_79ae5e56ca0e477091777d63f95d6083_grande.jpg"
+                            src="https://file.hstatic.net/200000411281/file/317338856_919023392815211_5886429705175850146_n_62ed86b53247434586ebb29784500eb5_grande.jpg"
                             alt=""
                             style={{ display: "block", margin: "auto" }}
                         />
-                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Hình ảnh bánh kem Endless love</p>
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Sắc màu rực rỡ trên hộp quà Lời ru mua xuân của Fresh Garden</p>
                         <p style={styles.p}>
-                            Trong khu vườn yêu thương Fresh Garden chăm chút, có một Endless love tượng trưng cho tình yêu vĩnh cửu. Nhẹ nhàng với lớp hoa kem trang trí màu sắc trang nhã, lớp cốt chiffon vani nhân cocktail hoa quả ngon ngọt dễ chịu, Endless love sẽ là món quà mang đến niềm vui và hạnh phúc bất ngờ cho mọi cô gái.
+                            “Dòng chảy hạnh phúc” là set quà tết nhẹ nhàng với sắc vàng rực rỡ của bìa hộp. Với ý nghĩa năm mới suôn sẻ, may mắn và hạnh phúc ngập tràn được gói trọn trong những chiếc bánh quy sô cô la chip, bánh quy hạnh nhân, ...
                         </p>
-                        <h1 style={styles.h1}>Lời kết</h1>
+                        <img
+                            src="https://file.hstatic.net/200000411281/file/untitled-2-02_9bc12391865144f78d36fa9df24df619_grande.jpg"
+                            alt=""
+                            style={{ display: "block", margin: "auto" }}
+                        />
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Sắc màu rực rỡ trên hộp quà Lời ru mua xuân của Fresh Garden</p>
                         <p style={styles.p}>
-                            BST bánh kem mới của Fresh Garden ra mắt chính là món quà tuyệt vời để bày tỏ tình cảm của bạn đối với người phụ nữ quan trọng trong cuộc đời. Mang diện mạo mới, "thơ" hơn, ngọt ngào hơn, lớp cốt chiffon bồng bềnh cùng lớp kem tươi dịu ngọt sẵn sàng chiều lòng những thực khách xinh đẹp trong dịp đặc biệt - ngày Phụ nữ Việt Nam sắp tới. Fresh Garden hy vọng người bà, người mẹ, người vợ, người chị/ em gái tuyệt vời của bạn sẽ tạm gác những bộn bề lo lắng, những hy sinh thầm lặng để rạng rỡ đầy sức sống như đóa phù dung khoe sắc dưới nắng thu dịu dàng. Mùa yêu thương năm nay cùng Fresh Garden bày tỏ tình yêu đến những đóa hoa bên cạnh bạn nhé!
+                            Trải qua hơn 10 năm hoạt động, Fresh Garden tự hào khi được nhiều khách hàng doanh nghiệp như TPbank, Techcombank, L's Place – L's Place Food Mart, Tiệc cưới Hoàng gia, Vinschool, Ken logistics,... tin tưởng lựa chọn.
                         </p>
-                        <p>---------</p>
+                        <p style={styles.p}>
+                            Là sản phẩm đến từ thương hiệu Việt vì sức khỏe người tiêu dùng, các sản phẩm trong hộp quà tết của Fresh Garden là lựa chọn hoàn hảo để gửi tặng cho đối tác, cán bộ công nhân viên nội bộ, người thân và bạn bè trong dịp tết Quý Mão 2023 và những dịp đặc biệt khác nữa.
+                        </p>
+                        <p style={styles.p}>
+                            Bạn cần đặt set quà tết hãy liên hệ Fresh Garden tại:
+                        </p>
                         <ul>
-                            <li>🌎 Website: freshgarden.vn</li>
-                            <li>☎  Hotline đặt hàng: 024 3856 3856</li>
+                            <li>Website: <a href="" style={{ color: "inherit" }}>hopquatetcaocap.freshgarden.vn</a></li>
+                            <li>Danh sách cửa hàng: <a href="" style={{ color: "inherit" }}>https://www.freshgarden.vn/pages/danh-sach-cua-hang</a></li>
+                            <li>Tiki Mall: <a href="" style={{ color: "inherit" }}>https://tiki.vn/cua-hang/fresh-garden-banh-tuoi-moi-ngay</a></li>
+                            <li>Shopee Mall: <a href="" style={{ color: "inherit" }}>https://shopee.vn/freshgarden_official_store</a></li>
+                            <li>Hotline đặt hàng: 024 3856 3856</li>
                         </ul>
                         <div style={styles.p}>
                             <span>Tags: </span>
-                            <a href="" style={styles.a}>bánh kem</a>
-                            <a href="" style={styles.a}>, quà tặng 20/10</a>
-                            <a href="" style={styles.a}>, ngày Phụ nữ Việt Nam</a>
+                            <a href="" style={styles.a}>hộp quà Tết</a>
+                            <a href="" style={styles.a}>, Bánh quy Tết</a>
+                            <a href="" style={styles.a}>, quà Tết 2023</a>
                         </div>
                     </div>
                 </CardContainer>

@@ -28,29 +28,29 @@ const News2 = () => {
 
         },
         {
-            title: "Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden",
-            description: "27.10.2024",
+            title: "Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ",
+            description: "09.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg",
+                "https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg",
             link: "/tintuc/tintuc2"
         },
         {
-            title: "BST bánh kem chào mừng ngày Phụ nữ Việt Nam",
-            description: "12.10.2023",
+            title: "Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt",
+            description: "16.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg",
+                "https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg",
             link: "/tintuc/tintuc3"
         },
         {
-            title: "Bạn đã biết ý nghĩa của ngày Tết Trung thu?",
-            description: "22.09.2023",
+            title: "Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi",
+            description: "13.04.2023",
             image:
-                "https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg",
+                "https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg",
             link: "/tintuc/tintuc4"
         },
         {
-            title: "ĐÓN MÙA TRĂNG 2023 VỚI BST THU AN CỦA FRESH GARDEN",
-            description: "24.08.2023",
+            title: "Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường",
+            description: "15.09.2023",
             image:
                 "https://file.hstatic.net/200000411281/article/fresh_garden05010_38fef0f8ff9d4427a1485f6d1d47f323.jpg",
             link: "/tintuc/tintuc5"
@@ -87,6 +87,10 @@ const News2 = () => {
             fontSize: "14px",
 
         },
+        ul: {
+            listStyleType: "disc",
+            paddingLeft: "20px",
+        },
 
         a: {
             opacity: 0.8,
@@ -117,57 +121,77 @@ const News2 = () => {
 
     return (
         <Row gutter={[16, 16]}>
-            <Col span={12} style={{ margin: "0 auto" }}>
+            <Col span={12} style={{ margin: "0 0 0 200px" }}>
                 <CardContainer>
                     <div>
                         <img
-                            src="https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146_1024x1024.jpg"
+                            src="https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763_1024x1024.jpg"
                             alt=""
                             style={{ width: "100%", height: "500px" }}
                         />
                         <h1 style={styles.h1}>
-                            Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden
+                            Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ
                         </h1>
-                        <h3 style={styles.h3}>Người viết: Vân Haravan lúc 27.10.2023 | Tin tức</h3>
+                        <h3 style={styles.h3}>Người viết: Marketing12 lúc 09.12.2022 | Tin tức</h3>
                         <p style={styles.p}>
-                            Vẫn là bánh kem cốt chiffon bồng bềnh ngọt ngào nhưng được khoác lên diện mạo ma mị và huyền bí hơn, bạn đã sẵn sàng tận hưởng bữa tiệc Halloween ma quái cùng Fresh Garden?
+                            Nhân dịp kỷ niệm sinh nhật năm thứ 12, thương hiệu bánh tươi mỗi ngày - Fresh Garden mang đến chương trình khuyến mại, tặng quà, quay số trúng thưởng cực kỳ hấp dẫn.
                         </p>
-                        <h1 style={styles.h1}>Nguồn gốc ngày Halloween?</h1>
                         <p>
-                            Nguồn gốc Halloween được bắt nguồn từ một ngày lễ cổ của người Celtic, là một nhóm các bộ lạc, bộ tộc và dân tộc của thời kỳ đồ sắt và thời kỳ đầu Trung Cổ của Châu Âu. Ngày lễ này có tên gọi là Samhain và là ngày kỷ niệm một năm mới của họ được bắt đầu từ hơn 1900 năm trước ở Ireland, Anh và miền Bắc của nước Pháp.
+                            Ngay từ những ngày đầu tháng 12, không khí tại Fresh Garden đã dần nóng lên với hoạt động chào đón bữa tiệc sinh nhật tuổi 12. Tất cả khách hàng của thương hiệu “bánh tươi mỗi ngày” sẽ có cơ hội săn những món quà giá trị trong chương trình check in nhận quà và “Vòng quay may mắn” được áp dụng tại toàn bộ các hệ thống cửa hàng của Fresh Garden tại miền Bắc.
                         </p>
                         <p style={styles.p}>
-                            Người Celtic coi ngày này là ngày tôn vinh vụ mùa thu hoạch, đánh dấu thời điểm chuyển sang mùa đông. Họ tin rằng vào ngày 31 tháng 10 cũng là lúc địa ngục mở cửa, ranh giới giữa cái chết và sự sống rất mờ nhạt. Vì thế, họ thường tắt lửa để cho nhà cửa thật lạnh và tối như không có người sống, sau đó hóa trang thành người chết, ma quỷ đi quanh khu vực sống để xua đuổi các linh hồn đến từ thế giới bên kia.
+                            Ngày 24/12/2022, sự kiện sinh nhật quy mô lớn được tổ chức tại khu đô thị HH Linh Đàm, ước tính thu hút hơn 10.000 người tham gia. Tại big event, khách hàng sẽ được tham gia các minigame, check in nhận quà và trải nghiệm mua sắm tại các gian hàng. Đặc biệt là chương trình “Quay số trúng thưởng” rinh quà 100% cho mọi đơn hàng với tổng giá trị giải thưởng giá trị lên tới hàng trăm triệu đồng. Nhanh tay mua hàng và tham gia siêu sự kiện của Fresh Garden để săn cơ hội trúng các phần quà cực khủng:
+                        </p>
+                        <ul style={styles.ul}>
+                            <li>IPhone 14 promax 512GB</li>
+                            <li>Điều hòa Daikin 2 chiều Inverter</li>
+                            <li>Lò vi sóng điện tử có nướng 28L thương hiệu Sharp R-G728XVN-BST</li>
+                            <li>Voucher mua hàng trị giá 1.000.000 đồng</li>
+                        </ul>
+                        <img src="https://file.hstatic.net/200000411281/file/bai_post-03_dabbaeeba48d402794e8745e461fd4fa_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
+                        <p style={styles.p}>
+                            Song song với các hoạt động game trúng thưởng, big event sinh nhật 12 tuổi của thương hiệu Fresh Garden còn có những hoạt động giải trí vô cùng hấp dẫn.
+                        </p>
+                        <img src="https://file.hstatic.net/200000411281/file/bai_post-04_ba9190b8d5b54406a5a12b2b5b3c271a_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
+                        <p style={styles.p}>
+                            Tham dự sự kiện lần này có sự góp mặt của rất nhiều các nhóm nhạc, ca sĩ nổi tiếng, hứa hẹn sẽ mang tới một “bữa tiệc âm nhạc” đặc sắc, hấp dẫn với các tiết mục nhảy hiện đại thiếu nhi, LED dance từ nhóm The RIO và biểu diễn ảo thuật cực sôi động.
                         </p>
                         <p style={styles.p}>
-                            Cho đến khi thánh Patrick cùng đoàn truyền giáo đến khu vực sinh sống của người Celtic thì ngày lễ này ít được tổ chức hơn. Tuy nhiên, sau đó, các nhà thờ đã thay đổi ngày lễ này thành một lễ hội mang nhiều ảnh hưởng của đạo Kito giáo.
+                            Bên cạnh các chương trình ca nhạc giải trí và trò chơi trúng thưởng, Fresh Garden sẽ khiến bữa tiệc thêm phần “nóng” hơn nữa với tiết mục đặc biệt cùng ca sĩ khách mời Khánh Phương viết lời chúc lên bánh kem và thổi nến chúc mừng Fresh Garden 12 tuổi.
+                        </p>
+                        <img src="https://file.hstatic.net/200000411281/file/bai_post-02_96f3417f2b5d483886b5056729506ca1_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
+                        <p style={styles.p}>Hòa cùng không khí ma quái của những ngày gần kề Halloween, Fresh Garden đã cho ra mắt 2 mẫu bánh kem độc đáoTưng bừng mừng sinh nhật, săn loạt quà siêu hot, tận hưởng thời gian giải trí sôi động và rất nhiều loại bánh tươi thơm ngon nhất tại Fresh Garden đang chờ đón được phục vụ quý khách hàng vào sự kiện siêu sinh nhật tháng 12 này.</p>
+                        <p style={styles.p}>Chỉ duy nhất ngày 24 tháng 12, đến tham gia tại HH Linh Đàm và đón chờ cơn mưa giải thưởng cùng hàng loạt ưu đãi cực hấp dẫn cho các sản phẩm bánh mì tươi, bánh kem,... tại toàn bộ hệ thống Fresh Garden trên toàn quốc.</p>
+                        <p style={styles.p}>Nhằm mang đến những trải nghiệm mua sắm tốt nhất, thưởng thức các sản phẩm bánh ngon nhất cho người tiêu dùng trong chương trình sinh nhật tháng 12 này, Fresh Garden phối hợp cùng ban quản lý tại địa điểm HH Linh Đàm, chủ động không gian để xe và giao thông thuận lợi. Cùng với đó là sự nỗ lực chuẩn bị, hoàn thiện hậu cần từ toàn bộ cán bộ, nhân viên, nghệ nhân làm bánh tại Fresh Garden.</p>
+                        <img src="https://file.hstatic.net/200000411281/file/z3060408737912_3c34eb932632e728ae89098fe3c724a0_2325987285dd4cbbaa1de7efee3a5cc7_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
+                        <p style={styles.p}><i>“Mười hai năm là cột mốc vô cùng quan trọng và ý nghĩa đối với Fresh Garden đi cùng rất nhiều thành tựu lẫn thử thách. Sự kiện sinh nhật tuổi thứ 12 của Fresh Garden được tổ chức và khởi động ngay từ đầu tháng nhằm tri ân đến toàn bộ khách hàng, đối tác, nhà cung cấp đã cùng đồng hành và góp phần tạo nên Fresh Garden hôm nay, tạo nên cả Fresh Garden của những ngày sau. Chúng tôi luôn mong muốn đem đến cho thực khách những sản phẩm chất lượng nhất cùng trải nghiệm thật sự bùng nổ. Đây cũng là một trong những dấu ấn tuyệt vời trong chặng đường phát triển của Fresh Garden bây giờ và mai sau.” Đại diện của Fresh Garden chia sẻ.</i></p>
+                        <h1 style={styles.h1}>
+                            Vài nét về Fresh Garden
+                        </h1>
+                        <p>
+                            Được thành lập vào tháng 12/2010, bên cạnh sự thành công từ dòng bánh cấp đông tiện lợi, Fresh Garden dần chinh phục nhiều loại bánh khác từ dòng bánh truyền thống như bánh kem sinh nhật đến bánh mì dinh dưỡng. Sự nhiệt tâm trong việc truyền tải tình yêu với bánh qua những sản phẩm chất lượng đã giúp Fresh Garden dần trở thành "thế giới bánh thu nhỏ", nơi chiều lòng bất kỳ vị khách nào ghé ngang.
+                        </p>
+                        <img src="https://file.hstatic.net/200000411281/file/z3740986435992_0e9aaa1e14a8ab845b4113c7c6da2436_3609d0995daa4769a2ecfbbafaa448e3_grande.jpghttps://file.hstatic.net/200000411281/file/z3060408737912_3c34eb932632e728ae89098fe3c724a0_2325987285dd4cbbaa1de7efee3a5cc7_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
+                        <p style={styles.p}>
+                            Với tôn chỉ “bánh tươi mỗi ngày”, Fresh Garden hiện là một trong những chuỗi cửa hàng bánh mì tươi, bánh kem hàng đầu Việt Nam, luôn nỗ lực không ngừng nhằm đem lại trải nghiệm những thức bánh tươi ngon, chất lượng, tiện lợi, an toàn với sức khỏe.</p>
+                        <p style={styles.p}>
+                            Hiện tại Fresh Garden có hơn 100 cửa hàng và đại lý tại Hà Nội, gần 20 nhà phân phối các tỉnh phía Bắc cùng với các ứng dụng bán hàng online toàn quốc. Fresh Garden luôn giữ vững giá trị chất lượng, không ngừng nỗ lực vươn lên là thương hiệu cửa hàng bánh tươi và cà phê đứng đầu thị trường Việt Nam.
                         </p>
                         <p style={styles.p}>
-                            Tới thế kỷ thế 8, Giáo hoàng Gregorius III đã quyết định chuyển ngày lễ Các Thánh Tử đạo (ngày 13 tháng 5) sang ngày 1 tháng 11 và gọi nó là ngày Các Thánh. Vào ngày này, người dân sẽ tổ chức các hoạt động của lễ Samhain và đêm trước ngày Các Thánh được gọi là Halloween.
+                            Tận hưởng và săn giải thưởng khủng tại siêu sinh nhật 12 tuổi của Fresh Garden tại:
                         </p>
-                        <p style={styles.p}>
-                            Vào năm 1840, theo phong trào di cư của người Ireland sang Mỹ, lễ hội Halloween cũng du nhập theo. Dần dà, theo trào lưu hội nhập, Halloween đã thành một lễ hội phổ biến trên toàn thế giới.
-                        </p>
-                        <h1 style={styles.h1}>Điều bí ẩn ngọt ngào tại Fresh Garden</h1>
-                        <img src="https://file.hstatic.net/200000411281/file/baif-01_e90f3a8639a048d49545c7ea099352fe_grande.jpg" alt="" style={{ display: "block", margin: "auto" }} />
-                        <p style={{ textAlign: "center", paddingTop: "10px" }}>Bánh kem đặc biệt nhân dịp Halloween tại Fresh Garden</p>
-                        <p style={styles.p}>Hòa cùng không khí ma quái của những ngày gần kề Halloween, Fresh Garden đã cho ra mắt 2 mẫu bánh kem độc đáo:</p>
-                        <p style={styles.p}>Bánh kem Midnight Sweets: Bánh kem tươi cốt chiffon vani bồng bềnh thơm ngất ngây nhân kem tươi, trang trí kem tươi và sô cô la hình ma chơi ngộ nghĩnh.</p>
-                        <p style={styles.p}>Bánh kem Happy Halloween: Lấy cảm hứng từ những trái bí ngô đặc trưng của ngày Hallowen, chiếc bánh kem tươi cốt bánh chiffon sô cô la chip nhân phô mai, trang trí kem tươi, ganat sô cô la và bánh oreo đáng yêu.</p>
-                        <p style={styles.p}>Những chiếc bánh độc đáo này sẽ ra mắt các cửa hàng Fresh Garden từ ngày 28/10, nhanh tay đặt hàng qua hotline hoặc nhắn tin qua fanpage để được tư vấn nhé!</p>
-                        <p style={styles.p}>
-                            Chúc bạn có một bữa tiệc Halloween vui vẻ cùng gia đình!
-                        </p>
-                        <p>---------</p>
                         <ul>
-                            <li>🌎 Website: freshgarden.vn</li>
-                            <li>☎  Hotline đặt hàng: 024 3856 3856</li>
+                            <li>Fanpage: <a href="" style={{ color: "inherit" }}>https://www.facebook.com/freshgardenbanhvacaphe</a></li>
+                            <li>Website: <a href="" style={{ color: "inherit" }}> https://freshgarden.vn/</a></li>
+                            <li>Hệ thống cửa hàng: <a href="" style={{ color: "inherit" }}>https://www.freshgarden.vn/pages/danh-sach-cua-hang</a></li>
+                            <li>Hotline đặt hàng: 024 3856 3856</li>
                         </ul>
                         <div style={styles.p}>
                             <span>Tags: </span>
-                            <a href="" style={styles.a}>Halloween</a>
-                            <a href="" style={styles.a}>, Bánh kem Halloween</a>
-                            <a href="" style={styles.a}>, bánh kem</a>
+                            <a href="" style={styles.a}>sinh nhật</a>
+                            <a href="" style={styles.a}>, vòng quay may mắn</a>
+                            <a href="" style={styles.a}>, quà sinh nhật</a>
+                            <a href="" style={styles.a}>, sinh nhật diệu kì</a>
                         </div>
                     </div>
                 </CardContainer>

@@ -23,6 +23,12 @@ import News3 from "../pages/public/NewsPage/News3";
 import News4 from "../pages/public/NewsPage/News4";
 import News5 from "../pages/public/NewsPage/News5";
 import News6 from "../pages/public/NewsPage/News6";
+import PromotionPage from "../pages/public/PromotionPage/PromotionPage";
+import Promotion1 from "../pages/public/PromotionPage/Promotion1";
+import Promotion2 from "../pages/public/PromotionPage/Promotion2";
+import Promotion3 from "../pages/public/PromotionPage/Promotion3";
+import PointPage from "../pages/public/PointPage/PointPage";
+import AboutUsPage from "../pages/public/AboutUsPage/AboutUsPage";
 
 export const routes = [
     {
@@ -149,5 +155,34 @@ export const routes = [
         page: News6,
         isShowHeader: true
     },
-
+    {
+        path: '/pages/about-us',
+        page: AboutUsPage,
+        isShowHeader: true
+    },
+    {
+        path: '/blogs/khuyen_mai',
+        page: PromotionPage,
+        isShowHeader: true
+    },
+    {
+        path: '/blogs/khuyen_mai1',
+        page: Promotion1,
+        isShowHeader: true
+    },
+    {
+        path: '/blogs/khuyen_mai2',
+        page: Promotion2,
+        isShowHeader: true
+    },
+    {
+        path: '/blogs/khuyen_mai3',
+        page: Promotion3,
+        isShowHeader: true
+    },
+    {
+        path: '/pages/point',
+        page: PointPage,
+        isShowHeader: true
+    },
 ]

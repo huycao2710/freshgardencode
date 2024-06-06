@@ -28,29 +28,29 @@ const News5 = () => {
 
         },
         {
-            title: "Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden",
-            description: "27.10.2024",
+            title: "Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ",
+            description: "09.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg",
+                "https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg",
             link: "/tintuc/tintuc2"
         },
         {
-            title: "BST bánh kem chào mừng ngày Phụ nữ Việt Nam",
-            description: "12.10.2023",
+            title: "Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt",
+            description: "16.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg",
+                "https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg",
             link: "/tintuc/tintuc3"
         },
         {
-            title: "Bạn đã biết ý nghĩa của ngày Tết Trung thu?",
-            description: "22.09.2023",
+            title: "Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi",
+            description: "13.04.2023",
             image:
-                "https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg",
+                "https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg",
             link: "/tintuc/tintuc4"
         },
         {
-            title: "ĐÓN MÙA TRĂNG 2023 VỚI BST THU AN CỦA FRESH GARDEN",
-            description: "24.08.2023",
+            title: "Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường",
+            description: "15.09.2023",
             image:
                 "https://file.hstatic.net/200000411281/article/fresh_garden05010_38fef0f8ff9d4427a1485f6d1d47f323.jpg",
             link: "/tintuc/tintuc5"

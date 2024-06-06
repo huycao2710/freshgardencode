@@ -28,29 +28,29 @@ const News4 = () => {
 
         },
         {
-            title: "Khám Phá Điều Bí Ẩn Ngọt Ngào Đêm Halloween Tại Fresh Garden",
-            description: "27.10.2024",
+            title: "Fresh Garden kỷ niệm 12 năm sinh nhật diệu kỳ",
+            description: "09.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/cover_23333-01_584a3e3a11584187bce2822d1b9f0146.jpg",
+                "https://file.hstatic.net/200000411281/article/bai_post-01_47db187bd342490eaf367a8a664fd763.jpg",
             link: "/tintuc/tintuc2"
         },
         {
-            title: "BST bánh kem chào mừng ngày Phụ nữ Việt Nam",
-            description: "12.10.2023",
+            title: "Thị trường quà tết 2023: Đột phá sản phẩm thương hiệu Việt",
+            description: "16.12.2022",
             image:
-                "https://file.hstatic.net/200000411281/article/bcbcbcvc-01_197f0fec099e485fb95862fee26c6316.jpg",
+                "https://file.hstatic.net/200000411281/article/untitled-2-01_9a2c857598044033aae0c06c6f059d36.jpg",
             link: "/tintuc/tintuc3"
         },
         {
-            title: "Bạn đã biết ý nghĩa của ngày Tết Trung thu?",
-            description: "22.09.2023",
+            title: "Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi",
+            description: "13.04.2023",
             image:
-                "https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a.jpg",
+                "https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987.jpg",
             link: "/tintuc/tintuc4"
         },
         {
-            title: "ĐÓN MÙA TRĂNG 2023 VỚI BST THU AN CỦA FRESH GARDEN",
-            description: "24.08.2023",
+            title: "Top 5 lý do khiến BST Bánh Trung thu cao cấp ít đường",
+            description: "15.09.2023",
             image:
                 "https://file.hstatic.net/200000411281/article/fresh_garden05010_38fef0f8ff9d4427a1485f6d1d47f323.jpg",
             link: "/tintuc/tintuc5"
@@ -117,70 +117,98 @@ const News4 = () => {
 
     return (
         <Row gutter={[16, 16]}>
-            <Col span={12} style={{ margin: "0 auto" }}>
+            <Col span={12} style={{ margin: "0 0 0 200px" }}>
                 <CardContainer>
                     <div>
                         <img
-                            src="https://file.hstatic.net/200000411281/article/299849_31-8-den_trung_thu_7a66288cbeee4adc8bc14d4c3c3b985a_1024x1024.jpg"
+                            src="https://file.hstatic.net/200000411281/article/z4260566825059_c35a2d4218b898819746af5588e2907f_1b1cbab703054ce294efeaa12484e987_1024x1024.jpg"
                             alt=""
                             style={{ width: "100%", height: "500px" }}
                         />
                         <h1 style={styles.h1}>
-                            Bạn đã biết ý nghĩa của ngày Tết Trung thu?
+                            Bánh mì kẹp Fresh Garden - Bữa ăn nhanh, dinh dưỡng, tiện lợi
                         </h1>
-                        <h3 style={styles.h3}>Người viết: Vân Haravan lúc 22.09.2023 | Tin tức</h3>
+                        <h3 style={styles.h3}>Người viết: CSKH10 lúc 13.04.2023  Tin tức</h3>
                         <p style={styles.p}>
-                            Tết Trung thu theo Âm lịch là ngày rằm tháng 8 hằng năm. Đây là ngày lễ được các em nhỏ vô cùng yêu thích và còn được biết đến với tên gọi khác là Tết trông trăng, Tết đoàn viên. Gần đến ngày tết Trung thu, trẻ em vô cùng háo hức, chờ đợi được đi chơi, sắm các món đồ đặc trưng để phá cỗ như đèn ông sao, mặt nạ, đèn kéo quân...
-                        </p>
-                        <h1 style={styles.h1}>Ý nghĩa ngày Tết Trung thu</h1>
-                        <p>
-                            Theo nhiều tài liệu ghi chép lại, người Việt đã có lễ hội trăng tròn mùa thu từ thời cổ đại, được khắc họa trên mặt trống đồng Ngọc Lũ. Trung thu là lúc thời tiết mát mẻ, nhà nông hoàn thành việc thu hoạch vụ mùa nên tổ chức vui chơi, ăn mừng và cúng lễ cầu nguyện cho mùa sau mưa gió thuận hoà, mùa màng bội thu.
-                        </p>
-                        <p style={styles.p}>
-                            Ý nghĩa ngày Tết Trung thu thời xa xưa là sự tri ân đối với thiên nhiên, với tổ tiên đã phù hộ cho mọi người được no ấm, là niềm mong ước sẽ được bội thu trong mùa sau, và cũng là sự tự thưởng cho mình sau những ngày lao động vất vả, tận hưởng niềm vui khi nhìn thấy thành quả lao động.
-                        </p>
-                        <p style={styles.p}>
-                            Sự đoàn viên, sum họp cũng là ý nghĩa quan trọng của ngày Tết Trung thu. Vào ngày này, người người nhà nhà sửa biện mâm cỗ để cúng gia tiên, mọi người quây quần cùng vui chơi và hàn huyên.
-                        </p>
-                        <p style={styles.p}>
-                            Nhà văn hóa Phan Kế Bính viết trong cuốn Việt Nam phong tục: <p style={{ fontStyle: "italic" }}>"Dân ta thế kỷ 19, ban ngày làm cỗ cúng gia tiên, tối đến bày cỗ thưởng trăng. Đầu cỗ là bánh mặt trăng và dùng nhiều thứ bánh trái hoa quả, nhuộm các màu sặc sỡ, xanh đỏ, trắng và vàng. Con gái ở phố thi nhau tài khéo, gọt đu đủ thành các thứ hoa, nặn bột làm con tôm, con cá voi...".</p>
+                            Fresh Garden là một trong những thương hiệu bánh ngon đã đốn tim hàng triệu thực khách. Trong đó, bánh mì kẹp được hầu hết mọi người ưa thích bởi dinh dưỡng và sự tiện dụng nhanh chóng cho bữa ăn. Với những loại bánh mì kẹp đa dạng và phong phú như bánh mì kẹp như pate, thập cẩm, chả, gà Teriyaki và xá xíu, hãy cùng chúng mình tìm hiểu nét đặc trưng của từng món bánh này nhé!
                         </p>
                         <img
-                            src="https://file.hstatic.net/200000411281/file/o-trung-thu-gom-nhung-gi-bay-mam-co-the-nao-cho-dep-202208160648138400_2f4d942e86674ec39620d4d533622738_grande.jpg"
+                            src="https://lh4.googleusercontent.com/Mcq6jzB8uNPUiyApk9TIpVVK8FgWqSnkC3xDmXq8XBICFadi92KUPw1QRF3KKzMhWV_0PTvesCaiFM9LYW_7SyZESwLO8kAT1ZZi1zA5d_nauZyV74WaHqVWGi3bnDeIAJTD_5m18LsJPqeih_T1N7s"
                             alt=""
                             style={{ display: "block", margin: "auto" }}
                         />
-                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Mâm cỗ trông trăng với các loại bánh trung thu ngộ nghĩnh và hoa quả trang trí đáng yêu</p>
-                        <p style={styles.p}>
-                            Ngày xưa trong dịp Tết Trung thu, trẻ con được người lớn mua hoặc làm cho những món đồ chơi như đèn lồng, đồ chơi bồi bằng giấy hình voi, ngựa, kỳ lân, sư tử, rồng, hươu, tôm cá, bươm bướm, bọ ngựa, hoặc làm đèn cù, ông nghè đất…
-                        </p>
-                        <p style={styles.p}>
-                            Khi trăng lên, người lớn sẽ ngồi ăn bánh, uống trà, ngắm trăng. Người trẻ tuổi thì cùng nhau hát điệu Trống quân. Trẻ em thì dắt nhau thành từng nhóm rước đèn, múa sư tử, đánh trống, đám thì nhảy ô, đám thì kéo co, đám thì rước đèn, tiếng reo hò, tiếng đùa vang khắp cả đường.
-                        </p>
-                        <p style={styles.p}>
-                            Tết Trung thu là dịp để mọi người sắp xếp công việc để trở về quê, sum họp với gia đình và quây quần bên mâm cỗ đoàn viên. Sau đó, cả nhà sẽ cùng uống trà, ăn bánh, ngắm trăng, trò chuyện và ôn lại những kỷ niệm đẹp.
-                        </p>
-                        <p style={styles.p}>
-                            Nhiều quốc gia ở Đông Á và Đông Nam Á thường tổ chức các lễ hội vào dịp này như Trung Quốc, Việt Nam, Nhật Bản, Triều Tiên, Đài Loan, Singapore. Đặc biệt với Hàn Quốc, đây là một trong những ngày lễ cổ truyền lớn nhất.
-                        </p>
-                        <h1 style={styles.h1}>Fresh Garden chào đón mùa trăng 2023</h1>
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Bánh mì kẹp Fresh Garden là lựa chọn của nhiều khách hàng</p>
+                        <h1 style={styles.h1}>Fresh Garden: Bánh tươi mỗi ngày</h1>
                         <p>
-                            Hơn ai hết, Fresh Garden hiểu rằng mỗi mùa trăng đến, bánh trung thu là nhân vật không thể thiếu trong mâm cỗ của các em nhỏ, trong bữa tiệc gia đình ấm cúng bên tách trà thơm. Ý nghĩa của ngày tết đặc biệt này sẽ không bao giờ phai nhạt khi chúng ta vẫn lưu giữ những nét đẹp truyền thống qua các thế hệ.
+                            Với tiêu chí đặt chất lượng sản phẩm lên hàng đầu, Fresh Garden sử dụng nguyên liệu tươi ngon, đảm bảo quy trình sản xuất và chế biến đúng tiêu chuẩn, để tạo ra những sản phẩm bánh mì kẹp thơm ngon, bổ dưỡng và an toàn cho sức khỏe của khách hàng.
                         </p>
                         <img
-                            src="https://file.hstatic.net/200000411281/file/ghep_truyen_thong-01_ae7c41efa3d249019a7eeb14eac97b2e_grande.jpg"
+                            src="https://lh3.googleusercontent.com/XNlr1HcxN-fAW44y1oOzyhZjXg1O9w8JAgwNeO7UoK2mqe45Z0LI9g-VBghY7sQrf3Ol0N7hKTfVjFHZzuD6Ci_SQssGtJs6eR-yNnrMUsaubymwx_muIWDOGCMaWoJeDnFcPLiODGdvgPnOsayBepA"
                             alt=""
                             style={{ display: "block", margin: "auto" }}
                         />
-                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Hình ảnh thực tế bánh trung thu Fresh Garden 2023</p>
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Không chỉ nổi tiếng với các sản phẩm bánh kem, Fresh Garden còn có thực đơn bánh mì kẹp hấp dẫn</p>
                         <p style={styles.p}>
-                            Trung thu được coi là Tết thứ 2 của những người con đất Việt, là giây phút sum vầy với những trông đợi và yêu thương. Cái hồn cái cốt của mùa trăng tròn chính là những chiếc bánh trung thu dẻo thơm, nồng đượm biết bao sự khéo léo, tỉ mỉ của người nghệ nhân làm ra chúng. Mùa Trung Thu này hãy để Fresh Garden tiếp tục đồng hành cùng bạn trao gửi những món quà thơm thảo, ý nghĩa nhất dành tặng cho người thân yêu nhé!
+                            Đội ngũ nhân viên nhiệt tình và chuyên nghiệp, Fresh Garden cam kết mang đến cho khách hàng những trải nghiệm ẩm thực tuyệt vời, cùng với dịch vụ khách hàng chất lượng cao. Cùng chúng mình tìm hiểu kĩ hơn về các món bánh mì nhanh tiện dụng tại Fresh Garden nhé!
+                        </p>
+                        <h1 style={styles.h1}>Bánh mì kẹp pate</h1>
+                        <p>
+                            Bánh mì kẹp pate của Fresh Garden là sự kết hợp tuyệt vời giữa bánh mì nóng giòn và lớp pate mềm mịn, thơm ngon bên trong. Những thành phần chính của bánh mì kẹp pate tại Fresh Garden là bánh mì, pate và nộm chua ngọt, được chế biến và trang trí tinh tế để tạo nên một sản phẩm bánh mì kẹp đẹp mắt, hấp dẫn và đầy hương vị.
+                        </p>
+                        <img
+                            src="https://lh6.googleusercontent.com/DitIoEBcTViZ5JVbxltLGnSyZwYsDmttZEaj7mcvqyjvg3WvamwPIoHmrRLiJrFE4VVHZq7APor7RVxL6LPJ63Gtrsk8ozdZkrzZWmgVUactCvth6jc2-GgFn_8tIvCw-s45u4LKWeoEx6eIKP9iRi8"
+                            alt=""
+                            style={{ display: "block", margin: "auto" }}
+                        />
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Pate là vị bánh mì kẹp được nhiều khách hàng yêu thích tại Fresh Garden</p>
+                        <p style={styles.p}>
+                            Bên cạnh đó, bánh mì kẹp pate của Fresh Garden còn được chế biến với bánh mì nóng giòn được làm từ bột mì, muối và nước. Bánh mì được nướng giòn, thơm mang lại cảm giác ngon miệng cho người thưởng thức.
+                        </p>
+                        <p style={styles.p}>
+                            Ngoài ra, bánh mì kẹp pate của Fresh Garden còn được trang trí với rau sống như rau xà lách, cà chua, hành tây... Rau sống không chỉ làm tăng hương vị cho bánh mì kẹp pate mà còn cung cấp thêm dinh dưỡng và chất xơ cho cơ thể.
+                        </p>
+                        <p style={styles.p}>
+                            Tất cả các thành phần của bánh mì kẹp pate tại Fresh Garden đều được chọn lựa kĩ càng và chế biến đúng tiêu chuẩn. Điều này đảm bảo rằng mỗi chiếc bánh mì kẹp pate mà bạn thưởng thức đều là sản phẩm tươi ngon, bổ dưỡng và an toàn cho sức khỏe.
+                        </p>
+                        <h1 style={styles.h1}>Bánh mì kẹp thập cẩm</h1>
+                        <p>
+                            Thêm một lựa chọn dinh dưỡng cho các tín đồ của bánh mì là bánh mì kẹp thập cẩm. Với nguyên liệu sạch, giàu dinh dưỡng, bánh mì kẹp thập cẩm của Fresh Garden cũng là một sản phẩm được yêu thích bởi sự đa dạng của các thành phần bên trong, bao gồm pate, chả kẹp,  thịt xá xíu. Tất cả các thành phần này được kết hợp với nhau để tạo nên một bánh mì kẹp thơm ngon, bổ dưỡng và đầy đủ dinh dưỡng cho bữa sáng.
+                        </p>
+                        <h1 style={styles.h1}>Bánh mì kẹp chả</h1>
+                        <p>
+                            Bánh mì kẹp chả của Fresh Garden lại mang đến cho khách hàng một trải nghiệm ẩm thực đậm đà, với chả lụa thơm ngon được đặt trong bánh mì nóng giòn, kết hợp với phần nộm được nêm nếm vừa phải và nước sốt tuyệt vời. Chả thơm, mềm, được cắt thành các lát vừa ăn, mỗi miếng bánh bạn sẽ cảm nhận được lớp vỏ giòn, lớp chả đậm vị cùng nộm giải ngán, ăn một miếng lại muốn ăn thêm một miếng.
+                        </p>
+                        <h1 style={styles.h1}>Bánh mì kẹp gà Teriyaki</h1>
+                        <p>
+                            Bánh mì kẹp gà Teriyaki của Fresh Garden lại mang đến cho khách hàng một hương vị Á Đông đặc trưng, với gà được ướp gia vị đều tay, kết hợp cùng bánh mì nóng giòn và phần sốt mang công thức độc quyền của Fresh Garden.
+                        </p>
+                        <img
+                            src="https://lh5.googleusercontent.com/0PzrbjW8zYNz7445QUiYIa1h70L33cZFubDREVPGvB2iyBn5MLBzkP2aV7TPqfjKrpqoFDs4yZtNbJFV4SH2FO9-V_id0j3Xh6IhaA53wK1kM6-FFQlOnktwZxeUECrhz7wZIe4qxbexMfuVTCMVRls"
+                            alt=""
+                            style={{ display: "block", margin: "auto" }}
+                        />
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Với những khách hàng yêu thích hương vị đặc trưng của gà Teriyaki chắc chắn không thể bỏ qua vị bánh mì kẹp này</p>
+                        <h1 style={styles.h1}>Bánh mì kẹp xá xíu</h1>
+                        <p>
+                            Cuối cùng, bánh mì kẹp xá xíu của Fresh Garden là một sản phẩm đặc trưng của ẩm thực Châu Á, với xá xíu thơm ngon được đặt trong bánh mì nóng giòn, kết hợp với nộm được nêm nếm vừa phải và sốt ngon.
+                        </p>
+                        <img
+                            src="https://lh3.googleusercontent.com/I1Hg5wi4_Bt4Wl8PC6sW8wHE7QjSvSVOyJZFDg0v3o4UAD81t7R1Hre3I_lp7WCtHACumNd4_oDriiUxCk28UTjtbps8hfkOtQqIcJFWHz1GY4bIyMRMx2nxZ05l3RkM-je_5neawXcAWSIRsbLWoEA"
+                            alt=""
+                            style={{ display: "block", margin: "auto" }}
+                        />
+                        <p style={{ textAlign: "center", paddingTop: "10px", fontStyle: "italic" }}>Bánh mì kẹp xá xíu cũng là bánh mì kẹp được khách hàng đánh giá cao tại Fresh Garden</p>
+                        <p style={styles.p}>
+                            Không chỉ đánh thức vị giác bằng sự hòa quyện giữa lớp xá xíu được ướp tẩm đặc biệt vị thơm của rau mùi, bánh mì xá xíu còn gây ấn tượng với thực khách bởi công thức sốt đặc biệt của quyện trong lớp vỏ nóng giòn của bánh.
+                        </p>
+                        <h1 style={styles.h1}>Lời kết</h1>
+                        <p>
+                            Với những loại bánh mì kẹp đa dạng và phong phú, Fresh Garden chắc chắn sẽ đáp ứng được sở thích của nhiều khách hàng khác nhau. Hãy đến thưởng thức và trải nghiệm những sản phẩm bánh mì kẹp của Fresh Garden để tận hưởng một bữa ăn ngon miệng và đầy đủ dinh dưỡng. Bữa sáng, bữa trưa, bữa xế của bạn và gia đình hãy để bánh mì kẹp Fresh Garden lo bạn nhé!
                         </p>
                         <div style={styles.p}>
                             <span>Tags: </span>
-                            <a href="" style={styles.a}>hộp quà Tết</a>
-                            <a href="" style={styles.a}>, quà doanh nghiệp</a>
-                            <a href="" style={styles.a}>, quà tết Fresh Garden</a>
+                            <a href="" style={styles.a}>bánh mì kẹp</a>
+                            <a href="" style={styles.a}>, bánh mì kẹp FreshGarden</a>
                         </div>
                     </div>
                 </CardContainer>
