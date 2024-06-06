@@ -23,6 +23,7 @@ import Loading from "../../../components/global/LoadingComponent/LoadingComponen
 import ModalComponent from "../../../components/admin/ModalComponent/ModelComponent";
 import InputComponent from "../../../components/admin/InputComponent/InputComponent";
 import ButtonComp from "../../../components/global/ButtonComponent/ButtonComp";
+import axios from "axios";
 
 const PaymentPage = () => {
   const order = useSelector((state) => state.order);
@@ -218,6 +219,13 @@ const PaymentPage = () => {
     )
   }
 
+  const zalopaybtn = async () => {
+    const session = await PaymentService.ZaloPayment(data);
+    const url = session.data.order_url
+    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
+    window.open(url, 'zalopay', windowFeatures)
+  }
+
   const addPaypalScript = async () => {
     const { data } = await PaymentService.getConfig()
     const script = document.createElement('script')
@@ -231,12 +239,12 @@ const PaymentPage = () => {
   }
 
   useEffect(() => {
-    if (!window.paypal) {
+    if (payment === 'paypal' && !window.paypal) {
       addPaypalScript()
     } else {
       setSdkReady(true)
     }
-  }, [])
+  }, [payment])
 
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
@@ -260,6 +268,7 @@ const PaymentPage = () => {
                   <WrapperRadio onChange={handlePayment} value={payment}>
                     <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
                     <Radio value="paypal"> Thanh toán tiền bằng Paypal</Radio>
+                    <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
                   </WrapperRadio>
                 </div>
               </WrapperInfo>
@@ -343,7 +352,44 @@ const PaymentPage = () => {
                   </span>
                 </WrapperTotal>
               </div>
-              {payment === 'paypal' && sdkReady ? (
+              {payment === 'later_money' &&
+                <ButtonComp
+                  onClick={() => handleAddOrder()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: "48px",
+                    width: "360px",
+                    border: "none",
+                    borderRadius: "4px",
+                    marginTop: "10px",
+                  }}
+                  textbutton={"Đặt hàng"}
+                  styleTextButton={{
+                    color: "#fff",
+                    fontSize: "15px",
+                    fontWeight: "700",
+                  }}
+                ></ButtonComp>
+              }
+              {
+                payment === 'zalopay' &&
+                <ButtonComp
+                  onClick={() => zalopaybtn()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textbutton={'zalopay'}
+                  styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
+                >
+                </ButtonComp>
+              }
+              {payment === 'paypal' && sdkReady &&
                 <PayPalScriptProvider options={{ "client-id": "your-client-id" }}>
                   <div style={{ width: '320px' }}>
                     <PayPalButtons
@@ -370,26 +416,7 @@ const PaymentPage = () => {
                     />
                   </div>
                 </PayPalScriptProvider>
-              ) : (
-                <ButtonComp
-                  onClick={() => handleAddOrder()}
-                  size={40}
-                  styleButton={{
-                    background: "rgb(255, 57, 69)",
-                    height: "48px",
-                    width: "360px",
-                    border: "none",
-                    borderRadius: "4px",
-                    marginTop: "10px",
-                  }}
-                  textbutton={"Đặt hàng"}
-                  styleTextButton={{
-                    color: "#fff",
-                    fontSize: "15px",
-                    fontWeight: "700",
-                  }}
-                ></ButtonComp>
-              )}
+              }
             </WrapperRight>
           </div>
         </div>
