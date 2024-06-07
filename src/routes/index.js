@@ -191,5 +191,5 @@ export const routes = [
         path: '/pages/point',
         page: PointPage,
         isShowHeader: true
-    },
+    }
 ]

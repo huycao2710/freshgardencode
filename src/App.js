@@ -73,7 +73,7 @@ const App = () => {
         }
       } catch (error) {
         console.error('Error processing refresh token:', error);
-        handleLogout();  // Logout if refresh token is invalid
+        handleLogout();
       }
     }
     return config;

@@ -8,9 +8,13 @@ import { CreditCard, ShoppingBag } from "@mui/icons-material";
 import CountUp from "react-countup";
 import MyCalendar from "../../components/MyCalender";
 import PieChartComponent from "../../charts/PieChartComp";
+import Carousel from "./Carousel";
+import img1 from "../admin/Banner/Banner1.jpg";
+import img2 from "../admin/Banner/Banner2.jpg";
+import img3 from "../admin/Banner/Banner3.jpg";
 
 const AdminHome = () => {
-
+  const slides = [img1, img2, img3];
 
 
   return (
@@ -121,8 +125,8 @@ const AdminHome = () => {
                     display: "flex",
                   }}
                 >
-                  <CardContent sx={{ height: "100%" }}>
-
+                  <CardContent sx={{ height: "100%" }} className="max-w">
+                    <Carousel slides={slides} />
                   </CardContent>
                 </Card>
               </Grid>

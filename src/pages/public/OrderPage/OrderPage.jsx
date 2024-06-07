@@ -233,10 +233,10 @@ const OrderPage = () => {
                   deliveryPriceMemo === 30000
                     ? 1
                     : deliveryPriceMemo === 50000
-                    ? 2
-                    : order.orderItemsSelected.length === 0
-                    ? 0
-                    : 0
+                      ? 2
+                      : order.orderItemsSelected.length === 0
+                        ? 0
+                        : 0
                 }
               />
             </WrapperStyleHeaderDelivery>
@@ -256,6 +256,7 @@ const OrderPage = () => {
                   justifyContent: "space-between",
                 }}
               >
+                <span>Tên bánh</span>
                 <span>Đơn giá</span>
                 <span>Số lượng</span>
                 <span>Thành tiền</span>
@@ -304,7 +305,7 @@ const OrderPage = () => {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {order?.fullName}
+                        {order?.nameProduct}
                       </div>
                     </div>
                     <div
@@ -323,7 +324,7 @@ const OrderPage = () => {
 
                       {/* item count */}
                       <div className="flex items-center justify-center gap-2">
-                      
+
                         <button
                           style={{
                             border: "none",
@@ -368,9 +369,9 @@ const OrderPage = () => {
                             style={{ color: "#000", fontSize: "10px" }}
                           />
                         </button>
-                      
+
                       </div>
-                      
+
                       <span
                         style={{
                           color: "rgb(255, 66, 78)",

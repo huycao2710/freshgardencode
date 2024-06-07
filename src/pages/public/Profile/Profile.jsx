@@ -74,6 +74,7 @@ const Profile = () => {
       city,
       access_token: user?.access_token,
     });
+    window.location.reload();
   };
 
   return (
