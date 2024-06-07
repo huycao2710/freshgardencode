@@ -92,6 +92,16 @@ const SidebarComponent = ({ open, onClose }) => {
                                     >
                                         Trang chủ
                                     </Link>
+                                    <Link
+                                        to="/pages/about_us"
+                                        className={`block px-4 py-2 text-lg font-semibold rounded-md transition-colors duration-300 ${location.pathname === '/pages/about_us' ? 'bg-[#B9D431] text-white' : 'text-black hover:bg-[#B9D431] hover:text-white'}`}
+                                        onClick={(e) => {
+                                            onClose();
+                                            e.stopPropagation();
+                                        }}
+                                    >
+                                        Giới thiệu
+                                    </Link>
                                     {user?.access_token ? (
                                         <>
                                             <div
