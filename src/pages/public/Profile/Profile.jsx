@@ -6,8 +6,7 @@ import * as message from '../../../components/global/MessageComponent/Message';
 import { getBase64 } from '../../../util';
 import Loading from '../../../components/global/LoadingComponent/LoadingComponent';
 import { UploadOutlined } from '@ant-design/icons';
-import { Input, Upload, Typography, Divider, Row, Col } from 'antd';
-import ButtonComp from '../../../components/global/ButtonComponent/ButtonComp';
+import { Input, Upload, Typography, Divider, Row, Col, Button } from 'antd';
 
 const { Title } = Typography;
 
@@ -83,7 +82,7 @@ const Profile = () => {
       <Loading isPending={isPending}>
         <div style={{ background: "#fff", padding: "20px", borderRadius: "8px", boxShadow: "0 0 10px rgba(0,0,0,0.1)" }}>
           <Row gutter={[16, 16]}>
-            <Col span={12}>
+            <Col span={16}>
               <label htmlFor="name">Họ tên</label>
               <Input
                 style={{ width: "100%" }}
@@ -92,28 +91,27 @@ const Profile = () => {
                 onChange={onChangeName}
               />
             </Col>
-            <Col span={12}>
-              <ButtonComp
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "45px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật
+              </Button>
             </Col>
           </Row>
           <Divider />
           <Row gutter={[16, 16]}>
-            <Col span={12}>
+            <Col span={16}>
               <label htmlFor="email">Email</label>
               <Input
                 style={{ width: "100%" }}
@@ -122,28 +120,27 @@ const Profile = () => {
                 onChange={onChangeEmail}
               />
             </Col>
-            <Col span={12}>
-              <ButtonComp
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "45px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật
+              </Button>
             </Col>
           </Row>
           <Divider />
           <Row gutter={[16, 16]}>
-            <Col span={12}>
+            <Col span={16}>
               <label htmlFor="phone">Phone</label>
               <Input
                 style={{ width: "100%" }}
@@ -152,28 +149,27 @@ const Profile = () => {
                 onChange={onChangePhone}
               />
             </Col>
-            <Col span={12}>
-              <ButtonComp
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "45px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật
+              </Button>
             </Col>
           </Row>
           <Divider />
           <Row gutter={[16, 16]}>
-            <Col span={12}>
+            <Col span={16}>
               <label htmlFor="address">Address</label>
               <Input
                 style={{ width: "100%" }}
@@ -182,28 +178,27 @@ const Profile = () => {
                 onChange={onChangeAddress}
               />
             </Col>
-            <Col span={12}>
-              <ButtonComp
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "45px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật
+              </Button>
             </Col>
           </Row>
           <Divider />
           <Row gutter={[16, 16]}>
-            <Col span={12}>
+            <Col span={16}>
               <label htmlFor="city">Thành phố</label>
               <Input
                 style={{ width: "100%" }}
@@ -212,48 +207,46 @@ const Profile = () => {
                 onChange={onChangeCity}
               />
             </Col>
-            <Col span={12}>
-              <ButtonComp
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "45px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật
+              </Button>
             </Col>
           </Row>
           <Divider />
           <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <label htmlFor="avatar">Avatar</label>
+            <Col span={16}>
+              <label htmlFor="avatar" style={{ marginBottom: '8px', display: 'block' }}>Avatar</label>
               <Upload onChange={onChangeAvatar} maxCount={1}>
-                <ButtonComp
+                <Button
                   icon={<UploadOutlined />}
-                  textbutton={"Select File"}
-                  styleButton={{
+                  style={{
                     width: "100%",
+                    height: "45px",
                     borderRadius: "4px",
-                    padding: "10px",
-                    background: "#1890ff",
-                  }}
-                  styleTextButton={{
+                    background: "#B9D431",
                     color: "white",
-                    fontSize: "15px",
+                    fontSize: "14px",
                     fontWeight: "700",
                   }}
-                />
+                >
+                  Select File
+                </Button>
               </Upload>
             </Col>
-            <Col span={12}>
+            <Col span={8} style={{ display: 'flex', alignItems: 'center' }}>
               {avatar && (
                 <img
                   src={avatar}
@@ -271,22 +264,21 @@ const Profile = () => {
           <Divider />
           <Row>
             <Col span={24}>
-              <ButtonComp
+              <Button
                 onClick={handleUpdate}
-                size="large"
-                styleButton={{
+                size="middle"
+                style={{
                   width: "100%",
+                  height: "40px",
                   borderRadius: "4px",
-                  padding: "10px",
-                  background: "#1890ff",
-                }}
-                textbutton={"Cập nhật tất cả"}
-                styleTextButton={{
+                  background: "#B9D431",
                   color: "white",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   fontWeight: "700",
                 }}
-              />
+              >
+                Cập nhật tất cả
+              </Button>
             </Col>
           </Row>
         </div>
