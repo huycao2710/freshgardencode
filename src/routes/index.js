@@ -29,6 +29,7 @@ import Promotion2 from "../pages/public/PromotionPage/Promotion2";
 import Promotion3 from "../pages/public/PromotionPage/Promotion3";
 import PointPage from "../pages/public/PointPage/PointPage";
 import AboutUsPage from "../pages/public/AboutUsPage/AboutUsPage";
+import VnpayPaymentPage from "../pages/public/PaymentPage/VnpayPaymentPage";
 
 export const routes = [
     {
@@ -60,6 +61,12 @@ export const routes = [
         path: '/orderSuccess',
         page: OrderSuccess,
         isShowHeader: true
+    },
+    //vnpay
+    {
+        path: '/vnpay',
+        page: VnpayPaymentPage,
+        isShowHeader: false
     },
     {
         path: '/product',

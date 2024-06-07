@@ -1,8 +1,6 @@
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-
-
 export const getConfig = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/payment/config`)
     return res.data
@@ -25,5 +23,11 @@ export const MomoPayment = async (data) => {
 
 export const CheckMomoPayment = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/check_momo`, data)
+    return res.data
+}
+
+//vnpay
+export const VNPayPayment = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay`, data)
     return res.data
 }

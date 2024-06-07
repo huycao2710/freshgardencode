@@ -245,8 +245,6 @@ const PaymentPage = () => {
     document.body.appendChild(script)
   }
 
-
-
   useEffect(() => {
     if (payment === 'paypal' && !window.paypal) {
       addPaypalScript()
@@ -255,6 +253,23 @@ const PaymentPage = () => {
     }
   }, [payment])
 
+  //vnpay
+
+const btnvnpay = () => {
+  // Encode data as query parameters if needed
+  const queryParams = new URLSearchParams({
+    total: totalPriceMemo
+  }).toString();
+  // Redirect to VnpayPaymentPage with data in URL
+  navigate(`/vnpay?${queryParams}`,{ state: { totalPriceMemo } });
+};
+  useEffect(() => {
+    if (payment === 'paypal' && !window.paypal) {
+      addPaypalScript()
+    } else {
+      setSdkReady(true)
+    }
+  }, [payment])
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
       <Loading isPending={isPendingAddOrder}>
@@ -279,6 +294,7 @@ const PaymentPage = () => {
                     <Radio value="paypal"> Thanh toán tiền bằng Paypal</Radio>
                     <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
                     <Radio value="momo"> Thanh toán tiền bằng Momo</Radio>
+                    <Radio value="vnpay"> Thanh toán tiền bằng VNPay</Radio>
                   </WrapperRadio>
                 </div>
               </WrapperInfo>
@@ -416,6 +432,26 @@ const PaymentPage = () => {
                 >
                 </ButtonComp>
               }
+              {/*  start of vnpay */}
+              {
+                payment === 'vnpay' &&
+                <ButtonComp
+                onClick={()=>btnvnpay()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textbutton={'vnpay'}
+                  styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
+                >
+                </ButtonComp>
+              }
+              {/* end of vnpay */}
+
               {payment === 'paypal' && sdkReady &&
                 <PayPalScriptProvider options={{ "client-id": "your-client-id" }}>
                   <div style={{ width: '320px' }}>

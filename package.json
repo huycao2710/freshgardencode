@@ -79,5 +79,6 @@
       ".localhost"
     ],
     "proxy": "https://freshgarden-backend.onrender.com"
+
   }
 }
