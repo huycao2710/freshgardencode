@@ -17,7 +17,7 @@ const MyOrderPage = () => {
   const fetchMyOrder = async () => {
     const res = await OrderAllService.getOrderByUserId(
       state?.id,
-      state?.access_token
+      state?.token
     );
     return res.data;
   };
@@ -25,7 +25,7 @@ const MyOrderPage = () => {
   const queryOrder = useQuery({
     queryKey: ["orders"],
     queryFn: fetchMyOrder,
-    enabled: !!state?.id && !!state?.access_token, // Convert to boolean
+    enabled: !!state?.id && !!state?.token, // Convert to boolean
   });
 
   const { isPending, data } = queryOrder
@@ -33,21 +33,22 @@ const MyOrderPage = () => {
   const handleDetailsOrder = (id) => {
     navigate(`/details-order/${id}`, {
       state: {
-        access_token: state?.access_token
+        token: state?.token
       }
     })
+    console.log(state?.token)
   }
 
   const mutation = useMutationHooks(
     (data) => {
-      const { id, access_token, orderItems } = data
-      const res = OrderAllService.cancelOrderDetailsInfo(id, access_token, orderItems)
+      const { id, token, orderItems } = data
+      const res = OrderAllService.cancelOrderDetailsInfo(id, token, orderItems)
       return res
     }
   )
 
   const handleCancelOrder = (order) => {
-    mutation.mutate({ id: order._id, access_token: state?.access_token, orderItems: order?.orderItems }, {
+    mutation.mutate({ id: order._id, token: state?.token, orderItems: order?.orderItems }, {
       onSuccess: () => {
         queryOrder.refetch()
       },
