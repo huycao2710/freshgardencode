@@ -22,8 +22,6 @@ const MyOrderPage = () => {
     return res.data;
   };
 
-  const user = useSelector((state) => state.user);
-
   const queryOrder = useQuery({
     queryKey: ["orders"],
     queryFn: fetchMyOrder,
@@ -49,7 +47,7 @@ const MyOrderPage = () => {
   )
 
   const handleCancelOrder = (order) => {
-    mutation.mutate({ id: order._id, token: state?.token, orderItems: order?.orderItems, userId: user.id }, {
+    mutation.mutate({ id: order._id, token: state?.token, orderItems: order?.orderItems}, {
       onSuccess: () => {
         queryOrder.refetch()
       },
