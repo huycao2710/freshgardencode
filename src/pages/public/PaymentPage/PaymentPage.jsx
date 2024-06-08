@@ -64,35 +64,37 @@ const PaymentPage = () => {
 
   const priceMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
-    }, 0)
-    return result
-  }, [order])
+      return total + cur.price * cur.amount;
+    }, 0);
+    return result;
+  }, [order]);
 
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount * cur.amount) / 100)
-    }, 0)
+      const totalDiscount = cur.discount ? cur.discount : 0;
+      return total + ((cur.price * cur.amount) * totalDiscount) / 100;
+    }, 0);
     if (Number(result)) {
-      return result
+      return result;
     }
-    return 0
-  }, [order])
+    return 0;
+  }, [order]);
 
   const deliveryPriceMemo = useMemo(() => {
     if (priceMemo >= 20000 && priceMemo < 500000) {
-      return 30000
+      return 30000;
     } else if (priceMemo >= 500000) {
-      return 50000
+      return 50000;
     } else {
-      return 0
+      return 0;
     }
-  }, [priceMemo])
+  }, [priceMemo]);
 
   const totalPriceMemo = useMemo(() => {
-    return Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
-  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo])
+    return (
+      Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
+    );
+  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo]);
 
 
   const handleAddOrder = () => {
