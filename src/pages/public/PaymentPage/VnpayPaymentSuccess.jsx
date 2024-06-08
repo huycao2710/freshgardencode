@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import {
-    confirmOrderVnpay,
-    paymentOrderVnpaySuccess,
-} from "../../../services/PaymentService";
+import { confirmOrderVnpay } from "../../../services/PaymentService";
 import { toast } from "react-toastify";
 
 function useQuery() {
@@ -15,6 +12,7 @@ function useQuery() {
 
 function VnpayPaymentSuccess(props) {
   let query = useQuery();
+  let navigate = useNavigate();
   useEffect(() => {
     let objectParam = {
       vnp_Amount: query.get("vnp_Amount"),
@@ -37,55 +35,16 @@ function VnpayPaymentSuccess(props) {
       if (orderData) {
         let res = await confirmOrderVnpay(objectParam);
         if (res && res.errCode == 0) {
-          createNewOrder(orderData);
+          
         }
       }
     };
     confirm();
   }, []);
 
-  let createNewOrder = async (data) => {
-    let res = await VNPayPaymentSuccess(data);
-    if (res && res.errCode == 0) {
-      toast.success("Thanh toán hóa đơn thành công");
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2000);
-    } else {
-      toast.error(res.errMessgae);
-    }
-  };
-
   return (
     <>
-      <div className="wrap-order">
-        <div className="wrap-heading-order">
-          <NavLink to="/" className="navbar-brand logo_h">
-            <img src="/resources/img/logo.png" alt="" />
-          </NavLink>
-          <span>Thanh Toán VNPAY</span>
-        </div>
-
-        <div className="wrap-order-item">
-          <section className="cart_area">
-            <div className="container">
-              <div className="cart_inner">
-                <div className="col-md-12">
-                  <div className="p-3 py-5">
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                      <h4 className="text-right">Thông tin thanh toán</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-      <div
-        style={{ width: "100%", height: "100px", backgroundColor: "#f5f5f5" }}
-      ></div>
+      <div>123456</div>
     </>
   );
 }

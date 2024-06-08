@@ -93,8 +93,9 @@ const PaymentPage = () => {
   const totalPriceMemo = useMemo(() => {
     return Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
   }, [priceMemo, priceDiscountMemo, deliveryPriceMemo])
-
-
+const orderItemsSelected = useMemo(() =>{
+  return order.orderItemsSelected
+})
   const handleAddOrder = () => {
     if (user?.access_token && order?.orderItemsSelected && user?.fullName && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
       // eslint-disable-next-line no-unused-expressions
@@ -225,9 +226,9 @@ const PaymentPage = () => {
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
     window.open(url, 'zalopay', windowFeatures)
   }
-
   const btnmomo = async () => {
     const session = await PaymentService.MomoPayment(data);
+    const amount = totalPriceMemo
     const url = session.data.payUrl
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
     window.open(url, 'momo', windowFeatures)

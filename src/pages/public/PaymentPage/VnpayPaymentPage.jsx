@@ -14,6 +14,7 @@ function VnpayPaymentPage(props) {
     language: "vn",
     amount: "",
   });
+  console.log(location.state)
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     if (name == "amount") {
@@ -26,7 +27,6 @@ function VnpayPaymentPage(props) {
       setInputValues({ ...inputValues, ['amount']: location.state.totalPriceMemo });
     }
   }, [location]);
-  console.log(inputValues)
   let handleOnclick = async () => {
     let res = await paymentOrderVnpay({
         orderType: inputValues.orderType,
@@ -35,8 +35,8 @@ function VnpayPaymentPage(props) {
         language: inputValues.language,
         amount: inputValues.amount,
     });
-    if (res) {
-        localStorage.setItem("orderData", JSON.stringify(location.state.totalPriceMemo));
+    if (res  && res.errCode == 200) {
+      localStorage.setItem("orderData", JSON.stringify(location.state));
       window.location.href = res.link;
     }else {
         toast.error("Payment failed!");

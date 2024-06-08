@@ -35,5 +35,5 @@ export const paymentOrderVnpaySuccess = (data) => {
     return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-success`, data)
 }
 export const confirmOrderVnpay = (data) => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay_return`, data)
+    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-return`, data)
 }
