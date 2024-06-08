@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const About = () => {
   const navigate = useNavigate();
   const handleItemClick = () => {
-    navigate("/pages/about-us");
+    navigate("/pages/about_us");
     window.scrollTo(0, 0); // Cuộn trang lên đầu khi người dùng click
   };
   return (

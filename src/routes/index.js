@@ -169,7 +169,7 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/pages/about-us',
+        path: '/pages/about_us',
         page: AboutUsPage,
         isShowHeader: true
     },
@@ -197,5 +197,5 @@ export const routes = [
         path: '/pages/point',
         page: PointPage,
         isShowHeader: true
-    },
+    }
 ]

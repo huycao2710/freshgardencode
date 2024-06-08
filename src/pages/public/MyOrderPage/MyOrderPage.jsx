@@ -36,6 +36,7 @@ const MyOrderPage = () => {
         token: state?.token
       }
     })
+    console.log(state?.token)
   }
 
   const mutation = useMutationHooks(
