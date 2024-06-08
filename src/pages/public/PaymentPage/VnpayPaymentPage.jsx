@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 
-import { VNPayPayment } from "../../../services/PaymentService";
+import { paymentOrderVnpay } from "../../../services/PaymentService";
 
 import { toast } from "react-toastify";
 
@@ -22,28 +22,25 @@ function VnpayPaymentPage(props) {
     setInputValues({ ...inputValues, [name]: value });
   };
   useEffect(() => {
-    if (location && location.state && location.state.totalPriceMemo) {
-      setInputValues({ ...inputValues, ["amount"]: location.state.totalPriceMemo });
+    if (location && location.state.totalPriceMemo) {
+      setInputValues({ ...inputValues, ['amount']: location.state.totalPriceMemo });
     }
   }, [location]);
-console.log(location)
-
+  console.log(inputValues)
   let handleOnclick = async () => {
-    let res = await VNPayPayment({
-      orderType: inputValues.orderType,
-      orderDescription: inputValues.orderDescription,
-      bankCode: inputValues.bankCode,
-      language: inputValues.language,
-      amount: inputValues.amount,
+    let res = await paymentOrderVnpay({
+        orderType: inputValues.orderType,
+        orderDescription: inputValues.orderDescription,
+        bankCode: inputValues.bankCode,
+        language: inputValues.language,
+        amount: inputValues.amount,
     });
-    if (res && res.errCode === 200) {
-      console.log("orderData", location.state);
-      localStorage.setItem("orderData", JSON.stringify(location.state));
+    if (res) {
+        localStorage.setItem("orderData", JSON.stringify(location.state.totalPriceMemo));
       window.location.href = res.link;
-    } else {
-      // Xử lý lỗi nếu cần
-      toast.error("Thanh toán không thành công");
-    }
+    }else {
+        toast.error("Payment failed!");
+      }
   };
   return (
     <>
@@ -66,7 +63,7 @@ console.log(location)
               </label>
               <select
                 value={inputValues.orderType}
-                onChange={handleOnChange}
+                onChange={(event) => handleOnChange(event)}
                 name="orderType"
                 className="form-select w-full"
               >
@@ -81,7 +78,7 @@ console.log(location)
                 name="amount"
                 disabled={true}
                 value={inputValues.amount}
-                onChange={handleOnChange}
+                onChange={(event) => handleOnChange(event)}
                 type="text"
                 className="form-input w-full"
               />
@@ -92,7 +89,7 @@ console.log(location)
               </label>
               <input
                 value={inputValues.orderDescription}
-                onChange={handleOnChange}
+                onChange={(event) => handleOnChange(event)}
                 name="orderDescription"
                 type="text"
                 className="form-input w-full"
@@ -104,7 +101,7 @@ console.log(location)
               </label>
               <select
                 value={inputValues.bankCode}
-                onChange={handleOnChange}
+                onChange={(event) => handleOnChange(event)}
                 name="bankCode"
                 className="form-select w-full"
               >
@@ -142,7 +139,7 @@ console.log(location)
               </label>
               <select
                 value={inputValues.language}
-                onChange={handleOnChange}
+                onChange={(event) => handleOnChange(event)}
                 name="language"
                 className="form-select w-full"
               >
@@ -152,8 +149,9 @@ console.log(location)
             </div>
             <div className="mt-6">
               <button
-                onClick={handleOnclick}
+                onClick={() => handleOnclick()}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                type="button"
               >
                 Thanh Toán
               </button>

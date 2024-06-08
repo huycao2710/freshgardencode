@@ -115,7 +115,7 @@ const OrderPage = () => {
     }, 0);
     return result;
   }, [order]);
-
+console.log(order)
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
       const totalDiscount = cur.discount ? cur.discount : 0;

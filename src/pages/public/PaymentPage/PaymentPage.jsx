@@ -254,14 +254,11 @@ const PaymentPage = () => {
   }, [payment])
 
   //vnpay
-
+  
 const btnvnpay = () => {
-  // Encode data as query parameters if needed
-  const queryParams = new URLSearchParams({
-    total: totalPriceMemo
-  }).toString();
   // Redirect to VnpayPaymentPage with data in URL
-  navigate(`/vnpay?${queryParams}`,{ state: { totalPriceMemo } });
+  
+  navigate('/vnpay', { state: { totalPriceMemo } });
 };
   useEffect(() => {
     if (payment === 'paypal' && !window.paypal) {

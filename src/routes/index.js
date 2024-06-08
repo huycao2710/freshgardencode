@@ -68,6 +68,7 @@ export const routes = [
         page: VnpayPaymentPage,
         isShowHeader: false
     },
+    
     {
         path: '/product',
         page: ProductsPage,

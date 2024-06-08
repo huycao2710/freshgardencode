@@ -27,7 +27,13 @@ export const CheckMomoPayment = async (data) => {
 }
 
 //vnpay
-export const VNPayPayment = async (data) => {
+export const paymentOrderVnpay = async(data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay`, data)
     return res.data
+}
+export const paymentOrderVnpaySuccess = (data) => {
+    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-success`, data)
+}
+export const confirmOrderVnpay = (data) => {
+    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay_return`, data)
 }
