@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { useSelector } from "react-redux";
 
+
 const HeaderComponent = () => {
     const HeaderBackGround = {
         backgroundImage: `url(${HeaderBackground})`,

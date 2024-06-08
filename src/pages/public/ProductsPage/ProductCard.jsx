@@ -20,6 +20,7 @@ const ProductCard = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const { countInStock, description, imageProduct, nameProduct, price, rating, type, selled, discount, idProduct } = props;
 
@@ -29,14 +30,14 @@ const ProductCard = (props) => {
   }
 
   const fetchGetDetailsProduct = async () => {
-    const res = await ProductAllService.getDetailsInfoProduct(props.idProduct);
+    const res = await ProductAllService.getDetailsInfoProduct(idProduct);
     return res.data;
   };
 
   const { isPending, data: productDetails } = useQuery({
-    queryKey: ["product-details", props.idProduct],
+    queryKey: ["product-details", idProduct],
     queryFn: fetchGetDetailsProduct,
-    enabled: !!props.idProduct,
+    enabled: !!idProduct,
   });
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const ProductCard = (props) => {
 
   useEffect(() => {
     if (order.isSuccessOrder) {
-      toast.success("Sản phẩm đã thêm vào giỏ hàng");
+      //toast.success(`Sản phẩm ${props.nameProduct} đã thêm vào giỏ hàng`);
     }
     return () => {
       dispatch(resetOrder());
