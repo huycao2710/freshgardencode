@@ -119,7 +119,7 @@ const OrderPage = () => {
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
       const totalDiscount = cur.discount ? cur.discount : 0;
-      return total + (priceMemo * (totalDiscount * cur.amount)) / 100;
+      return total + ((cur.price * cur.amount) * totalDiscount) / 100;
     }, 0);
     if (Number(result)) {
       return result;
@@ -297,16 +297,6 @@ const OrderPage = () => {
                         height={79}
                         preview={false}
                       />
-                      <div
-                        style={{
-                          width: "260px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {order?.nameProduct}
-                      </div>
                     </div>
                     <div
                       style={{
@@ -318,11 +308,15 @@ const OrderPage = () => {
                     >
                       <span>
                         <span style={{ fontSize: "13px", color: "#242424" }}>
+                          {order?.nameProduct}
+                        </span>
+                      </span>
+                      <span>
+                        <span style={{ fontSize: "13px", color: "#242424" }}>
                           {convertPrice(order?.price)}
                         </span>
                       </span>
 
-                      {/* item count */}
                       <div className="flex items-center justify-center gap-2">
 
                         <button

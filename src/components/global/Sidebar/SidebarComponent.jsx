@@ -7,6 +7,7 @@ import * as UserAllService from '../../../services/UserAllService';
 import { resetUser } from '../../../redux/slides/userAllSlide';
 import Loading from '../LoadingComponent/LoadingComponent';
 import { persistor } from '../../../redux/store';
+import { toast } from 'react-toastify';
 
 
 const SidebarComponent = ({ open, onClose }) => {
@@ -25,6 +26,7 @@ const SidebarComponent = ({ open, onClose }) => {
             dispatch(resetUser());
             persistor.purge();
             onClose();
+            toast.success('Đăng xuất thành công');
         } catch (error) {
             console.error('Failed to log out:', error);
         }

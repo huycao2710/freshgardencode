@@ -122,7 +122,7 @@ export default function ProductPage() {
                           type={product.type}
                           selled={product.selled}
                           discount={product.discount}
-                          id={product._id} />
+                          idProduct={product._id} />
                       ))}
                     </div>
                   )}

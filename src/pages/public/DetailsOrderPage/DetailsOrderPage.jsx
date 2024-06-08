@@ -1,39 +1,52 @@
-import React from 'react'
-import { WrapperAllPrice, WrapperContentInfo, WrapperHeaderUser, WrapperInfoUser, WrapperItem, WrapperItemLabel, WrapperLabel, WrapperNameProduct, WrapperProduct, WrapperStyleContent } from './style'
-
-import { useLocation, useParams } from 'react-router-dom'
-import * as OrderAllService from '../../../services/OrderAllService'
-import { useQuery } from '@tanstack/react-query'
-import { orderContant } from '../../../contant'
-import { convertPrice } from '../../../util'
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import Loading from '../../../components/global/LoadingComponent/LoadingComponent'
+import React from 'react';
+import { WrapperAllPrice, WrapperContentInfo, WrapperHeaderUser, WrapperInfoUser, WrapperItem, WrapperItemLabel, WrapperLabel, WrapperNameProduct, WrapperProduct, WrapperStyleContent } from './style';
+import { useLocation, useParams } from 'react-router-dom';
+import * as OrderAllService from '../../../services/OrderAllService';
+import { useQuery } from '@tanstack/react-query';
+import { orderContant } from '../../../contant';
+import { convertPrice } from '../../../util';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import Loading from '../../../components/global/LoadingComponent/LoadingComponent';
 
 const DetailsOrderPage = () => {
-  const params = useParams()
-  const location = useLocation()
-  const { state } = location
-  const { id } = params
+  const params = useParams();
+  const location = useLocation();
+  const { state } = location;
+  const { id } = params;
 
   const fetchDetailsOrder = async () => {
-    const res = await OrderAllService.getDetailsInfoOrder(id, state?.token)
-    return res.data
-  }
+    const res = await OrderAllService.getDetailsInfoOrder(id, state?.token);
+    return res.data;
+  };
+
   const user = useSelector((state) => state.user);
   const queryOrder = useQuery({
     queryKey: ["orders-details"],
     queryFn: fetchDetailsOrder,
-    enabled: !!user?.id && !!user?.access_token  // Convert to boolean
+    enabled: !!user?.id && !!user?.access_token, // Convert to boolean
   });
-  const { isPending, data } = queryOrder
 
+  const { isPending, data } = queryOrder;
+
+  // Tính priceMemo
   const priceMemo = useMemo(() => {
-    const result = data?.orderItems?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
-    }, 0)
-    return result
-  }, [data])
+    return data?.orderItems?.reduce((total, cur) => {
+      return total + cur.price * cur.amount;
+    }, 0);
+  }, [data]);
+
+  // Giảm giá cho từng sản phẩm
+  const totalDiscount = useMemo(() => {
+    return data?.orderItems?.reduce((total, cur) => {
+      return total + (cur.discount ? (cur.price * cur.amount * cur.discount) / 100 : 0);
+    }, 0);
+  }, [data]);
+
+  // Tính tổng giá sau khi giảm giá
+  const totalPriceAfterDiscount = useMemo(() => {
+    return priceMemo - totalDiscount;
+  }, [priceMemo, totalDiscount]);
 
   return (
     <Loading isPending={isPending}>
@@ -97,8 +110,6 @@ const DetailsOrderPage = () => {
                   <WrapperItem>{convertPrice(order?.price)}</WrapperItem>
                   <WrapperItem>{order?.amount}</WrapperItem>
                   <WrapperItem>{order?.discount ? convertPrice(priceMemo * order?.discount / 100) : '0 VND'}</WrapperItem>
-
-
                 </WrapperProduct>
               )
             })}
@@ -112,8 +123,12 @@ const DetailsOrderPage = () => {
               <WrapperItem>{convertPrice(data?.shippingPrice)}</WrapperItem>
             </WrapperAllPrice>
             <WrapperAllPrice>
+              <WrapperItemLabel>Giảm giá</WrapperItemLabel>
+              <WrapperItem>{convertPrice(totalDiscount)}</WrapperItem>
+            </WrapperAllPrice>
+            <WrapperAllPrice>
               <WrapperItemLabel>Tổng cộng</WrapperItemLabel>
-              <WrapperItem><WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem></WrapperItem>
+              <WrapperItem>{convertPrice(totalPriceAfterDiscount + data?.shippingPrice)}</WrapperItem>
             </WrapperAllPrice>
           </WrapperStyleContent>
         </div>
@@ -122,4 +137,4 @@ const DetailsOrderPage = () => {
   )
 }
 
-export default DetailsOrderPage
+export default DetailsOrderPage;

@@ -19,7 +19,7 @@ export const getOrderByUserId = async (id, access_token) => {
 }
 
 export const getDetailsInfoOrder = async (id, access_token) => {
-    const res = await axiosJWT.get(`${process.env.REACT_APP_API_URL}/order/get-details-order/${id}`, {
+    const res = await axiosJWT.get(`${process.env.REACT_APP_API_URL}/order/get-detailorder/${id}`, {
         headers: {
             Authorization: `Bearer ${access_token}`,
         }
@@ -29,7 +29,7 @@ export const getDetailsInfoOrder = async (id, access_token) => {
 
 export const cancelOrderDetailsInfo = async (id, access_token, orderItems) => {
     const data = { orderItems, orderId: id }
-    const res = await axiosJWT.post(`${process.env.REACT_APP_API_URL}/order/cancel-order/${id}`, { data }, {
+    const res = await axiosJWT.delete(`${process.env.REACT_APP_API_URL}/order/cancel-order/${id}`, { data }, {
         headers: {
             Authorization: `Bearer ${access_token}`,
         }

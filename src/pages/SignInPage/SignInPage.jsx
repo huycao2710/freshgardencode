@@ -8,6 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useMutationHooks } from '../../hooks/useMutationHook';
 import * as UserAllService from '../../services/UserAllService';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 const SignInPage = () => {
   const containerStyle = {
@@ -40,6 +41,7 @@ const SignInPage = () => {
       } else {
         navigate('/')
         window.location.reload();
+        toast.success('Đăng nhập thành công')
       }
       localStorage.setItem('access_token', JSON.stringify(data?.access_token));
       localStorage.setItem(
@@ -111,7 +113,8 @@ const SignInPage = () => {
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                 <ReCAPTCHA
-                  sitekey="6Lc5r_ApAAAAAFkH71LiveGqFIPc98eLm_8rY6Oe"
+                  sitekey="6LfGtewpAAAAABgM1A7E41JllsnYza_1dExCPagI"
+                  //6Lc5r_ApAAAAAFkH71LiveGqFIPc98eLm_8rY6Oe
                   onChange={handleRecaptchaChange}
                 />
               </Box>

@@ -233,6 +233,13 @@ const PaymentPage = () => {
     window.open(url, 'momo', windowFeatures)
   }
 
+  const btnstripe = async () => {
+    const session = await PaymentService.StripePayment(data);
+    const url = session.data.pay_Url
+    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
+    window.open(url, 'stripe', windowFeatures)
+  }
+
   const addPaypalScript = async () => {
     const { data } = await PaymentService.getConfig()
     const script = document.createElement('script')
@@ -254,15 +261,14 @@ const PaymentPage = () => {
   }, [payment])
 
   //vnpay
-
-const btnvnpay = () => {
-  // Encode data as query parameters if needed
-  const queryParams = new URLSearchParams({
-    total: totalPriceMemo
-  }).toString();
-  // Redirect to VnpayPaymentPage with data in URL
-  navigate(`/vnpay?${queryParams}`,{ state: { totalPriceMemo } });
-};
+  const btnvnpay = () => {
+    // Encode data as query parameters if needed
+    const queryParams = new URLSearchParams({
+      total: totalPriceMemo
+    }).toString();
+    // Redirect to VnpayPaymentPage with data in URL
+    navigate(`/vnpay?${queryParams}`, { state: { totalPriceMemo } });
+  };
   useEffect(() => {
     if (payment === 'paypal' && !window.paypal) {
       addPaypalScript()
@@ -295,6 +301,7 @@ const btnvnpay = () => {
                     <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
                     <Radio value="momo"> Thanh toán tiền bằng Momo</Radio>
                     <Radio value="vnpay"> Thanh toán tiền bằng VNPay</Radio>
+                    <Radio value="stripe"> Thanh toán tiền bằng Stripe</Radio>
                   </WrapperRadio>
                 </div>
               </WrapperInfo>
@@ -432,11 +439,28 @@ const btnvnpay = () => {
                 >
                 </ButtonComp>
               }
+              {
+                payment === 'stripe' &&
+                <ButtonComp
+                  onClick={() => btnstripe()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textbutton={'stripe'}
+                  styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
+                >
+                </ButtonComp>
+              }
               {/*  start of vnpay */}
               {
                 payment === 'vnpay' &&
                 <ButtonComp
-                onClick={()=>btnvnpay()}
+                  onClick={() => btnvnpay()}
                   size={40}
                   styleButton={{
                     background: "rgb(255, 57, 69)",
