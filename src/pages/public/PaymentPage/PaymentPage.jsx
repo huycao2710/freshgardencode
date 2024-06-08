@@ -5,6 +5,7 @@ import {
   WrapperInfo,
   WrapperLeft,
   WrapperRadio,
+  WrapperRadioSecond,
   WrapperRight,
   WrapperTotal,
 } from "./style";
@@ -297,14 +298,14 @@ const PaymentPage = () => {
               <WrapperInfo>
                 <div>
                   <Label>Chọn phương thức thanh toán</Label>
-                  <WrapperRadio onChange={handlePayment} value={payment}>
+                  <WrapperRadioSecond onChange={handlePayment} value={payment}>
                     <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
                     <Radio value="paypal"> Thanh toán tiền bằng Paypal</Radio>
                     <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
                     <Radio value="momo"> Thanh toán tiền bằng Momo</Radio>
                     <Radio value="vnpay"> Thanh toán tiền bằng VNPay</Radio>
                     <Radio value="stripe"> Thanh toán tiền bằng Stripe</Radio>
-                  </WrapperRadio>
+                  </WrapperRadioSecond>
                 </div>
               </WrapperInfo>
             </WrapperLeft>
