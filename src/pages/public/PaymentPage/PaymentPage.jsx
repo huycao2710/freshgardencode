@@ -232,7 +232,7 @@ const PaymentPage = () => {
       });
 
       const url = session.order_url;
-      window.location.href = url; // Chuyển hướng đến URL thanh toán trên cùng một tab hoặc cửa sổ
+      window.open(url, 'zalopay', 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500');
     } catch (error) {
       console.error("Payment error: ", error);
       message.error('Thanh toán không thành công. Vui lòng thử lại sau!');
