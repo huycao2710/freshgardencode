@@ -1,12 +1,12 @@
 import axios from "axios"
 import { axiosJWT } from "./UserAllService"
 
-export const getAllProduct = async (search, limit) => {
+export const getAllProduct = async (page, limit) => {
     let res = {}
     // if (search?.length > 0) {
     //     res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?filter=name&filter=${search}&limit=${limit}`)
     // } else {
-    res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?limit=${limit}`)
+    res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-allproduct?page=${page}&limit=${limit}`)
     // }
     return res.data
 }

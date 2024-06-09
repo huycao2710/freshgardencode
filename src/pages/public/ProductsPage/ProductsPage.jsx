@@ -11,15 +11,19 @@ export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryText, setCategoryText] = useState("Tất cả sản phẩm");
   const [products, setProducts] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 12;
 
-  const fetchProducts = async () => {
+  const fetchProducts = async ({ queryKey }) => {
+    const [_, selectedCategory, currentPage] = queryKey;
     if (selectedCategory) {
-      const res = await ProductAllService.getProductsByCategory(
-        selectedCategory
-      );
+      const res = await ProductAllService.getProductsByCategory(selectedCategory, currentPage - 1, pageSize);
+      setTotalPages(Math.ceil(res.total / pageSize));
       return res;
     } else {
-      const res = await ProductAllService.getAllProduct();
+      const res = await ProductAllService.getAllProduct(currentPage - 1, pageSize);
+      setTotalPages(Math.ceil(res.total / pageSize));
       return res;
     }
   };
@@ -30,7 +34,7 @@ export default function ProductPage() {
   };
 
   const { isLoading, data: productsData } = useQuery({
-    queryKey: ["products", selectedCategory],
+    queryKey: ["products", selectedCategory, currentPage],
     queryFn: fetchProducts,
     retry: 3,
     retryDelay: 1000,
@@ -48,6 +52,7 @@ export default function ProductPage() {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setCategoryText(category ? category : "Tất cả sản phẩm");
+    setCurrentPage(1);
   };
 
   const sortProducts = (type) => {
@@ -60,6 +65,9 @@ export default function ProductPage() {
     setProducts({ data: sortedProducts });
   };
 
+  const handlePaginationChange = (event, value) => {
+    setCurrentPage(value);
+  };
   return (
     <div className="bg-white font-playfairDisplay">
       <div>
@@ -132,7 +140,12 @@ export default function ProductPage() {
           </section>
           <section className="w-full px=[3.6rem]">
             <div className="px-4 py-5 flex justify-center">
-              <Pagination color="secondary" />
+            <Pagination
+                color="secondary"
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePaginationChange}
+              />
             </div>
           </section>
         </main>
