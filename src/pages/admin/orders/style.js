@@ -2,9 +2,9 @@ import { Upload } from "antd";
 import styled from "styled-components";
 
 export const WrapperHeader = styled.h1`
+    font-size: 24px;
     text-align: center;
     font-weight: bold;
-    font-size: 24px;
     padding: 10px;
     background-color: #4B494E;
     border-radius: 6px; 
@@ -27,6 +27,24 @@ export const WrapperUploadFile = styled(Upload)`
     & .ant-upload-list-item-container {
         display: none;
     }
+`
+export const WrapperProduct = styled.div`
+  font-weight: bold;
+  display:flex;
+  align-items:flex-start;
+  margin-top: 10px;
+`
 
-   
+export const WrapperNameProduct = styled.div`
+  display:flex;
+  align-items: flex-start;
+  width: 670px;
+`
+
+export const WrapperItem = styled.div`
+  width: 200px;
+  font-weight: bold;
+  &:first-child {
+    color: red
+  }
 `

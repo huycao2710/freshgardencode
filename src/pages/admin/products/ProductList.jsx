@@ -1,4 +1,4 @@
-import { Button, Form, Select, Space } from "antd";
+import { Button, Form, Radio, Select, Space } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useMutationHooks } from "../../../hooks/useMutationHook";
@@ -14,6 +14,7 @@ import DrawerComponent from "../../../components/admin/DrawerComponent/DrawerCom
 import * as ProductAllService from "../../../services/ProductAllService";
 import * as message from "../../../components/global/MessageComponent/Message";
 import { PlusOutlined } from "@ant-design/icons";
+import { Checkbox } from "@mui/material";
 
 
 const ProductList = () => {
@@ -34,6 +35,7 @@ const ProductList = () => {
         countInStock: '',
         newCategory: '',
         discount: '',
+        featured: false
     })
     const [stateProduct, setStateProduct] = useState(inittial())
     const [stateProductDetails, setStateProductDetails] = useState(inittial())
@@ -48,7 +50,7 @@ const ProductList = () => {
                 rating,
                 imageProduct,
                 categoryName,
-                countInStock, discount } = data
+                countInStock, discount, featured } = data
             const res = ProductAllService.createNewProduct({
                 nameProduct,
                 price,
@@ -57,7 +59,8 @@ const ProductList = () => {
                 imageProduct,
                 categoryName,
                 countInStock,
-                discount
+                discount,
+                featured
             })
             return res
         }
@@ -114,7 +117,8 @@ const ProductList = () => {
                 imageProduct: res?.data?.imageProduct,
                 categoryName: res?.data?.categoryName,
                 countInStock: res?.data?.countInStock,
-                discount: res?.data?.discount
+                discount: res?.data?.discount,
+                featured: res?.data?.featured
             })
         }
         setIsPendingUpdate(false)
@@ -300,13 +304,27 @@ const ProductList = () => {
             dataIndex: 'countInStock',
         },
         {
+            title: 'Sản phẩm nổi bật',
+            dataIndex: 'featured',
+            filters: [
+                {
+                    text: 'Sản phẩm nổi bật',
+                    value: 'true',
+                },
+                {
+                    text: 'Không',
+                    value: 'false',
+                },
+            ],
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = products?.data?.length && products?.data?.map((product) => {
-        return { ...product, key: product._id }
+        return { ...product, key: product._id, featured: product.featured ? 'Sản phẩm nổi bật' : 'Không' }
     })
 
     useEffect(() => {
@@ -344,7 +362,8 @@ const ProductList = () => {
             rating: '',
             imageProduct: '',
             categoryName: '',
-            countInStock: ''
+            countInStock: '',
+            featured: false
         })
         form.resetFields()
     };
@@ -361,7 +380,6 @@ const ProductList = () => {
     const handleCancelDelete = () => {
         setIsModalOpenDelete(false)
     }
-
 
     const handleDeleteProduct = () => {
         mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
@@ -382,6 +400,7 @@ const ProductList = () => {
             categoryName: '',
             countInStock: '',
             discount: '',
+            featured: false
         })
         form.resetFields()
     };
@@ -395,7 +414,8 @@ const ProductList = () => {
             imageProduct: stateProduct.imageProduct,
             categoryName: stateProduct.categoryName === 'add_category' ? stateProduct.newCategory : stateProduct.categoryName,
             countInStock: stateProduct.countInStock,
-            discount: stateProduct.discount
+            discount: stateProduct.discount,
+            featured: stateProduct.featured
         }
         mutation.mutate(params, {
             onSettled: () => {
@@ -453,6 +473,13 @@ const ProductList = () => {
             categoryName: value
         })
     }
+
+    const handleChangeFeatured = (e) => {
+        setStateProductDetails({
+            ...stateProductDetails,
+            featured: e.target.value,
+        });
+    };
 
     return (
         <div>
@@ -655,6 +682,21 @@ const ProductList = () => {
                                     }} alt="avatar" />
                                 )}
                             </WrapperUploadFile>
+                        </Form.Item>
+                        <Form.Item
+                            label="Sản phẩm nổi bật"
+                            name="featured"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn sản phẩm nổi bật!",
+                                },
+                            ]}
+                        >
+                            <Radio.Group onChange={handleChangeFeatured} value={stateProductDetails.featured}>
+                                <Radio value={true}>Sản phẩm nổi bật</Radio>
+                                <Radio value={false}>Không</Radio>
+                            </Radio.Group>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                             <Button type="primary" htmlType="submit">

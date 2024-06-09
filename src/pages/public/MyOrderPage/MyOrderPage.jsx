@@ -37,7 +37,6 @@ const MyOrderPage = () => {
       }
     })
     window.scrollTo(0, 0);
-    console.log(state?.token)
   }
 
   const mutation = useMutationHooks(

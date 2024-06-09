@@ -24,26 +24,23 @@ const DetailsOrderPage = () => {
   const queryOrder = useQuery({
     queryKey: ["orders-details"],
     queryFn: fetchDetailsOrder,
-    enabled: !!user?.id && !!user?.access_token, // Convert to boolean
+    enabled: !!user?.id && !!user?.access_token,
   });
 
   const { isPending, data } = queryOrder;
 
-  // Tính priceMemo
   const priceMemo = useMemo(() => {
     return data?.orderItems?.reduce((total, cur) => {
       return total + cur.price * cur.amount;
     }, 0);
   }, [data]);
 
-  // Giảm giá cho từng sản phẩm
   const totalDiscount = useMemo(() => {
     return data?.orderItems?.reduce((total, cur) => {
       return total + (cur.discount ? (cur.price * cur.amount * cur.discount) / 100 : 0);
     }, 0);
   }, [data]);
 
-  // Tính tổng giá sau khi giảm giá
   const totalPriceAfterDiscount = useMemo(() => {
     return priceMemo - totalDiscount;
   }, [priceMemo, totalDiscount]);

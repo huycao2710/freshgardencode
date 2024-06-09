@@ -29,11 +29,15 @@ export const CheckMomoPayment = async (data) => {
 }
 
 //vnpay
-export const paymentOrderVnpay = async(data) => {
+export const paymentOrderVnpay = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay`, data)
     return res.data
 }
-
+//chưa sửa
+export const confirmOrderVnpay = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-return`, data)
+    return res.data
+}
 //stripe
 export const StripePayment = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/stripe`, data)

@@ -35,7 +35,7 @@ function VnpayPaymentSuccess(props) {
       if (orderData) {
         let res = await confirmOrderVnpay(objectParam);
         if (res && res.errCode == 0) {
-          
+
         }
       }
     };
