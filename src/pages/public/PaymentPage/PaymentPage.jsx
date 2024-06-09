@@ -221,20 +221,40 @@ const PaymentPage = () => {
       }
     )
   }
-
+  //zalopay
   const btnzalopay = async () => {
-    const session = await PaymentService.ZaloPayment(data);
-    const url = session.data.order_url
-    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
-    window.open(url, 'zalopay', windowFeatures)
-  }
-  const btnmomo = async () => {
-    const session = await PaymentService.MomoPayment(data);
-    const amount = totalPriceMemo
-    const url = session.data.payUrl
-    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
-    window.open(url, 'momo', windowFeatures)
-  }
+    try {
+      const session = await PaymentService.ZaloPayment({
+        orderItems: order?.orderItemsSelected,
+        totalPrice: totalPriceMemo,
+        user: user?.id,
+        email: user?.email
+      });
+
+      const url = session.order_url;
+      window.location.href = url; // Chuyển hướng đến URL thanh toán trên cùng một tab hoặc cửa sổ
+    } catch (error) {
+      console.error("Payment error: ", error);
+      message.error('Thanh toán không thành công. Vui lòng thử lại sau!');
+    }
+  };
+  //momo
+  const btnMomo = async () => {
+    try {
+      const session = await PaymentService.MomoPayment({
+        orderItems: order?.orderItemsSelected,
+        totalPrice: totalPriceMemo,
+        user: user?.id,
+        email: user?.email
+      });
+
+      const url = session.order_url;
+      window.open(url, 'momo', 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500');
+    } catch (error) {
+      console.error("Payment error: ", error);
+      message.error('Thanh toán không thành công. Vui lòng thử lại sau!');
+    }
+  };
 
   const btnstripe = async () => {
     const session = await PaymentService.StripePayment(data);
@@ -428,7 +448,7 @@ const PaymentPage = () => {
               {
                 payment === 'momo' &&
                 <ButtonComp
-                  onClick={() => btnmomo()}
+                  onClick={() => btnMomo()}
                   size={40}
                   styleButton={{
                     background: "rgb(255, 57, 69)",

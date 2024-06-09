@@ -32,6 +32,8 @@ import AboutUsPage from "../pages/public/AboutUsPage/AboutUsPage";
 import VnpayPaymentPage from "../pages/public/PaymentPage/VnpayPaymentPage";
 import ContactPage from "../pages/public/ContactPage/ContactPage";
 import VnpayPaymentSuccess from "../pages/public/PaymentPage/VnpayPaymentSuccess";
+import SuccessPage from "../pages/public/ZaloPage/SuccessPage";
+import FailurePage from "../pages/public/ZaloPage/FailurePage";
 
 export const routes = [
     {
@@ -203,5 +205,15 @@ export const routes = [
         path: '/contact',
         page: ContactPage,
         isShowHeader: true
-    }
+    },
+    {
+        path: '/payment-success',
+        page: SuccessPage,
+        isShowHeader: true
+    },
+    {
+        path: '/payment-failure',
+        page: FailurePage,
+        isShowHeader: true
+    },
 ]
