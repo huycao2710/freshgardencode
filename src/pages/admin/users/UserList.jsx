@@ -358,14 +358,6 @@ const UserList = () => {
             <WrapperHeader>
                 Quản lý người dùng
             </WrapperHeader>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-                <Button
-                    style={{ height: '40px', borderRadius: '6px', borderStyle: 'dashed', marginRight: '10px' }}
-                    onClick={() => setIsModalOpen(true)}
-                >
-                    <PlusOutlined style={{ fontSize: '20px' }} /> Thêm người dùng mới
-                </Button>
-            </div>
             <div style={{ marginTop: "20px" }}>
                 <TableComponent
                     handleDeleteMany={handleDeleteManyUsers}
