@@ -9,5 +9,6 @@ export const orderContant = {
         stripe: 'Thanh toán bằng Stripe',
         momo: 'Thanh toán bằng Momo',
         zalopay: 'Thanh toán bằng ZaloPay',
+        vnpay: 'Thanh toán bằng VnPay'
     }
 }

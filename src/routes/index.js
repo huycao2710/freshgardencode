@@ -30,7 +30,7 @@ import Promotion3 from "../pages/public/PromotionPage/Promotion3";
 import PointPage from "../pages/public/PointPage/PointPage";
 import AboutUsPage from "../pages/public/AboutUsPage/AboutUsPage";
 import VnpayPaymentPage from "../pages/public/PaymentPage/VnpayPaymentPage";
-import VnpayPaymentSuccess from "../pages/public/PaymentPage/VnpayPaymentSuccess";
+import ContactPage from "../pages/public/ContactPage/ContactPage";
 
 export const routes = [
     {
@@ -196,6 +196,11 @@ export const routes = [
     {
         path: '/pages/point',
         page: PointPage,
+        isShowHeader: true
+    },
+    {
+        path: '/contact',
+        page: ContactPage,
         isShowHeader: true
     }
 ]

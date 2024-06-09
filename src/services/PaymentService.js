@@ -6,6 +6,7 @@ export const getConfig = async () => {
     return res.data
 }
 
+//zalo
 export const ZaloPayment = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/zalopay`, data)
     return res.data
@@ -16,6 +17,7 @@ export const Check_ZaloPayment = async (data) => {
     return res.data
 }
 
+//momo
 export const MomoPayment = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/momo`, data)
     return res.data
@@ -31,9 +33,13 @@ export const paymentOrderVnpay = async(data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay`, data)
     return res.data
 }
-export const paymentOrderVnpaySuccess = (data) => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-success`, data)
+
+//stripe
+export const StripePayment = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/stripe`, data)
+    return res.data
 }
-export const confirmOrderVnpay = (data) => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-return`, data)
+export const CheckStripePayment = async (data) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/check_stripe`, data)
+    return res.data
 }

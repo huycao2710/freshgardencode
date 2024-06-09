@@ -5,6 +5,7 @@ import {
   WrapperInfo,
   WrapperLeft,
   WrapperRadio,
+  WrapperRadioSecond,
   WrapperRight,
   WrapperTotal,
 } from "./style";
@@ -64,38 +65,39 @@ const PaymentPage = () => {
 
   const priceMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      return total + ((cur.price * cur.amount))
-    }, 0)
-    return result
-  }, [order])
+      return total + cur.price * cur.amount;
+    }, 0);
+    return result;
+  }, [order]);
 
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      const totalDiscount = cur.discount ? cur.discount : 0
-      return total + (priceMemo * (totalDiscount * cur.amount) / 100)
-    }, 0)
+      const totalDiscount = cur.discount ? cur.discount : 0;
+      return total + ((cur.price * cur.amount) * totalDiscount) / 100;
+    }, 0);
     if (Number(result)) {
-      return result
+      return result;
     }
-    return 0
-  }, [order])
+    return 0;
+  }, [order]);
 
   const deliveryPriceMemo = useMemo(() => {
     if (priceMemo >= 20000 && priceMemo < 500000) {
-      return 30000
+      return 30000;
     } else if (priceMemo >= 500000) {
-      return 50000
+      return 50000;
     } else {
-      return 0
+      return 0;
     }
-  }, [priceMemo])
+  }, [priceMemo]);
 
   const totalPriceMemo = useMemo(() => {
-    return Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
-  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo])
-const orderItemsSelected = useMemo(() =>{
-  return order.orderItemsSelected
-})
+    return (
+      Number(priceMemo) - Number(priceDiscountMemo) + Number(deliveryPriceMemo)
+    );
+  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo]);
+
+
   const handleAddOrder = () => {
     if (user?.access_token && order?.orderItemsSelected && user?.fullName && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
       // eslint-disable-next-line no-unused-expressions
@@ -234,6 +236,13 @@ const orderItemsSelected = useMemo(() =>{
     window.open(url, 'momo', windowFeatures)
   }
 
+  const btnstripe = async () => {
+    const session = await PaymentService.StripePayment(data);
+    const url = session.data.pay_Url
+    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
+    window.open(url, 'stripe', windowFeatures)
+  }
+
   const addPaypalScript = async () => {
     const { data } = await PaymentService.getConfig()
     const script = document.createElement('script')
@@ -255,12 +264,14 @@ const orderItemsSelected = useMemo(() =>{
   }, [payment])
 
   //vnpay
-  
-const btnvnpay = () => {
-  // Redirect to VnpayPaymentPage with data in URL
-  
-  navigate('/vnpay', { state: { totalPriceMemo } });
-};
+  const btnvnpay = () => {
+    // Encode data as query parameters if needed
+    const queryParams = new URLSearchParams({
+      total: totalPriceMemo
+    }).toString();
+    // Redirect to VnpayPaymentPage with data in URL
+    navigate(`/vnpay?${queryParams}`, { state: { totalPriceMemo } });
+  };
   useEffect(() => {
     if (payment === 'paypal' && !window.paypal) {
       addPaypalScript()
@@ -287,13 +298,14 @@ const btnvnpay = () => {
               <WrapperInfo>
                 <div>
                   <Label>Chọn phương thức thanh toán</Label>
-                  <WrapperRadio onChange={handlePayment} value={payment}>
+                  <WrapperRadioSecond onChange={handlePayment} value={payment}>
                     <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
                     <Radio value="paypal"> Thanh toán tiền bằng Paypal</Radio>
                     <Radio value="zalopay"> Thanh toán tiền bằng ZaloPay</Radio>
                     <Radio value="momo"> Thanh toán tiền bằng Momo</Radio>
                     <Radio value="vnpay"> Thanh toán tiền bằng VNPay</Radio>
-                  </WrapperRadio>
+                    <Radio value="stripe"> Thanh toán tiền bằng Stripe</Radio>
+                  </WrapperRadioSecond>
                 </div>
               </WrapperInfo>
             </WrapperLeft>
@@ -430,11 +442,28 @@ const btnvnpay = () => {
                 >
                 </ButtonComp>
               }
+              {
+                payment === 'stripe' &&
+                <ButtonComp
+                  onClick={() => btnstripe()}
+                  size={40}
+                  styleButton={{
+                    background: "rgb(255, 57, 69)",
+                    height: '48px',
+                    width: '320px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
+                  textbutton={'stripe'}
+                  styleTextButton={{ color: '#fff', fontSize: '25px', fontWeight: '700' }}
+                >
+                </ButtonComp>
+              }
               {/*  start of vnpay */}
               {
                 payment === 'vnpay' &&
                 <ButtonComp
-                onClick={()=>btnvnpay()}
+                  onClick={() => btnvnpay()}
                   size={40}
                   styleButton={{
                     background: "rgb(255, 57, 69)",

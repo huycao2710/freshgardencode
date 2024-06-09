@@ -36,6 +36,7 @@ const MyOrderPage = () => {
         token: state?.token
       }
     })
+    window.scrollTo(0, 0);
     console.log(state?.token)
   }
 

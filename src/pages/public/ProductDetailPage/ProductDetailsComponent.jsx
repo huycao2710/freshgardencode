@@ -21,6 +21,7 @@ import { convertPrice } from "../../../util";
 import * as message from "../../../components/global/MessageComponent/Message";
 import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
 import ButtonComp from "../../../components/global/ButtonComponent/ButtonComp";
+import { toast } from "react-toastify";
 
 const ProductDetailComponent = ({ idProduct }) => {
   const [numProduct, setNumProduct] = useState(1);
@@ -67,7 +68,8 @@ const ProductDetailComponent = ({ idProduct }) => {
 
   useEffect(() => {
     if (order.isSuccessOrder) {
-      message.success("Sản phẩm đã thêm vào giỏ hàng");
+      toast.success("Sản phẩm đã thêm vào giỏ hàng");
+      //message.success("Sản phẩm đã thêm vào giỏ hàng");
     }
     return () => {
       dispatch(resetOrder());
@@ -167,13 +169,6 @@ const ProductDetailComponent = ({ idProduct }) => {
                     {convertPrice(productDetails?.price)}
                   </WrapperPriceTextProduct>
                 </WrapperPriceProduct>
-
-                <WrapperAddressProduct>
-                  <span>Giao tới </span>
-                  <span className="address">{user?.address}</span> -
-                  <span className="change-address"> Đổi địa chỉ</span>
-                </WrapperAddressProduct>
-
                 <div
                   style={{
                     margin: "10px 0 20px",
@@ -229,41 +224,33 @@ const ProductDetailComponent = ({ idProduct }) => {
                       readOnly
                     />
                     <p className="opacity-50 text-sm">6 ratings</p>
-                    <p className="opacity-50 text-sm ml-3 font-medium text-indigo-600 hover:text-indigo-600">
-                      9 reviews
-                    </p>
                   </div>
                 </div>
 
                 <form className="mt-10">
                   <ButtonComp
                     size={40}
+                    className="text-white font-bold rounded hover:bg-green-700"
                     styleButton={{
-                      background: "#b1c23c",
+                      background: "#B9D431",
                       height: "48px",
                       width: "220px",
                       border: "none",
-                      borderRadius: "4px",
                     }}
                     onClick={handleAddOrderProduct}
                     textbutton={"Đặt hàng"}
                     styleTextButton={{
-                      color: "#fff",
                       fontSize: "15px",
-                      fontWeight: "700",
                     }}
                   />
                 </form>
               </div>
               <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
                 <div>
-                  <h3 className="sr-only">Description</h3>
-                  <div className="space-y-6">Thông tin sản phẩm</div>
-                </div>
-                <div className="mt-10">
-                  <h3 className="text-sm font-medium text-gray-900">
-                    Hướng dẫn mua hàng online
-                  </h3>
+                  <div className="flex justify-center items-center space-y-6 shadow-lg p-6 bg-white rounded-lg font-bold">
+                    Thông tin sản phẩm
+                  </div>
+                  <div className="space-y-6 ml-5">{productDetails?.description}</div>
                 </div>
               </div>
             </div>
