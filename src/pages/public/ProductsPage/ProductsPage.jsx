@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductSortDropdown from "./SortOption";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Pagination from "@mui/material/Pagination";
 import { useQuery } from "@tanstack/react-query";
 import * as ProductAllService from "../../../services/ProductAllService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -13,24 +13,28 @@ export default function ProductPage() {
   const [products, setProducts] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 12;
+  const pageSize = 1;
 
   const fetchProducts = async ({ queryKey }) => {
     const [_, selectedCategory, currentPage] = queryKey;
     if (selectedCategory) {
-      const res = await ProductAllService.getProductsByCategory(selectedCategory, currentPage - 1, pageSize);
-      setTotalPages(Math.ceil(res.total / pageSize));
-      return res;
+        const res = await ProductAllService.getProductsByCategory(selectedCategory, currentPage - 1, pageSize);
+        //setTotalPages(res.totalPages);
+        setTotalPages(Math.ceil(res.total / pageSize));
+        console.log("cate selected",res)
+        return res;
     } else {
-      const res = await ProductAllService.getAllProduct(currentPage - 1, pageSize);
-      setTotalPages(Math.ceil(res.total / pageSize));
-      return res;
+        const res = await ProductAllService.getAllProduct(currentPage - 1, pageSize);
+        //setTotalPages(res.totalPages);
+        setTotalPages(Math.ceil(res.total / pageSize));
+        console.log("cate not selected",res)
+        return res;
     }
-  };
+};
 
   const fetchCategories = async () => {
     const res = await ProductAllService.getAllCategory();
-    return res;
+    return res.data;
   };
 
   const { isLoading, data: productsData } = useQuery({
@@ -91,7 +95,7 @@ export default function ProductPage() {
                     {isLoadingCategories ? (
                       <div>Loading categories...</div>
                     ) : (
-                      categories?.data?.map((category) => (
+                      categories?.map((category) => (
                         <div className="py-2 flex justify-between items-center ">
                           <span
                             className="text-md font-bold cursor-pointer"

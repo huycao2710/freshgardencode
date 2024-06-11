@@ -72,11 +72,11 @@ export const routes = [
         page: VnpayPaymentPage,
         isShowHeader: false
     },
-    // {
-    //     path: '/vnpay-return',
-    //     page: VnpayPaymentSuccess,
-    //     isShowHeader: true
-    // },
+    {
+        path: '/vnpay-return',
+        page: VnpayPaymentSuccess,
+        isShowHeader: true
+    },
     {
         path: '/product',
         page: ProductsPage,

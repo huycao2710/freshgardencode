@@ -28,7 +28,6 @@ export const getDetailsInfoProduct = async (id) => {
     return res.data
 }
 
-
 export const updateInfoProduct = async (id, access_token, data) => {
     const res = await axiosJWT.put(`${process.env.REACT_APP_API_URL}/product/update-infoproduct/${id}`, data, {
         headers: {
@@ -55,14 +54,14 @@ export const deleteManyProduct = async (data, access_token) => {
     return res.data
 }
 
-
 export const getAllCategory = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all-category`)
     return res.data
 }
 
-export const getProductsByCategory = async (categoryName) => {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-products-by-category/${categoryName}`);
+export const getProductsByCategory = async (categoryName, page, limit) => {
+    let res = {}
+    res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-products-by-category/${categoryName}?page=${page}&limit=${limit}`);
     return res.data;
 };
 

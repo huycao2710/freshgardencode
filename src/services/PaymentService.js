@@ -43,7 +43,7 @@ export const paymentOrderVnpay = async (data) => {
 }
 //chưa sửa
 export const confirmOrderVnpay = async (data) => {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/vnpay-return`, data)
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/payment/vnpay-return`, data)
     return res.data
 }
 //stripe

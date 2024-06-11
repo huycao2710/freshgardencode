@@ -12,7 +12,6 @@ function useQuery() {
 
 function VnpayPaymentSuccess(props) {
   let query = useQuery();
-  let navigate = useNavigate();
   useEffect(() => {
     let objectParam = {
       vnp_Amount: query.get("vnp_Amount"),
@@ -35,7 +34,8 @@ function VnpayPaymentSuccess(props) {
       if (orderData) {
         let res = await confirmOrderVnpay(objectParam);
         if (res && res.errCode == 0) {
-
+          toast.success("Thanh toán hóa đơn thành công");
+         
         }
       }
     };
@@ -44,7 +44,28 @@ function VnpayPaymentSuccess(props) {
 
   return (
     <>
-      <div>123456</div>
+      <div className="bg-gray-100">
+        <div className="bg-white flex items-center h-24 mb-5 px-32">
+          <NavLink to="/" className="flex items-center">
+          </NavLink>
+          <span className="text-xl font-semibold text-green-600 border-l-2 border-green-600 pl-5">
+            Thanh Toán VNPAY
+          </span>
+        </div>
+
+        <div className="bg-white mx-32 p-5 border border-gray-300">
+          <section>
+            <div className="container mx-auto">
+              <div className="py-5">
+                <div className="mb-3">
+                  <h4 className="text-right">Thông tin thanh toán</h4>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div className="w-full h-24 bg-gray-100"></div>
     </>
   );
 }
