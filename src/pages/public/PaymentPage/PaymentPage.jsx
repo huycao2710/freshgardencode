@@ -299,6 +299,7 @@ const PaymentPage = () => {
       setSdkReady(true)
     }
   }, [payment])
+  console.log(order)
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
       <Loading isPending={isPendingAddOrder}>

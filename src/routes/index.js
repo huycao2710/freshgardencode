@@ -73,9 +73,9 @@ export const routes = [
         isShowHeader: false
     },
     {
-        path: '/vnpay-return',
+        path: '/payment/vnpay-return',
         page: VnpayPaymentSuccess,
-        isShowHeader: true
+        isShowHeader: false
     },
     {
         path: '/product',
