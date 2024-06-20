@@ -299,7 +299,6 @@ const PaymentPage = () => {
       setSdkReady(true)
     }
   }, [payment])
-  console.log(order)
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
       <Loading isPending={isPendingAddOrder}>
@@ -487,7 +486,8 @@ const PaymentPage = () => {
                   onClick={() => btnvnpay()}
                   size={40}
                   styleButton={{
-                    background: "rgb(255, 57, 69)",
+                    marginTop: "20px",
+                    background: "#B9D431",
                     height: '48px',
                     width: '320px',
                     border: 'none',
