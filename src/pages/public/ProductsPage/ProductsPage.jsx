@@ -11,34 +11,39 @@ export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryText, setCategoryText] = useState("Tất cả sản phẩm");
   const [products, setProducts] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCurrent, setPageCurrent] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 1;
+  const pageSize = 12;
 
   const fetchProducts = async ({ queryKey }) => {
-    const [_, selectedCategory, currentPage] = queryKey;
+    const [_, selectedCategory, pageCurrent] = queryKey;
     if (selectedCategory) {
-        const res = await ProductAllService.getProductsByCategory(selectedCategory, currentPage - 1, pageSize);
-        //setTotalPages(res.totalPages);
-        setTotalPages(Math.ceil(res.total / pageSize));
-        console.log("cate selected",res)
-        return res;
+      const res = await ProductAllService.getProductsByCategory(
+        selectedCategory,
+        pageSize,
+        pageCurrent - 1
+      );
+      setTotalPages(Math.ceil(res.total / pageSize));
+      console.log("cate selected", res);
+      return res;
     } else {
-        const res = await ProductAllService.getAllProduct(currentPage - 1, pageSize);
-        //setTotalPages(res.totalPages);
-        setTotalPages(Math.ceil(res.total / pageSize));
-        console.log("cate not selected",res)
-        return res;
+      const res = await ProductAllService.getAllProduct(
+        pageCurrent - 1,
+        pageSize
+      );
+      setTotalPages(Math.ceil(res.total / pageSize));
+      console.log("cate not selected", res);
+      return res;
     }
-};
+  };
 
   const fetchCategories = async () => {
     const res = await ProductAllService.getAllCategory();
     return res.data;
   };
 
-  const { isLoading, data: productsData } = useQuery({
-    queryKey: ["products", selectedCategory, currentPage],
+  const { isLoading: isLoadingProducts, data: productsData } = useQuery({
+    queryKey: ["products", selectedCategory, pageCurrent, pageSize],
     queryFn: fetchProducts,
     retry: 3,
     retryDelay: 1000,
@@ -56,7 +61,7 @@ export default function ProductPage() {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setCategoryText(category ? category : "Tất cả sản phẩm");
-    setCurrentPage(1);
+    setPageCurrent(1);
   };
 
   const sortProducts = (type) => {
@@ -70,7 +75,7 @@ export default function ProductPage() {
   };
 
   const handlePaginationChange = (event, value) => {
-    setCurrentPage(value);
+    setPageCurrent(value);
   };
   return (
     <div className="bg-white font-playfairDisplay">
@@ -118,7 +123,7 @@ export default function ProductPage() {
                     <h1 className="text-3xl font-bold">{categoryText}</h1>
                     <ProductSortDropdown sortProducts={sortProducts} />
                   </div>
-                  {isLoading ? (
+                  {isLoadingProducts ? (
                     <div>Loading...</div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -134,7 +139,8 @@ export default function ProductPage() {
                           type={product.type}
                           selled={product.selled}
                           discount={product.discount}
-                          idProduct={product._id} />
+                          idProduct={product._id}
+                        />
                       ))}
                     </div>
                   )}
@@ -144,10 +150,10 @@ export default function ProductPage() {
           </section>
           <section className="w-full px=[3.6rem]">
             <div className="px-4 py-5 flex justify-center">
-            <Pagination
+              <Pagination
                 color="secondary"
                 count={totalPages}
-                page={currentPage}
+                page={pageCurrent}
                 onChange={handlePaginationChange}
               />
             </div>

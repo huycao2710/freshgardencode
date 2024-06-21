@@ -125,13 +125,13 @@ function VnpayPaymentSuccess(props) {
   };
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-vnpay-blue">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-lg">
           <div className="flex items-center mb-5">
             <NavLink to="/" className="flex items-center">
               {/* Add any logo or text here */}
             </NavLink>
-            <span className="text-xl font-semibold text-green-600 border-l-2 border-green-600 pl-5">
+            <span className="text-xl font-semibold text-red-500 border-l-2 border-vnpay-blue pl-5">
               Thanh Toán VNPAY
             </span>
           </div>
@@ -159,7 +159,7 @@ function VnpayPaymentSuccess(props) {
                   <button
                     type="button"
                     onClick={handleConfirm}
-                    className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline"
+                    className="w-full bg-vnpay-blue text-white mt-5 py-2 px-4 rounded hover:bg-blue-900 focus:outline-none focus:shadow-outline"
                   >
                     Xác nhận
                   </button>
@@ -169,7 +169,6 @@ function VnpayPaymentSuccess(props) {
           </section>
         </div>
       </div>
-      <div className="w-full h-24 bg-gray-100"></div>
     </>
   );
 }

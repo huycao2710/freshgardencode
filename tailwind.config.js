@@ -9,6 +9,7 @@ module.exports = {
         'logo-green': '#B9D431',
         'banner-black': '#4B494E',
         'about-content': '#4B494E',
+        'vnpay-blue':'#005AA9',
       },
       fontFamily: {
         'playfairDisplay': ['Playfair Display',],

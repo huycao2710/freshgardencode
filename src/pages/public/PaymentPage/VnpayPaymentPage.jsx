@@ -47,23 +47,20 @@ function VnpayPaymentPage(props) {
   };
   return (
     <>
-      <div className="bg-gray-100">
-        <div className="container mx-auto px-4">
-          <div class=" p-6 bg-gray-100 flex items-center justify-center">
-            <div class="container max-w-screen-lg mx-auto">
+        <div className="h-screen bg-gradient-to-b from-white to-vnpay-blue mx-auto px-4 flex items-center justify-center">
+            <div class="max-w-screen-lg mx-auto">
               <div>
-                <h2 class="font-semibold text-xl text-gray-600">
-                  Responsive Form
+                <h2 class="font-bold text-5xl text-red-500">
+                  VNPAY
                 </h2>
-                <p class="text-gray-500 mb-6">
-                  Form is mobile responsive. Give it a try.
+                <p class="py-4 text-xl font-semibold text-black mb-6">
+                  Thông tin thanh toán
                 </p>
 
-                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                <div class="bg-white rounded shadow-lg shadow-vnpay-blue p-4 px-4 md:p-8 mb-6">
                   <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div class="text-gray-600">
-                      <p class="font-medium text-lg">Personal Details</p>
-                      <p>Please fill out all the fields.</p>
+                    <div class="text-gray-600 object-cover p-5">
+                      <img src="/assets/images/Header/vnpaylogo.jpg" alt="" />
                     </div>
 
                     <div class="lg:col-span-2">
@@ -204,12 +201,7 @@ function VnpayPaymentPage(props) {
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div
-        style={{ width: "100%", height: "100px", backgroundColor: "#f5f5f5" }}
-      ></div>
     </>
   );
 }
