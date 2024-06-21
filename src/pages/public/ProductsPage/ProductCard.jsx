@@ -58,7 +58,6 @@ const ProductCard = (props) => {
 
   useEffect(() => {
     if (order.isSuccessOrder) {
-      //toast.success(`Sản phẩm ${props.nameProduct} đã thêm vào giỏ hàng`);
     }
     return () => {
       dispatch(resetOrder());
@@ -101,10 +100,10 @@ const ProductCard = (props) => {
 
   return (
     <>
-      <div className="relative w-auto transition-all cursor-pointer group">
+      <div className="relative w-auto transition-all group">
         <div className=" flex justify-center items-center h-80">
           <img
-            className="h-full w-full object-cover object-center transition-transform duration-300"
+            className="h-full w-full object-contain object-center transition-transform duration-300 cursor-pointer"
             src={imageProduct}
             alt={nameProduct}
           />
@@ -119,11 +118,11 @@ const ProductCard = (props) => {
           </button>
         </div>
 
-        <div className="pt-3 px-5 textPart bg-white-p-3 font-sans">
+        <div className="pt-3 px-5 textPart bg-white-p-3 font-sans ">
           <div>
-            <p className="">{nameProduct}</p>
+            <p className="flex items-center justify-center space-x-2">{nameProduct}</p>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-center space-x-2">
             <p className="font-semibold text-2xl text-logo-green">{convertPrice(price)}</p>
           </div>
         </div>

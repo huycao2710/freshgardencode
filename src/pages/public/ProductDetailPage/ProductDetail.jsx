@@ -48,7 +48,7 @@ export default function ProductDetails() {
           <div className="py-5">
             <AliceCarousel
               items={relatedProducts.map((product) => (
-                <div key={product._id}>
+                <div key={product._id} >
                   <ProductCard
                     countInStock={product.countInStock}
                     description={product.description}
@@ -69,8 +69,6 @@ export default function ProductDetails() {
                 1024: { items: 3 },
               }}
               disableButtonsControls
-              autoPlay
-              autoPlayInterval={3000}
               infinite
             />
           </div>
