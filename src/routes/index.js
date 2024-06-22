@@ -34,7 +34,7 @@ import ContactPage from "../pages/public/ContactPage/ContactPage";
 import VnpayPaymentSuccess from "../pages/public/PaymentPage/VnpayPaymentSuccess";
 import SuccessPage from "../pages/public/ZaloPage/SuccessPage";
 import FailurePage from "../pages/public/ZaloPage/FailurePage";
-import StripeSuccess from "../pages/public/OrderSuccess/StripeSuccess";
+import StripeSuccess from "../pages/public/PaymentPage/StripeSuccess";
 
 export const routes = [
     {
@@ -74,7 +74,7 @@ export const routes = [
         isShowHeader: false
     },
     {
-        path: '/payment/vnpay-return',
+        path: '/vnpay-return',
         page: VnpayPaymentSuccess,
         isShowHeader: false
     },
@@ -220,6 +220,6 @@ export const routes = [
     {
         path: '/stripe-success',
         page: StripeSuccess,
-        isShowHeader: true
+        isShowHeader: false
     },
 ]

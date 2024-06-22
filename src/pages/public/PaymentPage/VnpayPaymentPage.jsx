@@ -57,7 +57,7 @@ function VnpayPaymentPage(props) {
                   Thông tin thanh toán
                 </p>
 
-                <div class="bg-white rounded shadow-lg shadow-vnpay-blue p-4 px-4 md:p-8 mb-6">
+                <div class="bg-white rounded shadow-lg shadow-black p-4 px-4 md:p-8 mb-6">
                   <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                     <div class="text-gray-600 object-cover p-5">
                       <img src="/assets/images/Header/vnpaylogo.jpg" alt="" />

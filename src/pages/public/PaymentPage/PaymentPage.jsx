@@ -257,6 +257,7 @@ const PaymentPage = () => {
     const session = await PaymentService.StripePayment({
       totalPrice: (totalPriceMemo / 24540).toFixed(0),
     });
+    console.log (session)
     const url = session.data.url
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
     window.open(url, 'stripe', windowFeatures)

@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://freshgarden-backend.onrender.com',
+            target: 'http://localhost:3002',
             changeOrigin: true,
         })
     );
