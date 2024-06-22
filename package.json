@@ -81,6 +81,6 @@
       "localhost",
       ".localhost"
     ],
-    "proxy": "https://freshgarden-backend.onrender.com"
+    "proxy": "http://localhost:3002"
   }
 }
