@@ -34,6 +34,7 @@ import ContactPage from "../pages/public/ContactPage/ContactPage";
 import VnpayPaymentSuccess from "../pages/public/PaymentPage/VnpayPaymentSuccess";
 import SuccessPage from "../pages/public/ZaloPage/SuccessPage";
 import FailurePage from "../pages/public/ZaloPage/FailurePage";
+import StripeSuccess from "../pages/public/OrderSuccess/StripeSuccess";
 
 export const routes = [
     {
@@ -214,6 +215,11 @@ export const routes = [
     {
         path: '/payment-failure',
         page: FailurePage,
+        isShowHeader: true
+    },
+    {
+        path: '/stripe-success',
+        page: StripeSuccess,
         isShowHeader: true
     },
 ]

@@ -8,14 +8,9 @@ export const getConfig = async () => {
 
 //zalo
 export const ZaloPayment = async (data) => {
-    const payload = {
-        ...data,
-        callback_url: 'http://localhost:3002/payment/zalopay-callback'
-    };
-
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/zalopay`, payload);
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/zalopay`, data);
     return res.data;
-}
+};
 
 export const Check_ZaloPayment = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/payment/check_zalopay`, data)

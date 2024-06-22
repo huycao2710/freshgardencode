@@ -55,13 +55,13 @@ function VnpayPaymentSuccess(props) {
       try {
         // Lấy thông tin từ query params
         const objectParam = {
-          vnp_Amount: query.get("vnp_Amount"),
+          vnp_Amount: query.get("vnp_Amount") / 100,
           vnp_BankCode: query.get("vnp_BankCode"),
           vnp_CardType: query.get("vnp_CardType"),
           vnp_OrderInfo: query.get("vnp_OrderInfo"),
           vnp_PayDate: query.get("vnp_PayDate"),
         };
-        
+
         // Cập nhật state để hiển thị thông tin thanh toán
         setPaymentInfo(objectParam);
       } catch (error) {
@@ -86,7 +86,7 @@ function VnpayPaymentSuccess(props) {
     const day = dateString.substring(6, 8);
     return `${day}/${month}/${year}`;
   };
-  
+
   const handleConfirm = async () => {
     try {
       const { data } = await OrderAllService.createNewOrder({
@@ -103,7 +103,7 @@ function VnpayPaymentSuccess(props) {
         user: user.id,
         email: user.email
       });
-  
+
       console.log('Response from backend:', data); // Debug response từ backend
       const arrayOrdered = []
       order?.orderItemsSelected?.forEach(element => {
@@ -111,13 +111,13 @@ function VnpayPaymentSuccess(props) {
       });
       dispatch(removeAllOrderProduct({ listChecked: arrayOrdered }))
       navigate('/orderSuccess', {
-          state: {
-            delivery:'',
-            payment:'vnpay',
-            orders: order?.orderItemsSelected,
-            totalPriceMemo: totalPriceMemo
-          }
-        })// Điều hướng đến trang thành công sau khi tạo đơn hàng
+        state: {
+          delivery: '',
+          payment: 'vnpay',
+          orders: order?.orderItemsSelected,
+          totalPriceMemo: totalPriceMemo
+        }
+      })// Điều hướng đến trang thành công sau khi tạo đơn hàng
     } catch (error) {
       console.error("Error creating order:", error);
       toast.error('Đặt hàng không thành công! Vui lòng thử lại sau.');

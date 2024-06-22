@@ -18,7 +18,7 @@ const OrderSuccess = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = location;
-  const handleClick = async () =>{
+  const handleClick = async () => {
     navigate("/")
   }
   return (
@@ -89,14 +89,14 @@ const OrderSuccess = () => {
                 <div className="flex justify-center font-semibold text-xl">
                   <button
                     onClick={handleClick}
-                   className=" bg-logo-green text-black mt-5 py-2 px-4 rounded transform transition-transform duration-200 hover:scale-150 focus:shadow-outline">
+                    className=" bg-logo-green text-black mt-5 py-2 px-4 rounded transform transition-transform duration-200 hover:scale-150 focus:shadow-outline">
                     Mua hàng tiếp nha :3
                   </button>
                 </div>
               </div>
-              
+
             </div>
-            
+
           </div>
         </div>
       </Loading>

@@ -9,11 +9,13 @@ import { useMutationHooks } from "../../../hooks/useMutationHook";
 import * as message from '../../../components/global/MessageComponent/Message';
 import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
 import ButtonComp from "../../../components/global/ButtonComponent/ButtonComp";
+import { orderContant } from '../../../contant';
 
 const MyOrderPage = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { state } = location
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { state } = location;
+
   const fetchMyOrder = async () => {
     const res = await OrderAllService.getOrderByUserId(
       state?.id,
@@ -25,51 +27,59 @@ const MyOrderPage = () => {
   const queryOrder = useQuery({
     queryKey: ["orders"],
     queryFn: fetchMyOrder,
-    enabled: !!state?.id && !!state?.token, // Convert to boolean
+    enabled: !!state?.id && !!state?.token,
   });
 
-  const { isPending, data } = queryOrder
+  const { isPending, isError, data } = queryOrder;
 
   const handleDetailsOrder = (id) => {
     navigate(`/details-order/${id}`, {
       state: {
         token: state?.token
       }
-    })
+    });
     window.scrollTo(0, 0);
-  }
+  };
 
   const mutation = useMutationHooks(
-    (data) => {
-      const { id, token, orderItems } = data
-      const res = OrderAllService.cancelOrderDetailsInfo(id, token, orderItems)
-      return res
+    (data) => OrderAllService.cancelOrderDetailsInfo(data.id),
+    {
+      onSuccess: () => {
+        queryOrder.refetch();
+        message.success('Huỷ đơn hàng thành công!');
+      },
+      onError: (error) => {
+        console.error('Error cancelling order:', error);
+        message.error('Huỷ đơn hàng thất bại!');
+      }
     }
-  )
+  );
 
   const handleCancelOrder = (order) => {
-    mutation.mutate({ id: order._id, token: state?.token, orderItems: order?.orderItems }, {
-      onSuccess: () => {
-        queryOrder.refetch()
-      },
-    })
-  }
+    mutation.mutate({ id: order._id });
+  };
 
-  const { isPending: isPendingCancel, isSuccess: isSuccessCancel, isError: isErrorCancel, data: dataCancel } = mutation
+  const { isPending: isPendingCancel, isSuccess: isSuccessCancel, isError: isErrorCancel, data: dataCancel } = mutation;
 
   useEffect(() => {
-    if (isSuccessCancel && dataCancel?.status === 'OK') {
-      message.success('Huỷ đơn hàng thành công!')
-    } else if (isSuccessCancel && dataCancel?.status === 'ERR') {
-      message.error(dataCancel?.message)
-    } else if (isErrorCancel) {
-      message.error('Huỷ đơn hàng thất bại!')
+    if (mutation.isSuccess) {
+      const { data: response } = mutation;
+      if (response?.status === 'OK') {
+        message.success('Huỷ đơn hàng thành công!');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        message.error(response?.message || 'Huỷ đơn hàng thất bại!');
+      }
     }
-  }, [isErrorCancel, isSuccessCancel])
+  }, [mutation.isSuccess, mutation.isError]);
+
   const renderProduct = (data) => {
-    return data?.map((order) => {
-      return <WrapperHeaderItem key={order?._id}>
-        <img src={order?.imageProduct}
+    return data?.map((order) => (
+      <WrapperHeaderItem key={order?._id}>
+        <img
+          src={order?.imageProduct}
           style={{
             width: '70px',
             height: '70px',
@@ -77,6 +87,7 @@ const MyOrderPage = () => {
             border: '1px solid rgb(238, 238, 238)',
             padding: '2px'
           }}
+          alt={order?.nameProduct}
         />
         <div style={{
           width: 260,
@@ -87,9 +98,8 @@ const MyOrderPage = () => {
         }}>{order?.nameProduct}</div>
         <span style={{ fontSize: '13px', color: '#242424', marginLeft: 'auto' }}>{convertPrice(order?.price)}</span>
       </WrapperHeaderItem>
-    })
-  }
-
+    ));
+  };
 
   return (
     <Loading isPending={isPending || isPendingCancel}>
@@ -104,11 +114,11 @@ const MyOrderPage = () => {
                     <span style={{ fontSize: '14px', fontWeight: 'bold' }}>Trạng thái</span>
                     <div>
                       <span style={{ color: 'rgb(255, 66, 78)' }}>Giao hàng: </span>
-                      <span style={{ color: 'rgb(90, 32, 193)', fontWeight: 'bold' }}>{`${order.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng'}`}</span>
+                      <span style={{ color: 'rgb(90, 32, 193)', fontWeight: 'bold' }}>{order.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng'}</span>
                     </div>
                     <div>
-                      <span style={{ color: 'rgb(255, 66, 78)' }}>Thanh toán: </span>
-                      <span style={{ color: 'rgb(90, 32, 193)', fontWeight: 'bold' }}>{`${order.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán'}`}</span>
+                      <span style={{ color: 'rgb(255, 66, 78)' }}>Phương thức thanh toán: </span>
+                      <span style={{ color: 'rgb(90, 32, 193)', fontWeight: 'bold' }}>{orderContant.payment[order?.paymentMethod]}</span>
                     </div>
                   </WrapperStatus>
                   {renderProduct(order?.orderItems)}
@@ -130,8 +140,7 @@ const MyOrderPage = () => {
                         }}
                         textbutton={'Hủy đơn hàng'}
                         styleTextButton={{ color: '#9255FD', fontSize: '14px' }}
-                      >
-                      </ButtonComp>
+                      />
                       <ButtonComp
                         onClick={() => handleDetailsOrder(order?._id)}
                         size={40}
@@ -142,8 +151,7 @@ const MyOrderPage = () => {
                         }}
                         textbutton={'Xem chi tiết'}
                         styleTextButton={{ color: '#9255FD', fontSize: '14px' }}
-                      >
-                      </ButtonComp>
+                      />
                     </div>
                   </WrapperFooterItem>
                 </WrapperItemOrder>

@@ -223,32 +223,22 @@ const PaymentPage = () => {
   }
   //zalopay
   const btnzalopay = async () => {
-    try {
-      const session = await PaymentService.ZaloPayment({
-        orderItems: order?.orderItemsSelected,
-        totalPrice: totalPriceMemo,
-        user: user?.id,
-        email: user?.email
-      });
-
-      const url = session.order_url;
-      window.open(url, 'zalopay', 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500');
-    } catch (error) {
-      console.error("Payment error: ", error);
-      message.error('Thanh toán không thành công. Vui lòng thử lại sau!');
-    }
-  };
+    const session = await PaymentService.ZaloPayment({
+      totalPrice: totalPriceMemo,
+    });
+    const url = session.data.order_url
+    const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
+    window.open(url, 'stripe', windowFeatures)
+  }
   //momo
   const btnMomo = async () => {
     try {
       const session = await PaymentService.MomoPayment({
-        orderItems: order?.orderItemsSelected,
         totalPrice: totalPriceMemo,
         user: user?.id,
-        email: user?.email
       });
 
-      const url = session.order_url;
+      const url = session.data.order_url;
       window.open(url, 'momo', 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500');
     } catch (error) {
       console.error("Payment error: ", error);
@@ -257,10 +247,20 @@ const PaymentPage = () => {
   };
 
   const btnstripe = async () => {
-    const session = await PaymentService.StripePayment(data);
-    const url = session.data.pay_Url
+    // handleAddOrder();
+    // const arrayOrdered = []
+    // order?.orderItemsSlected?.forEach(element => {
+    //   arrayOrdered.push(element.product)
+    // });
+    // dispatch(removeAllOrderProduct({ listChecked: arrayOrdered }))
+
+    const session = await PaymentService.StripePayment({
+      totalPrice: (totalPriceMemo / 24540).toFixed(0),
+    });
+    const url = session.data.url
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
     window.open(url, 'stripe', windowFeatures)
+    //window.location.href = session.url
   }
 
   const addPaypalScript = async () => {
