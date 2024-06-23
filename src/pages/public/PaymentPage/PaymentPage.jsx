@@ -258,11 +258,11 @@ const PaymentPage = () => {
     const session = await PaymentService.StripePayment({
       totalPrice: (totalPriceMemo / 24540).toFixed(0),
     });
-    console.log (session)
+    console.log(session)
     const url = session.data.url
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
-    window.open(url, 'stripe', windowFeatures)
-    //window.location.href = session.url
+    // window.open(url, 'stripe', windowFeatures)
+    window.location.href = url
   }
 
   const addPaypalScript = async () => {
@@ -294,13 +294,7 @@ const PaymentPage = () => {
     // Redirect to VnpayPaymentPage with data in URL
     navigate(`/vnpay?${queryParams}`, { state: { totalPriceMemo } });
   };
-  useEffect(() => {
-    if (payment === 'paypal' && !window.paypal) {
-      addPaypalScript()
-    } else {
-      setSdkReady(true)
-    }
-  }, [payment])
+
   return (
     <div style={{ background: "#f5f5fa", with: "100%", height: "100vh" }}>
       <Loading isPending={isPendingAddOrder}>

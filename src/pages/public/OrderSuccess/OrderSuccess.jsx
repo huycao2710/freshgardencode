@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { orderContant } from "../../../contant";
 import { convertPrice } from "../../../util";
 import Loading from "../../../components/global/LoadingComponent/LoadingComponent";
-const OrderSuccess = () => {
+const OrderSuccess = () => { 
   const order = useSelector((state) => state.order);
   const location = useLocation();
   const navigate = useNavigate();
