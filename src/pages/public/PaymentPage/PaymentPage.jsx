@@ -228,7 +228,8 @@ const PaymentPage = () => {
     });
     const url = session.data.order_url
     const windowFeatures = 'location=yes,height=570,width=520,scrollbars=yes,status=yes,top=100,left=500'
-    window.open(url, 'stripe', windowFeatures)
+    //window.open(url, 'stripe', windowFeatures)
+    window.location.href = url;
   }
   //momo
   const btnMomo = async () => {

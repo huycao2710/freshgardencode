@@ -222,4 +222,9 @@ export const routes = [
         page: StripeSuccess,
         isShowHeader: false
     },
+    {
+        path:'/zalopay-success',
+        page: SuccessPage,
+        isShowHeader: false
+    },
 ]
