@@ -35,7 +35,8 @@ const ProductList = () => {
         countInStock: '',
         newCategory: '',
         discount: '',
-        featured: false
+        featured: false,
+        available: true,
     })
     const [stateProduct, setStateProduct] = useState(inittial())
     const [stateProductDetails, setStateProductDetails] = useState(inittial())
@@ -50,7 +51,7 @@ const ProductList = () => {
                 rating,
                 imageProduct,
                 categoryName,
-                countInStock, discount, featured } = data
+                countInStock, discount, featured, available } = data
             const res = ProductAllService.createNewProduct({
                 nameProduct,
                 price,
@@ -60,7 +61,8 @@ const ProductList = () => {
                 categoryName,
                 countInStock,
                 discount,
-                featured
+                featured,
+                available
             })
             return res
         }
@@ -118,7 +120,8 @@ const ProductList = () => {
                 categoryName: res?.data?.categoryName,
                 countInStock: res?.data?.countInStock,
                 discount: res?.data?.discount,
-                featured: res?.data?.featured
+                featured: res?.data?.featured,
+                available: res?.data.available
             })
         }
         setIsPendingUpdate(false)
@@ -318,13 +321,27 @@ const ProductList = () => {
             ],
         },
         {
+            title: 'Hiển thị sản phẩm',
+            dataIndex: 'available',
+            filters: [
+                {
+                    text: 'Hiển thị',
+                    value: 'true',
+                },
+                {
+                    text: 'Không hiển thị',
+                    value: 'false',
+                },
+            ],
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = products?.data?.length && products?.data?.map((product) => {
-        return { ...product, key: product._id, featured: product.featured ? 'Sản phẩm nổi bật' : 'Không' }
+        return { ...product, key: product._id, featured: product.featured ? 'Sản phẩm nổi bật' : 'Không', available: product.available ? 'Hiển thị' : 'Không hiển thị' }
     })
 
     useEffect(() => {
@@ -363,7 +380,8 @@ const ProductList = () => {
             imageProduct: '',
             categoryName: '',
             countInStock: '',
-            featured: false
+            featured: false,
+            available: true
         })
         form.resetFields()
     };
@@ -400,7 +418,8 @@ const ProductList = () => {
             categoryName: '',
             countInStock: '',
             discount: '',
-            featured: false
+            featured: false,
+            available: true
         })
         form.resetFields()
     };
@@ -415,7 +434,8 @@ const ProductList = () => {
             categoryName: stateProduct.categoryName === 'add_category' ? stateProduct.newCategory : stateProduct.categoryName,
             countInStock: stateProduct.countInStock,
             discount: stateProduct.discount,
-            featured: stateProduct.featured
+            featured: stateProduct.featured,
+            available: stateProduct.available
         }
         mutation.mutate(params, {
             onSettled: () => {
@@ -478,6 +498,13 @@ const ProductList = () => {
         setStateProductDetails({
             ...stateProductDetails,
             featured: e.target.value,
+        });
+    };
+
+    const handleChangeAvaiable = (e) => {
+        setStateProductDetails({
+            ...stateProductDetails,
+            available: e.target.value,
         });
     };
 
@@ -696,6 +723,21 @@ const ProductList = () => {
                             <Radio.Group onChange={handleChangeFeatured} value={stateProductDetails.featured}>
                                 <Radio value={true}>Sản phẩm nổi bật</Radio>
                                 <Radio value={false}>Không</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item
+                            label="Hiển thị sản phẩm"
+                            name="available"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn có hiển thị sản phẩm!",
+                                },
+                            ]}
+                        >
+                            <Radio.Group onChange={handleChangeAvaiable} value={stateProductDetails.available}>
+                                <Radio value={true}>Hiển thị</Radio>
+                                <Radio value={false}>Không hiển thị</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
