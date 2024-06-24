@@ -23,17 +23,26 @@ export default function ProductPage() {
         pageSize,
         pageCurrent - 1
       );
-      setTotalPages(Math.ceil(res.total / pageSize));
+      //setTotalPages(Math.ceil(res.total / pageSize));
+      
+      //return res;
+      const availableProducts = res.data.filter(product => product.available);
+      setTotalPages(Math.ceil(availableProducts.length / pageSize));
       console.log("cate selected", res);
-      return res;
+      return { ...res, data: availableProducts };
     } else {
       const res = await ProductAllService.getAllProduct(
         pageCurrent - 1,
         pageSize
       );
-      setTotalPages(Math.ceil(res.total / pageSize));
+      //setTotalPages(Math.ceil(res.total / pageSize));
+      //console.log("cate not selected", res);
+      //return res;
+      
+      const availableProducts = res.data.filter(product => product.available);
+      setTotalPages(Math.ceil(availableProducts.length / pageSize));
       console.log("cate not selected", res);
-      return res;
+      return { ...res, data: availableProducts };
     }
   };
 

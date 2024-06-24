@@ -20,7 +20,9 @@ const MainProduct = () => {
 
   const fetchFeaturedProduct = async () => {
     const res = await ProductAllService.getFeaturedProducts();
-    return res;
+    const availableProducts = res.data.filter(product => product.available);
+    //return res;
+    return { ...res, data: availableProducts };
   };
 
   const { isLoading, data: products } = useQuery({
