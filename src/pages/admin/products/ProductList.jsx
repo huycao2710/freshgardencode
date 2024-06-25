@@ -35,7 +35,8 @@ const ProductList = () => {
         countInStock: '',
         newCategory: '',
         discount: '',
-        featured: false
+        featured: false,
+        available: true,
     })
     const [stateProduct, setStateProduct] = useState(inittial())
     const [stateProductDetails, setStateProductDetails] = useState(inittial())
@@ -50,7 +51,7 @@ const ProductList = () => {
                 rating,
                 imageProduct,
                 categoryName,
-                countInStock, discount, featured } = data
+                countInStock, discount, featured, available } = data
             const res = ProductAllService.createNewProduct({
                 nameProduct,
                 price,
@@ -60,7 +61,8 @@ const ProductList = () => {
                 categoryName,
                 countInStock,
                 discount,
-                featured
+                featured,
+                available
             })
             return res
         }
@@ -118,7 +120,8 @@ const ProductList = () => {
                 categoryName: res?.data?.categoryName,
                 countInStock: res?.data?.countInStock,
                 discount: res?.data?.discount,
-                featured: res?.data?.featured
+                featured: res?.data?.featured,
+                available: res?.data?.available
             })
         }
         setIsPendingUpdate(false)
@@ -318,13 +321,27 @@ const ProductList = () => {
             ],
         },
         {
+            title: 'Hiển thị',
+            dataIndex: 'available',
+            filters: [
+                {
+                    text: 'Có',
+                    value: 'true',
+                },
+                {
+                    text: 'Không',
+                    value: 'false',
+                },
+            ],
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = products?.data?.length && products?.data?.map((product) => {
-        return { ...product, key: product._id, featured: product.featured ? 'Sản phẩm nổi bật' : 'Không' }
+        return { ...product, key: product._id, featured: product.featured ? 'Sản phẩm nổi bật' : 'Không',available:product.available}
     })
 
     useEffect(() => {
@@ -478,6 +495,13 @@ const ProductList = () => {
         setStateProductDetails({
             ...stateProductDetails,
             featured: e.target.value,
+        });
+    };
+
+    const handleChangeAvailable = (e) => {
+        setStateProductDetails({
+            ...stateProductDetails,
+            available: e.target.value,
         });
     };
 
@@ -696,6 +720,21 @@ const ProductList = () => {
                             <Radio.Group onChange={handleChangeFeatured} value={stateProductDetails.featured}>
                                 <Radio value={true}>Sản phẩm nổi bật</Radio>
                                 <Radio value={false}>Không</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item
+                            label="Hiển thị"
+                            name="available"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Sản phẩm này có hiển thị ở trang khách hàng không?",
+                                },
+                            ]}
+                        >
+                            <Radio.Group onChange={handleChangeAvailable} value={stateProductDetails.available}>
+                                <Radio value={true}>Hiển thị</Radio>
+                                <Radio value={false}>Không hiển thị</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
